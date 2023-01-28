@@ -31,5 +31,18 @@ bootstrap:  ## Build development environment
 	pip install -r requirements.txt
 
 .PHONY: lint
-lint:
+lint:  ## Check code style
 	yamllint .github/workflows
+
+
+.PHONY: format
+format:  ## Format terraform files
+	terraform fmt
+
+.PHONY: init
+init:
+	terraform init
+
+.PHONY: plan
+plan: init ## Run terraform plan
+	terraform plan
