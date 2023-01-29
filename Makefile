@@ -45,4 +45,9 @@ init:
 
 .PHONY: plan
 plan: init ## Run terraform plan
-	terraform plan
+	terraform plan -out=tf.plan
+
+
+.PHONY: apply
+apply: ## Run terraform apply
+	terraform apply -auto-approve -input=false tf.plan
