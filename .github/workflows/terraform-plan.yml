@@ -1,0 +1,60 @@
+---
+name: 'Terraform plan'
+
+on:  # yamllint disable-line rule:truthy
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  terraform:
+    name: 'Terraform Plan'
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 5
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+      GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      # Checkout the repository to the GitHub Actions runner
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Lint
+        run: make lint
+
+      # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file
+      # with a Terraform Cloud user API token
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      # Checks that all Terraform configuration files adhere to a canonical format
+      - name: Terraform fmt
+        id: fmt
+        run: terraform fmt -check
+
+      # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state,
+      # downloading modules, etc.
+      - name: Terraform Init
+        run: terraform init -input=false
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+
+      # Generates an execution plan for Terraform
+      - name: Terraform Plan
+        run: terraform plan -input=false -out=${{ github.event.pull_request.number }}.plan
+
+      # Generates an execution plan for Terraform
+      - name: Upload Terraform Plan
+        run: aws cp ${{ github.event.pull_request.number }}.plan s3://$STATES_BUCKET/pending/${{ github.event.pull_request.number }}.plan
