@@ -1,9 +1,10 @@
 ---
-name: 'Terraform plan'
+name: 'Terraform apply'
 
 on:  # yamllint disable-line rule:truthy
   pull_request:
-    closed
+    types:
+      - closed
 
 permissions:
   contents: read
