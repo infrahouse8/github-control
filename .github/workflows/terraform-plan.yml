@@ -57,4 +57,4 @@ jobs:
 
       # Generates an execution plan for Terraform
       - name: Upload Terraform Plan
-        run: aws cp "${{ github.event.pull_request.number }}.plan" "s3://${{ vars.STATES_BUCKET }}/pending/${{ github.event.pull_request.number }}.plan"
+        run: aws s3 cp "${{ github.event.pull_request.number }}.plan" "s3://${{ vars.STATES_BUCKET }}/pending/${{ github.event.pull_request.number }}.plan"

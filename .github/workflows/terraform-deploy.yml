@@ -37,7 +37,7 @@ jobs:
         uses: hashicorp/setup-terraform@v2
 
       - name: Download plan
-        run: aws cp s3://$STATES_BUCKET/pending/${{ github.event.pull_request.number }}.plan tf.plan
+        run: aws s3 cp s3://${{ vars.STATES_BUCKET }}/pending/${{ github.event.pull_request.number }}.plan tf.plan
 
       # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state,
       # downloading modules, etc.
@@ -52,4 +52,4 @@ jobs:
         run: terraform apply -auto-approve -input=false tf.plan
 
       - name: Remove plan
-        run: aws rm s3://$STATES_BUCKET/pending/${{ github.event.pull_request.number }}.plan
+        run: aws s3 rm s3://${{ vars.STATES_BUCKET }}/pending/${{ github.event.pull_request.number }}.plan
