@@ -85,7 +85,7 @@ jobs:
       # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state,
       # downloading modules, etc.
       - name: Terraform Init
-        run: TF_LOG=trace terraform init
+        run: terraform init -input=false
 
       - name: Terraform Validate
         id: validate
