@@ -1,3 +1,7 @@
+.. image:: https://readthedocs.org/projects/github-control/badge/?version=latest
+    :target: https://github-control.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
+
 GitHub Control
 ==============
 InfraHouse GitHub configuration.
