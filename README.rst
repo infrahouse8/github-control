@@ -52,7 +52,7 @@ Secrets
 ~~~~~~~
 Defined in https://github.com/infrahouse8/github-control/settings/secrets/actions.
 
-* ``AWS_ACCESS_KEY_ID``, ``AWS_SECRET_ACCESS_KEY``, ``AWS_DEFAULT_REGION`` --
+``AWS_ACCESS_KEY_ID``, ``AWS_SECRET_ACCESS_KEY``, ``AWS_DEFAULT_REGION``
     AWS credentials of a user that has privileges to work with a Terraform state in S3.
     Minimal privileges required [#]_:
 
@@ -61,11 +61,13 @@ Defined in https://github.com/infrahouse8/github-control/settings/secrets/action
     * ``PutObject``
     * ``DeleteObject``
 
-* ``GH_TOKEN`` -- personal token of a user `infrahouse8 <https://github.com/infrahouse8>`_.
-    Defined in https://github.com/settings/tokens.
+``GH_TOKEN``
+    Personal token of a user `infrahouse8 <https://github.com/infrahouse8>`_.
+    Created in https://github.com/settings/tokens.
 
 Variables
 ~~~~~~~~~
+
 Defined in https://github.com/infrahouse8/github-control/settings/variables/actions.
 
 * ``STATES_BUCKET`` - a name of an S3 bucket that stores the Terraform state e.g. ``infrahouse-github-state``.
