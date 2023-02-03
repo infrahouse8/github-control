@@ -15,6 +15,7 @@ Welcome to GitHub Control's documentation!
    :caption: Contents:
 
    readme
+   cicd
 
 
 * :ref:`search`
