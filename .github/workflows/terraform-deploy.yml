@@ -37,6 +37,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
 
+      # Download a plan from the approved pull request
       - name: Download plan
         run: aws s3 cp s3://${{ vars.STATES_BUCKET }}/pending/${{ github.event.pull_request.number }}.plan tf.plan
 
@@ -49,6 +50,7 @@ jobs:
         id: validate
         run: terraform validate -no-color
 
+      # Execute the plan
       - name: Terraform Apply
         run: terraform apply -auto-approve -input=false tf.plan
 
