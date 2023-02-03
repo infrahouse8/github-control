@@ -70,7 +70,8 @@ Variables
 
 Defined in https://github.com/infrahouse8/github-control/settings/variables/actions.
 
-* ``STATES_BUCKET`` - a name of an S3 bucket that stores the Terraform state e.g. ``infrahouse-github-state``.
+``STATES_BUCKET``
+    A name of an S3 bucket that stores the Terraform state e.g. ``infrahouse-github-state``.
 
 
 .. [#] The repository doesn't use Terraform state locking at the moment.
