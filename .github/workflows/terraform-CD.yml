@@ -36,6 +36,10 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
 
+      # Prepare Python environment
+      - name: Setup Python Environment
+        run: make bootstrap-ci
+
       # Download a plan from the approved pull request
       - name: Download plan
         run: python support/s3-plan.py download ${{ github.event.pull_request.number }}
