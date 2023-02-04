@@ -25,9 +25,16 @@ help: ## Print this help
 bootstrap:  ## Build development environment
 	pip install -r requirements.txt
 
+.PHONY: bootstrap-ci
+bootstrap-ci:  ## Build environment for CI
+	pip install -r requirements-ci.txt
+
 .PHONY: lint
 lint:  ## Check code style
-	yamllint .github/workflows
+	yamllint \
+		.github/workflows \
+		.readthedocs.yaml
+	terraform fmt -check
 
 
 .PHONY: format

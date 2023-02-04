@@ -1,18 +1,15 @@
 ---
-name: 'Terraform apply'
+name: 'Terraform CI'
 
 on:  # yamllint disable-line rule:truthy
   pull_request:
-    types:
-      - closed
 
 permissions:
   contents: read
 
 jobs:
-  apply:
-    name: 'Terraform Apply'
-    if: github.event.pull_request.merged
+  terraform:
+    name: 'Terraform Plan'
     runs-on: ubuntu-latest
     environment: production
     timeout-minutes: 5
@@ -32,14 +29,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file
-      # with a Terraform Cloud user API token
+      # Install the latest version of Terraform CLI
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
 
-      # Download a plan from the approved pull request
-      - name: Download plan
-        run: aws s3 cp s3://${{ vars.STATES_BUCKET }}/pending/${{ github.event.pull_request.number }}.plan tf.plan
+      # Prepare Python environment
+      - name: Setup Python Environment
+        run: make bootstrap-ci
+
+      # Run all required linters
+      - name: Code Style Check
+        run: make lint
 
       # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state,
       # downloading modules, etc.
@@ -50,9 +50,10 @@ jobs:
         id: validate
         run: terraform validate -no-color
 
-      # Execute the plan
-      - name: Terraform Apply
-        run: terraform apply -auto-approve -input=false tf.plan
+      # Generates an execution plan for Terraform
+      - name: Terraform Plan
+        run: terraform plan -input=false -out=${{ github.event.pull_request.number }}.plan
 
-      - name: Remove plan
-        run: aws s3 rm s3://${{ vars.STATES_BUCKET }}/pending/${{ github.event.pull_request.number }}.plan
+      # Upload Terraform Plan
+      - name: Upload Terraform Plan
+        run: python support/s3-plan.py ${{ github.event.pull_request.number }}
