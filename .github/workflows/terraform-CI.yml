@@ -56,4 +56,4 @@ jobs:
 
       # Upload Terraform Plan
       - name: Upload Terraform Plan
-        run: python support/s3-plan.py ${{ github.event.pull_request.number }}
+        run: python support/s3-plan.py upload ${{ github.event.pull_request.number }}
