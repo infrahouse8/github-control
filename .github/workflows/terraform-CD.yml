@@ -55,7 +55,7 @@ jobs:
 
       # Execute the plan
       - name: Terraform Apply
-        run: terraform apply -auto-approve -input=false tf.plan
+        run: terraform apply -auto-approve -input=false ${{ github.event.pull_request.number }}.plan
 
       - name: Remove plan
         run: python support/s3-plan.py remove ${{ github.event.pull_request.number }}
