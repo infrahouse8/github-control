@@ -12,7 +12,7 @@ resource "github_organization_settings" "infrahouse" {
   members_can_create_repositories                              = true
   members_can_create_public_repositories                       = true
   members_can_create_private_repositories                      = true
-  members_can_create_internal_repositories                     = true
+  members_can_create_internal_repositories                     = false
   members_can_create_pages                                     = true
   members_can_create_public_pages                              = true
   members_can_create_private_pages                             = true
