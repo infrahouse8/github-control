@@ -52,7 +52,9 @@ jobs:
 
       # Generates an execution plan for Terraform
       - name: Terraform Plan
-        run: terraform plan -input=false -out=${{ github.event.pull_request.number }}.plan
+        run: |
+          make plan
+          mv tf.plan ${{ github.event.pull_request.number }}.plan
 
       # Upload Terraform Plan
       - name: Upload Terraform Plan
