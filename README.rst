@@ -43,10 +43,9 @@ Once the pull request is merged, GitHub Actions runs ``terraform apply`` to impl
 
     Repository workflow.
 
-Input secrets and variables
----------------------------
-The repo needs a set of input available for in the PR stage as well as for deployment.
-Some inputs are secrets, some - variables.
+Input secrets
+-------------
+The repo needs a set of inputs available for in the pull request stage as well as for deployment.
 
 Secrets
 ~~~~~~~
@@ -64,15 +63,6 @@ Defined in https://github.com/infrahouse8/github-control/settings/secrets/action
 ``GH_TOKEN``
     Personal token of a user `infrahouse8 <https://github.com/infrahouse8>`_.
     Created in https://github.com/settings/tokens.
-
-Variables
-~~~~~~~~~
-
-Defined in https://github.com/infrahouse8/github-control/settings/variables/actions.
-
-``STATES_BUCKET``
-    A name of an S3 bucket that stores the Terraform state e.g. ``infrahouse-github-state``.
-
 
 .. [#] The repository doesn't use Terraform state locking at the moment.
     If it did, additional privileges would be needed to work with a DynamoDB table.
