@@ -47,7 +47,7 @@ init:
 
 .PHONY: plan
 plan: init ## Run terraform plan
-	terraform plan -out=tf.plan
+	terraform plan -var-file=configuration.tfvars --out=tf.plan
 
 
 .PHONY: apply

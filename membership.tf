@@ -1,3 +1,4 @@
-resource "github_membership" "aleks" {
-  username = "akuzminsky"
+resource "github_membership" "infrahouse" {
+  for_each = toset(var.developers)
+  username = each.key
 }
