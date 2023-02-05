@@ -38,7 +38,8 @@ It means direct pushes to the main branch are not allowed.
 Status check rules
 ~~~~~~~~~~~~~~~~~~
 
-A "Terraform Plan" check runs ``terraform plan``, so we want to enable it.
+A `Terraform CI <https://github.com/infrahouse8/github-control/actions/workflows/terraform-CI.yml>`_
+workflow runs ``terraform plan``, so we want to enable it.
 
 **Require branches to be up to date before merging** is especially important when it comes to Terraform repositories.
 It requires a pull request to include all known commits from the default branch.
@@ -52,7 +53,8 @@ If this option is not set, a user may unintentionally destroy resources created 
 Continuous Integration
 ----------------------
 
-A workflow defined in ``.github/workflows/terraform-plan.yml`` triggers on a new pull request or any updates in it.
+A `Terraform CD <https://github.com/infrahouse8/github-control/actions/workflows/terraform-CD.yml>`_ workflow
+defined in ``.github/workflows/terraform-CI.yml`` triggers on a new pull request or any updates in it.
 Among other trivial steps like running a linter and checking code style there are two important steps.
 
 .. code-block:: yaml
@@ -70,15 +72,21 @@ The plan file will be used by Continuous Deployment.
 
     # Upload Terraform Plan
     - name: Upload Terraform Plan
-    run: aws s3 cp "${{ github.event.pull_request.number }}.plan" "s3://${{ vars.STATES_BUCKET }}/pending/${{ github.event.pull_request.number }}.plan"
+    run: python support/s3-plan.py upload ${{ github.event.pull_request.number }}
 
-This step upload the plan file to an S3 bucket. The plan is identified by a pull request number.
+This step uploads the plan file to the same S3 bucket as the Terraform state.
+``support/s3-plan.py`` parses ``terraform.tf`` to get the bucket.
+The plan is identified by a pull request number.
+
+It is important to note, when the pull request is reviewed, not only the code is a subject for a review
+but so is the plan.
+We want to execute the approved plan, not regenerated one later on.
 
 
 Continuous Deployment
 ---------------------
 
-The deployment workflow is defined in ``.github/workflows/terraform-deploy.yml``.
+The deployment workflow is defined in ``.github/workflows/terraform-CD.yml``.
 It is triggered when a pull request is closed.
 
 .. code-block:: yaml
@@ -98,7 +106,7 @@ In a context of the push event there is no a pull request number and we need it 
 
     # Download a plan from the approved pull request
     - name: Download plan
-    run: aws s3 cp s3://${{ vars.STATES_BUCKET }}/pending/${{ github.event.pull_request.number }}.plan tf.plan
+    run: python support/s3-plan.py download ${{ github.event.pull_request.number }}
 
 When the plan is downloaded, the worker can execute it:
 
@@ -107,7 +115,7 @@ When the plan is downloaded, the worker can execute it:
 
     # Execute the plan
     - name: Terraform Apply
-    run: terraform apply -auto-approve -input=false tf.plan
+    run: terraform apply -auto-approve -input=false ${{ github.event.pull_request.number }}.plan
 
 Thus ``terraform apply`` applies only approved plan exactly as it was shown in the pull request.
 
