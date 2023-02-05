@@ -12,7 +12,7 @@ Changes made outside of the repository may be reverted.
 Continuous Integration and Deployment (CI/CD) is configured for this repository.
 
 
-.. admonition:: See also
+.. admonition:: **See also**
 
     A `cookiecutter template <https://github.com/infrahouse/cookiecutter-github-control>`_ is available
     to create a Terraform repository with CI/CD to manage a GitHub organization.
