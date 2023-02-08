@@ -1,18 +1,18 @@
 locals {
   repos = {
-    "infrahouse-toolkit": {
+    "infrahouse-toolkit" : {
       description = "InfraHouse Toolkit"
-      team_id = github_team.dev.id
+      team_id     = github_team.dev.id
     }
   }
 }
 
 module "repos" {
-  source = "./modules/plain-repo"
-  for_each = local.repos
-  repo_name = each.key
+  source           = "./modules/plain-repo"
+  for_each         = local.repos
+  repo_name        = each.key
   repo_description = each.value["description"]
-  team_id = each.value["team_id"]
+  team_id          = each.value["team_id"]
 }
 
 resource "github_repository" "cookiecutter-github-control" {
