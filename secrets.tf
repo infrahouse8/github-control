@@ -24,6 +24,6 @@ resource "github_actions_secret" "pypi_api_token" {
     if local.repos[k]["type"] == "python_app"
   }
   repository      = each.key
-  secret_name     = "PYPI_API_TOKEN"  ## Note: not the same name as in aws_secretsmanager_secret.pypi_api_token
+  secret_name     = "PYPI_API_TOKEN" ## Note: not the same name as in aws_secretsmanager_secret.pypi_api_token
   plaintext_value = data.aws_secretsmanager_secret_version.pypi_api_token.secret_string
 }
