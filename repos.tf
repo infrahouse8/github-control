@@ -3,10 +3,12 @@ locals {
     "infrahouse-toolkit" : {
       description = "InfraHouse Toolkit"
       team_id     = github_team.dev.id
+      type        = "python_app"
     }
     "cookiecutter-github-control" : {
       description = "Template for a GitHub Control repository"
       team_id     = github_team.dev.id
+      type        = "other"
     }
   }
 }

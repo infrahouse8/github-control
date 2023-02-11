@@ -1,3 +1,5 @@
+.. _ci-cd-doc-label:
+
 Continuous Integration and Deployment (CI/CD)
 =============================================
 
