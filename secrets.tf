@@ -16,7 +16,7 @@ data "aws_secretsmanager_secret_version" "PYPI_API_TOKEN" {
 }
 
 resource "github_actions_secret" "infrahouse-toolkit-PYPI_API_TOKEN" {
-  repository       = "infrahouse-toolkit"
-  secret_name      = "PYPI_API_TOKEN"
-  plaintext_value  = data.aws_secretsmanager_secret_version.PYPI_API_TOKEN.secret_string
+  repository      = "infrahouse-toolkit"
+  secret_name     = "PYPI_API_TOKEN"
+  plaintext_value = data.aws_secretsmanager_secret_version.PYPI_API_TOKEN.secret_string
 }
