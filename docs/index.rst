@@ -17,6 +17,7 @@ Welcome to GitHub Control's documentation!
    readme
    cicd
    aws-policy
+   secrets-management
 
 
 * :ref:`search`
