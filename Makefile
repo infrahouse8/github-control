@@ -34,12 +34,12 @@ lint:  ## Check code style
 	yamllint \
 		.github/workflows \
 		.readthedocs.yaml
-	terraform fmt -check
+	terraform fmt -check -recursive
 
 
 .PHONY: format
 format:  ## Format terraform files
-	terraform fmt
+	terraform fmt -recursive
 
 .PHONY: init
 init:
