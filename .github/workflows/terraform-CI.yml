@@ -54,8 +54,7 @@ jobs:
       - name: Terraform Plan
         run: |
           make plan
-          mv tf.plan ${{ github.event.pull_request.number }}.plan
 
       # Upload Terraform Plan
       - name: Upload Terraform Plan
-        run: python support/s3-plan.py upload ${{ github.event.pull_request.number }}
+        run: ih-plan upload --key-name=plans/${{ github.event.pull_request.number }}.plan tf.plan

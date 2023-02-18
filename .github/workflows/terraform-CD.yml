@@ -42,7 +42,7 @@ jobs:
 
       # Download a plan from the approved pull request
       - name: Download plan
-        run: python support/s3-plan.py download ${{ github.event.pull_request.number }}
+        run: ih-plan download plans/${{ github.event.pull_request.number }}.plan tf.plan
 
       # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state,
       # downloading modules, etc.
@@ -56,8 +56,7 @@ jobs:
       # Execute the plan
       - name: Terraform Apply
         run: |
-          mv ${{ github.event.pull_request.number }}.plan tf.plan
           make apply
 
       - name: Remove plan
-        run: python support/s3-plan.py remove ${{ github.event.pull_request.number }}
+        run: ih-plan remove plans/${{ github.event.pull_request.number }}.plan
