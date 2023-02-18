@@ -3,7 +3,7 @@
 Continuous Integration and Deployment (CI/CD)
 =============================================
 
-The `GitHub Control <https://github.com/infrahouse8/github-control>`_ is a Terraform live repository [#]_.
+The `GitHub Control <https://github.com/infrahouse8/github-control>`_ is a Terraform live repository [#fn1]_.
 The Continuous Integration part of the workflow ensures that a proposed change is syntactically correct and it prepares the ``terraform plan`` output for the code review.
 The Continuous Deployment part of the workflow applies the suggested change i.e. runs ``terraform apply``.
 
@@ -70,11 +70,11 @@ Not only the step runs ``terraform plan`` but it also saves the plan in a file.
 The plan file will be used by Continuous Deployment.
 
 .. code-block:: yaml
-    :caption: Step 2. Save the plan.
+    :caption: Step 2. Save the plan [#fn2]_.
 
     # Upload Terraform Plan
     - name: Upload Terraform Plan
-    run: python support/s3-plan.py upload ${{ github.event.pull_request.number }}
+    run: ih-plan upload --key-name=plans/${{ github.event.pull_request.number }}.plan tf.plan
 
 This step uploads the plan file to the same S3 bucket as the Terraform state.
 ``support/s3-plan.py`` parses ``terraform.tf`` to get the bucket.
@@ -104,11 +104,11 @@ The matter is we need to know what pull request is being merged into the main br
 In a context of the push event there is no a pull request number and we need it to download the plan.
 
 .. code-block:: yaml
-    :caption: Download the plan.
+    :caption: Download the plan [#fn2]_.
 
     # Download a plan from the approved pull request
     - name: Download plan
-    run: python support/s3-plan.py download ${{ github.event.pull_request.number }}
+    run: ih-plan download plans/${{ github.event.pull_request.number }}.plan tf.plan
 
 When the plan is downloaded, the worker can execute it:
 
@@ -117,12 +117,14 @@ When the plan is downloaded, the worker can execute it:
 
     # Execute the plan
     - name: Terraform Apply
-    run: terraform apply -auto-approve -input=false ${{ github.event.pull_request.number }}.plan
+    run: make apply
 
 Thus ``terraform apply`` applies only approved plan exactly as it was shown in the pull request.
 
 
-.. [#] There are two kinds of Terraform repositories: a live repository and a module repository.
+.. [#fn1] There are two kinds of Terraform repositories: a live repository and a module repository.
     The live repository contains the Terraform code and creates real resources.
     The module repository contains a Terraform module code.
     The module code is supposed to be used in other live repositories.
+
+.. [#fn2] ``ih-plan`` is a part of `InfraHouse Toolkit <https://github.com/infrahouse/infrahouse-toolkit>`_.
