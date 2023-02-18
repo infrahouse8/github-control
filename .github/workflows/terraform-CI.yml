@@ -57,4 +57,7 @@ jobs:
 
       # Upload Terraform Plan
       - name: Upload Terraform Plan
-        run: ih-plan upload --key-name=plans/${{ github.event.pull_request.number }}.plan tf.plan
+        run: |
+          ih-plan upload \
+            --key-name=plans/${{ github.event.pull_request.number }}.plan \
+            tf.plan
