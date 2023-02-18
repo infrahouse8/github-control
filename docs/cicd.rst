@@ -64,7 +64,8 @@ Among other trivial steps like running a linter and checking code style there ar
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-    run: terraform plan -input=false -out=${{ github.event.pull_request.number }}.plan
+    run: |
+        make plan
 
 Not only the step runs ``terraform plan`` but it also saves the plan in a file.
 The plan file will be used by Continuous Deployment.
@@ -74,10 +75,13 @@ The plan file will be used by Continuous Deployment.
 
     # Upload Terraform Plan
     - name: Upload Terraform Plan
-    run: ih-plan upload --key-name=plans/${{ github.event.pull_request.number }}.plan tf.plan
+    run: |
+        ih-plan upload \
+            --key-name=plans/${{ github.event.pull_request.number }}.plan \
+            tf.plan
 
 This step uploads the plan file to the same S3 bucket as the Terraform state.
-``support/s3-plan.py`` parses ``terraform.tf`` to get the bucket.
+``ih-plan`` [#fn2]_ parses ``terraform.tf`` to get the bucket.
 The plan is identified by a pull request number.
 
 It is important to note, when the pull request is reviewed, not only the code is a subject for a review
@@ -108,7 +112,10 @@ In a context of the push event there is no a pull request number and we need it 
 
     # Download a plan from the approved pull request
     - name: Download plan
-    run: ih-plan download plans/${{ github.event.pull_request.number }}.plan tf.plan
+    run: |
+        ih-plan download \
+            plans/${{ github.event.pull_request.number }}.plan \
+            tf.plan
 
 When the plan is downloaded, the worker can execute it:
 
