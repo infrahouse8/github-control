@@ -54,6 +54,7 @@ jobs:
       - name: Terraform Plan
         run: |
           make plan
+          ih-plan publish ${{ github.repository }} ${{ github.event.pull_request.number }} plan.stdout plan.stderr
 
       # Upload Terraform Plan
       - name: Upload Terraform Plan
