@@ -3,6 +3,9 @@ locals {
     "github-control" : {
       description = "InfraHouse GitHub configuration"
     }
+    "aws-s3-control" : {
+      description = "InfraHouse Terraform State Buckets"
+    }
   }
 }
 
