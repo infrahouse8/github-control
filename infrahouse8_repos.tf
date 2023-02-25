@@ -29,5 +29,7 @@ resource "github_branch_protection" "github-control-main" {
       "Terraform Plan",
     ]
   }
-  required_pull_request_reviews {}
+  required_pull_request_reviews {
+    required_approving_review_count = 0
+  }
 }
