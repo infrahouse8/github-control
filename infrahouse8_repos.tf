@@ -21,9 +21,13 @@ resource "github_branch_protection" "github-control-main" {
   provider = github.infrahouse8
 
   pattern       = github_branch_default.github-control-main.branch
-  repository_id = github_repository.github-control.id
+  repository_id = github_repository.github-control.node_id
 
   required_status_checks {
     strict = true
+    contexts = [
+      "Terraform Plan",
+    ]
   }
+  required_pull_request_reviews {}
 }
