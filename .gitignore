@@ -31,3 +31,5 @@ override.tf.json
 tf.plan
 .idea
 /docs/_build/
+/plan.stderr
+/plan.stdout
