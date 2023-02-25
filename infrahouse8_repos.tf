@@ -22,4 +22,9 @@ resource "github_branch_protection" "github-control-main" {
 
   pattern       = github_branch_default.github-control-main.branch
   repository_id = github_branch_protection
+
+  required_status_checks {
+    strict = true
+
+  }
 }
