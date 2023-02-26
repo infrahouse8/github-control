@@ -54,12 +54,11 @@ jobs:
       - name: Terraform Plan
         run: |
           make plan
-          ih-plan --aws-assume-role-arn arn:aws:iam::990466748045:role/github-admin \
-            publish ${{ github.repository }} ${{ github.event.pull_request.number }} plan.stdout plan.stderr
+          ih-plan publish ${{ github.repository }} ${{ github.event.pull_request.number }} plan.stdout plan.stderr
 
       # Upload Terraform Plan
       - name: Upload Terraform Plan
         run: |
-          ih-plan upload \
+          ih-plan --aws-assume-role-arn arn:aws:iam::990466748045:role/github-admin upload \
             --key-name=plans/${{ github.event.pull_request.number }}.plan \
             tf.plan
