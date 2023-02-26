@@ -8,7 +8,7 @@ resource "github_repository" "repo" {
   vulnerability_alerts = true
   template {
     owner      = "infrahouse8"
-    repository = "terraform-template"
+    repository = var.template_repo
   }
 }
 

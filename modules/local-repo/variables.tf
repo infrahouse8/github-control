@@ -19,3 +19,8 @@ variable "role" {
   type        = string
   default     = null
 }
+
+variable "template_repo" {
+  description = "Repository name to use as a template"
+  default     = "terraform-template"
+}
