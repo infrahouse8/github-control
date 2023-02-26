@@ -43,7 +43,7 @@ jobs:
       # Download a plan from the approved pull request
       - name: Download plan
         run: |
-          ih-plan download \
+          ih-plan --aws-assume-role-arn arn:aws:iam::990466748045:role/github-admin download \
             plans/${{ github.event.pull_request.number }}.plan \
             tf.plan
 
@@ -63,5 +63,5 @@ jobs:
 
       - name: Remove plan
         run: |
-          ih-plan remove \
+          ih-plan --aws-assume-role-arn arn:aws:iam::990466748045:role/github-admin remove \
             plans/${{ github.event.pull_request.number }}.plan
