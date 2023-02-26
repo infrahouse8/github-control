@@ -11,6 +11,7 @@ locals {
     }
     "aws-s3-control" : {
       description   = "InfraHouse Terraform State Buckets"
+      role          = "arn:aws:iam::990466748045:role/s3-admin"
       template_repo = github_repository.terraform-template.name
     }
   }
