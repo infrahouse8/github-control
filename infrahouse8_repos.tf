@@ -24,13 +24,16 @@ module "ih_8_repos" {
 
 
 resource "github_repository" "terraform-template" {
-  provider    = github.infrahouse8
-  name        = "terraform-template"
-  description = <<EOT
-Template repository for a Terraform project.
-This repository is not supposed to become a cookiecutter.
-If you need one - check out https://github.com/infrahouse/cookiecutter-github-control
+  provider = github.infrahouse8
+  name     = "terraform-template"
+  description = join(
+    " ",
+    [
+      "Template repository for a Terraform project.",
+      "This repository is not supposed to become a cookiecutter.",
+      "If you need one - check out https://github.com/infrahouse/cookiecutter-github-control .",
+      "This repository will be used as a template to instantiate a new empty Terraform repository."
+    ]
+  )
 
-This repository will be used as a template to instantiate a new empty Terraform repository.
-EOT
 }
