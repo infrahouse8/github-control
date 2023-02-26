@@ -59,6 +59,6 @@ jobs:
       # Upload Terraform Plan
       - name: Upload Terraform Plan
         run: |
-          ih-plan --aws-assume-role-arn arn:aws:iam::990466748045:role/github-admin upload \
+          ih-plan --aws-assume-role-arn ${{ secrets.AWS_ROLE }} upload \
             --key-name=plans/${{ github.event.pull_request.number }}.plan \
             tf.plan
