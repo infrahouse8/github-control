@@ -22,9 +22,13 @@ BROWSER := python -c "$$BROWSER_PYSCRIPT"
 help: ## Print this help
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
+.PHONY: hooks
+hooks:
+	test -f .git/hooks/pre-commit || cp hooks/pre-commit .git/hooks/pre-commit
+
 
 .PHONY: bootstrap
-bootstrap:  ## Build development environment
+bootstrap: hooks ## Build development environment
 	pip install -r requirements.txt
 
 .PHONY: bootstrap-ci

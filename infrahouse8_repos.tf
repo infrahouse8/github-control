@@ -24,8 +24,8 @@ module "ih_8_repos" {
 
 
 resource "github_repository" "terraform-template" {
-  provider = github.infrahouse8
-  name = "terraform-template"
+  provider    = github.infrahouse8
+  name        = "terraform-template"
   description = <<EOT
 Template repository for a Terraform project.
 This repository is not supposed to become a cookiecutter.
