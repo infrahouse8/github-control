@@ -6,6 +6,10 @@ resource "github_repository" "repo" {
   has_projects         = false
   has_wiki             = false
   vulnerability_alerts = true
+  template {
+    owner      = "infrahouse8"
+    repository = "terraform-template"
+  }
 }
 
 resource "github_branch_default" "main" {

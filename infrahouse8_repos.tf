@@ -4,6 +4,9 @@ locals {
       description = "InfraHouse GitHub configuration"
       role        = "arn:aws:iam::990466748045:role/github-admin"
     }
+    "aws-control" : {
+      description = "InfraHouse Basic AWS configuration"
+    }
     "aws-s3-control" : {
       description = "InfraHouse Terraform State Buckets"
     }
