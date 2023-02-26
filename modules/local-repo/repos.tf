@@ -26,3 +26,10 @@ resource "github_branch_protection" "main" {
     required_approving_review_count = 0
   }
 }
+
+resource "github_actions_secret" "role" {
+  repository      = github_repository.repo.name
+  secret_name     = "AWS_ROLE"
+  plaintext_value = var.role
+  count           = var.role != null ? 1 : 0
+}

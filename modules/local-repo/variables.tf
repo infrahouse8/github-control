@@ -1,3 +1,11 @@
+variable "checks" {
+  description = "Required pull request checks"
+  type        = list(string)
+  default = [
+    "Terraform Plan",
+  ]
+}
+
 variable "repo_description" {
   description = "The repository description"
 }
@@ -6,10 +14,8 @@ variable "repo_name" {
   description = "Repository short name"
 }
 
-variable "checks" {
-  description = "Required pull request checks"
-  type        = list(string)
-  default = [
-    "Terraform Plan",
-  ]
+variable "role" {
+  description = "AWS role ARN to be saved in a repo secret"
+  type        = string
+  default     = null
 }
