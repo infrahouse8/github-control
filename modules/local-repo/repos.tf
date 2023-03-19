@@ -31,7 +31,7 @@ resource "github_branch_protection" "main" {
   }
 }
 
-resource "github_actions_secret" "role" {
+resource "github_actions_secret" "secret" {
   for_each        = var.secrets
   repository      = github_repository.repo.name
   secret_name     = each.key
