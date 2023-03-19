@@ -38,6 +38,17 @@ resource "github_actions_secret" "secret" {
   plaintext_value = each.value
 }
 
+data "external" "env" {
+  program = ["bash", "${path.module}/env.sh"]
+}
+
+resource "github_actions_secret" "gh_token" {
+  for_each        = var.secrets
+  repository      = github_repository.repo.name
+  secret_name     = "GH_TOKEN"
+  plaintext_value = data.external.env.result["GH_TOKEN"]
+}
+
 
 resource "github_repository_collaborator" "collaborators" {
   for_each   = toset(var.collaborators)

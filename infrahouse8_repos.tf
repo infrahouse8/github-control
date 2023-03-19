@@ -6,7 +6,6 @@ locals {
       secrets = {
         AWS_DEFAULT_REGION = "us-west-1"
         AWS_ROLE           = "arn:aws:iam::990466748045:role/github-admin"
-        GH_TOKEN           = data.external.env.result["GH_TOKEN"]
       }
     }
     aws-control = {
@@ -14,7 +13,6 @@ locals {
       template_repo = github_repository.terraform-template.name
       secrets = {
         AWS_DEFAULT_REGION = "us-west-1"
-        GH_TOKEN           = data.external.env.result["GH_TOKEN"]
       }
     }
     aws-s3-control = {
@@ -23,16 +21,11 @@ locals {
       secrets = {
         AWS_DEFAULT_REGION = "us-west-1"
         AWS_ROLE           = "arn:aws:iam::990466748045:role/s3-admin"
-        GH_TOKEN           = data.external.env.result["GH_TOKEN"]
       }
     }
   }
 }
 
-data "external" "env" {
-  program = ["bash", "${path.module}/env.sh"]
-
-}
 
 module "ih_8_repos" {
   source           = "./modules/local-repo"
