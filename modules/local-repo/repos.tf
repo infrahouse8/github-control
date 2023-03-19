@@ -32,10 +32,10 @@ resource "github_branch_protection" "main" {
 }
 
 resource "github_actions_secret" "role" {
+  for_each        = var.secrets
   repository      = github_repository.repo.name
-  secret_name     = "AWS_ROLE"
-  plaintext_value = var.role
-  count           = var.role != null ? 1 : 0
+  secret_name     = each.key
+  plaintext_value = each.value
 }
 
 
