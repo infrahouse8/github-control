@@ -28,6 +28,10 @@ resource "github_actions_secret" "pypi_api_token" {
   plaintext_value = data.aws_secretsmanager_secret_version.pypi_api_token.secret_string
 }
 
+locals {
+  secrets_namespace = "_github_control__"
+  s_prefix          = "${local.secrets_namespace}tf_admin"
+}
 
 data "aws_secretsmanager_secret" "aws_access_key_id" {
   for_each = {
@@ -35,7 +39,7 @@ data "aws_secretsmanager_secret" "aws_access_key_id" {
     k => local.repos[k]
     if local.repos[k]["type"] == "terraform_aws"
   }
-  name = "tf_admin/${each.value["tf_admin_username"]}"
+  name = "${local.s_prefix}/${each.value["tf_admin_username"]}"
 }
 
 data "aws_secretsmanager_secret_version" "aws_access_key_id" {
@@ -44,7 +48,7 @@ data "aws_secretsmanager_secret_version" "aws_access_key_id" {
     k => local.repos[k]
     if local.repos[k]["type"] == "terraform_aws"
   }
-  secret_id = data.aws_secretsmanager_secret.aws_access_key_id["tf_admin/${each.value["tf_admin_username"]}"].id
+  secret_id = data.aws_secretsmanager_secret.aws_access_key_id["${local.s_prefix}/${each.value["tf_admin_username"]}"].id
 }
 
 resource "github_actions_secret" "aws_access_key_id" {
@@ -55,5 +59,5 @@ resource "github_actions_secret" "aws_access_key_id" {
   }
   repository      = each.key
   secret_name     = "aws_access_key_id"
-  plaintext_value = data.aws_secretsmanager_secret_version.aws_access_key_id["tf_admin/${each.value["tf_admin_username"]}"].secret_string
+  plaintext_value = data.aws_secretsmanager_secret_version.aws_access_key_id["${local.s_prefix}/${each.value["tf_admin_username"]}"].secret_string
 }
