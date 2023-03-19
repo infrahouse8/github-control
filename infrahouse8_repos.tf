@@ -4,18 +4,23 @@ locals {
       description   = "InfraHouse GitHub configuration"
       template_repo = github_repository.terraform-template.name
       secrets = {
-        AWS_ROLE = "arn:aws:iam::990466748045:role/github-admin"
+        AWS_DEFAULT_REGION = "us-west-1"
+        AWS_ROLE           = "arn:aws:iam::990466748045:role/github-admin"
       }
     }
     aws-control = {
       description   = "InfraHouse Basic AWS configuration"
       template_repo = github_repository.terraform-template.name
+      secrets = {
+        AWS_DEFAULT_REGION = "us-west-1"
+      }
     }
     aws-s3-control = {
       description   = "InfraHouse Terraform State Buckets"
       template_repo = github_repository.terraform-template.name
       secrets = {
-        AWS_ROLE = "arn:aws:iam::990466748045:role/github-admin"
+        AWS_DEFAULT_REGION = "us-west-1"
+        AWS_ROLE           = "arn:aws:iam::990466748045:role/s3-admin"
       }
     }
   }
