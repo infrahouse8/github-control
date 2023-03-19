@@ -10,6 +10,11 @@ locals {
       team_id     = github_team.dev.id
       type        = "other"
     }
+    "infrahouse-aws-control" : {
+      description = "InfraHouse AWS Infrastructure"
+      team_id     = github_team.dev.id
+      type        = "other"
+    }
     "cookiecutter-github-control" : {
       description = "Template for a GitHub Control repository"
       team_id     = github_team.dev.id
