@@ -37,3 +37,10 @@ resource "github_actions_secret" "role" {
   plaintext_value = var.role
   count           = var.role != null ? 1 : 0
 }
+
+
+resource "github_repository_collaborator" "collaborators" {
+  for_each   = toset(var.collaborators)
+  repository = github_repository.repo.name
+  username   = each.key
+}
