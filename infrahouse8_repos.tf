@@ -24,6 +24,9 @@ module "ih_8_repos" {
   repo_description = each.value["description"]
   role             = contains(keys(each.value), "role") ? each.value["role"] : null
   template_repo    = each.value["template_repo"]
+  collaborators = [
+    "akuzminsky"
+  ]
 
   providers = {
     github = github.infrahouse8
