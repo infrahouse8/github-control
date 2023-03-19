@@ -6,7 +6,7 @@ locals {
       type        = "python_app"
     }
     "infrahouse-website-infra" : {
-      description       = "InfraHouse Infrastructure"
+      description       = "InfraHouse Website Infrastructure"
       team_id           = github_team.dev.id
       type              = "terraform_aws"
       tf_admin_username = "tf_aws"
