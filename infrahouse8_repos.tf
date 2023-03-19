@@ -1,21 +1,21 @@
 locals {
   infrahouse_8_repos = {
-    "github-control" : {
+    github-control = {
       description   = "InfraHouse GitHub configuration"
       template_repo = github_repository.terraform-template.name
       secrets = {
-        AWS_ROLE : "arn:aws:iam::990466748045:role/github-admin"
+        AWS_ROLE = "arn:aws:iam::990466748045:role/github-admin"
       }
     }
-    "aws-control" : {
+    aws-control = {
       description   = "InfraHouse Basic AWS configuration"
       template_repo = github_repository.terraform-template.name
     }
-    "aws-s3-control" : {
+    aws-s3-control = {
       description   = "InfraHouse Terraform State Buckets"
       template_repo = github_repository.terraform-template.name
       secrets = {
-        AWS_ROLE : "arn:aws:iam::990466748045:role/github-admin"
+        AWS_ROLE = "arn:aws:iam::990466748045:role/github-admin"
       }
     }
   }
@@ -27,7 +27,7 @@ module "ih_8_repos" {
   repo_name        = each.key
   repo_description = each.value["description"]
   template_repo    = each.value["template_repo"]
-  secrets          = each.value["secrets"]
+  secrets          = contains(keys(each.value), "secrets") ? each.value["secrets"] : {}
   collaborators = [
     "akuzminsky"
   ]
