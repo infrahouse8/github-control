@@ -20,13 +20,13 @@ variable "repo_name" {
   description = "Repository short name"
 }
 
-variable "role" {
-  description = "AWS role ARN to be saved in a repo secret"
-  type        = string
-  default     = null
-}
-
 variable "template_repo" {
   description = "Repository name to use as a template"
   default     = "terraform-template"
+}
+
+variable "secrets" {
+  description = "Map with GitHub Action secrets"
+  type        = map(string)
+  default     = {}
 }
