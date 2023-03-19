@@ -6,6 +6,12 @@ variable "checks" {
   ]
 }
 
+variable "collaborators" {
+  description = "List of users who have a push privilege"
+  type        = list(string)
+  default     = []
+}
+
 variable "repo_description" {
   description = "The repository description"
 }
