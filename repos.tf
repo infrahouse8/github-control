@@ -6,14 +6,16 @@ locals {
       type        = "python_app"
     }
     "infrahouse-website-infra" : {
-      description = "InfraHouse Infrastructure"
-      team_id     = github_team.dev.id
-      type        = "other"
+      description       = "InfraHouse Infrastructure"
+      team_id           = github_team.dev.id
+      type              = "terraform_aws"
+      tf_admin_username = "tf_aws"
     }
     "infrahouse-aws-control" : {
-      description = "InfraHouse AWS Infrastructure"
-      team_id     = github_team.dev.id
-      type        = "other"
+      description       = "InfraHouse AWS Infrastructure"
+      team_id           = github_team.dev.id
+      type              = "terraform_aws"
+      tf_admin_username = "tf_aws"
     }
     "cookiecutter-github-control" : {
       description = "Template for a GitHub Control repository"
