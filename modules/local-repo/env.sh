@@ -3,5 +3,5 @@
 # env.sh
 
 cat <<EOF
-{"GH_TOKEN": "$GH_TOKEN"}
+{"GH_TOKEN": "$GITHUB_TOKEN"}
 EOF
