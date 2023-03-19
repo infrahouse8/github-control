@@ -7,7 +7,7 @@ variable "checks" {
 }
 
 variable "collaborators" {
-  description = "List of user who have push privilege"
+  description = "List of users who have a push privilege"
   type        = list(string)
   default     = []
 }
