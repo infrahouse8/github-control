@@ -1,42 +1,50 @@
 locals {
   infrahouse_8_repos = {
     github-control = {
-      description   = "InfraHouse GitHub configuration"
-      template_repo = github_repository.terraform-template.name
+      description       = "InfraHouse GitHub configuration"
+      tf_admin_username = "tf_github"
       secrets = {
-        AWS_DEFAULT_REGION = "us-west-1"
-        AWS_ROLE           = "arn:aws:iam::990466748045:role/github-admin"
-        GH_TOKEN           = data.external.env.result["GH_TOKEN"]
+        AWS_ROLE = "arn:aws:iam::990466748045:role/github-admin"
       }
     }
     aws-control = {
-      description   = "InfraHouse Basic AWS configuration"
-      template_repo = github_repository.terraform-template.name
+      description       = "InfraHouse Basic AWS configuration"
+      template_repo     = github_repository.terraform-template.name
+      tf_admin_username = "tf_aws"
       secrets = {
-        AWS_DEFAULT_REGION = "us-west-1"
-        GH_TOKEN           = data.external.env.result["GH_TOKEN"]
       }
     }
     aws-s3-control = {
-      description   = "InfraHouse Terraform State Buckets"
-      template_repo = github_repository.terraform-template.name
+      description       = "InfraHouse Terraform State Buckets"
+      template_repo     = github_repository.terraform-template.name
+      tf_admin_username = "tf_s3"
       secrets = {
-        AWS_DEFAULT_REGION = "us-west-1"
-        AWS_ROLE           = "arn:aws:iam::990466748045:role/s3-admin"
-        GH_TOKEN           = data.external.env.result["GH_TOKEN"]
+        AWS_ROLE = "arn:aws:iam::990466748045:role/s3-admin"
       }
     }
   }
 }
 
+module "aws_creds_infrahouse8" {
+  source      = "./modules/aws_creds"
+  for_each    = local.infrahouse_8_repos
+  secret_name = join("/", [local.s_prefix, each.value["tf_admin_username"]])
+}
 
 module "ih_8_repos" {
   source           = "./modules/local-repo"
   for_each         = local.infrahouse_8_repos
   repo_name        = each.key
   repo_description = each.value["description"]
-  template_repo    = each.value["template_repo"]
-  secrets          = contains(keys(each.value), "secrets") ? each.value["secrets"] : {}
+  template_repo    = contains(keys(each.value), "template_repo") ? each.value["template_repo"] : null
+  secrets = merge(contains(keys(each.value), "secrets") ? each.value["secrets"] : {},
+    {
+      AWS_DEFAULT_REGION    = "us-west-1"
+      AWS_ACCESS_KEY_ID     = module.aws_creds_infrahouse8[each.key].aws_access_key_id
+      AWS_SECRET_ACCESS_KEY = module.aws_creds_infrahouse8[each.key].aws_secret_access_key
+      GH_TOKEN              = data.external.env.result["GH_TOKEN"]
+    }
+  )
   collaborators = [
     "akuzminsky"
   ]
@@ -44,10 +52,6 @@ module "ih_8_repos" {
   providers = {
     github = github.infrahouse8
   }
-}
-
-data "external" "env" {
-  program = ["bash", "${path.module}/env.sh"]
 }
 
 resource "github_repository" "terraform-template" {

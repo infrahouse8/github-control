@@ -1,6 +1,6 @@
 resource "aws_secretsmanager_secret" "pypi_api_token" {
   provider                       = aws.uw1
-  name                           = "_github_control__PYPI_API_TOKEN"
+  name                           = "${data.aws_ssm_parameter.gh_secrets_namespace.value}PYPI_API_TOKEN"
   description                    = <<-EOT
 Token for "GitHub Publishing"
 Permissions: Upload packages
@@ -29,8 +29,7 @@ resource "github_actions_secret" "pypi_api_token" {
 }
 
 locals {
-  secrets_namespace = "_github_control__"
-  s_prefix          = "${local.secrets_namespace}tf_admin"
+  s_prefix = "${data.aws_ssm_parameter.gh_secrets_namespace.value}tf_admin"
 }
 
 
