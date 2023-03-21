@@ -6,9 +6,14 @@ resource "github_repository" "repo" {
   has_projects         = false
   has_wiki             = false
   vulnerability_alerts = true
-  template {
-    owner      = "infrahouse8"
-    repository = var.template_repo
+  dynamic "template" {
+    for_each = toset(
+      var.template_repo != null ? ["one"] : []
+    )
+    content {
+      owner      = "infrahouse8"
+      repository = var.template_repo
+    }
   }
 }
 

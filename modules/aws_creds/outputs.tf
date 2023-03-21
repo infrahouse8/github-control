@@ -1,7 +1,7 @@
 output "aws_access_key_id" {
-  value = data.aws_secretsmanager_secret_version.aws_access_key_id.secret_string
+  value = jsondecode(data.aws_secretsmanager_secret_version.aws_key.secret_string)["aws_access_key_id"]
 }
 
 output "aws_secret_access_key" {
-  value = data.aws_secretsmanager_secret_version.aws_secret_access_key.secret_string
+  value = jsondecode(data.aws_secretsmanager_secret_version.aws_key.secret_string)["aws_secret_access_key"]
 }
