@@ -67,3 +67,9 @@ docs: ## generate Sphinx HTML documentation
 	$(MAKE) -C docs clean
 	$(MAKE) -C docs html
 	$(BROWSER) docs/_build/html/index.html
+
+.PHONY: clean
+clean: ## Remove generated files
+	rm -fr .terraform
+	rm -f .terraform.lock.hcl
+	rm -f plan.stderr plan.stdout tf.plan
