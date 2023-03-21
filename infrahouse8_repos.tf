@@ -4,7 +4,7 @@ locals {
       description       = "InfraHouse GitHub configuration"
       tf_admin_username = "tf_github"
       secrets = {
-        AWS_ROLE = "arn:aws:iam::990466748045:role/github-admin"
+        AWS_ROLE = "arn:aws:iam::${local.aws_account_id}:role/github-admin"
       }
     }
     aws-control = {
@@ -19,7 +19,7 @@ locals {
       template_repo     = github_repository.terraform-template.name
       tf_admin_username = "tf_s3"
       secrets = {
-        AWS_ROLE = "arn:aws:iam::990466748045:role/s3-admin"
+        AWS_ROLE = "arn:aws:iam::${local.aws_account_id}:role/s3-admin"
       }
     }
   }
