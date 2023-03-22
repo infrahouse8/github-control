@@ -25,11 +25,6 @@ locals {
   }
 }
 
-module "aws_creds_infrahouse8" {
-  source      = "./modules/aws_creds"
-  for_each    = local.infrahouse_8_repos
-  secret_name = join("/", [local.s_prefix, each.value["tf_admin_username"]])
-}
 
 module "ih_8_repos" {
   source           = "./modules/local-repo"
@@ -40,8 +35,8 @@ module "ih_8_repos" {
   secrets = merge(contains(keys(each.value), "secrets") ? each.value["secrets"] : {},
     {
       AWS_DEFAULT_REGION    = "us-west-1"
-      AWS_ACCESS_KEY_ID     = module.aws_creds_infrahouse8[each.key].aws_access_key_id
-      AWS_SECRET_ACCESS_KEY = module.aws_creds_infrahouse8[each.key].aws_secret_access_key
+      AWS_ACCESS_KEY_ID     = module.aws_creds[each.key].aws_access_key_id
+      AWS_SECRET_ACCESS_KEY = module.aws_creds[each.key].aws_secret_access_key
       GH_TOKEN              = data.external.env.result["GH_TOKEN"]
     }
   )
