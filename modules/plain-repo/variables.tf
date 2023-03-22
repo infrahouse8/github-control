@@ -9,3 +9,9 @@ variable "repo_name" {
 variable "team_id" {
   description = "Team identifier that has a push permission"
 }
+
+variable "secrets" {
+  description = "Map with GitHub Action secrets"
+  type        = map(string)
+  default     = {}
+}
