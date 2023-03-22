@@ -44,12 +44,19 @@ module "repos" {
   team_id          = each.value["team_id"]
   secrets = merge(
     contains(keys(each.value), "secrets") ? each.value["secrets"] : {},
-    {
-      AWS_DEFAULT_REGION    = local.aws_default_region
-      AWS_ACCESS_KEY_ID     = module.aws_creds[each.key].aws_access_key_id
-      AWS_SECRET_ACCESS_KEY = module.aws_creds[each.key].aws_secret_access_key
-      GH_TOKEN              = data.external.env.result["GH_TOKEN"]
-    }
+    merge(
+      {
+        GH_TOKEN = data.external.env.result["GH_TOKEN"]
+      },
+      contains(keys(each.value), "tf_admin_username") ?
+      {
+        AWS_DEFAULT_REGION    = local.aws_default_region
+        AWS_ACCESS_KEY_ID     = module.aws_creds[each.key].aws_access_key_id
+        AWS_SECRET_ACCESS_KEY = module.aws_creds[each.key].aws_secret_access_key
+
+      } :
+      {}
+    )
   )
 
 }
