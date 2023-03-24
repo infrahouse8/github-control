@@ -50,8 +50,7 @@ module "ih_8_repos" {
 }
 
 resource "github_repository" "terraform-template" {
-  provider = github.infrahouse8
-  name     = "terraform-template"
+  name = "terraform-template"
   description = join(
     " ",
     [
