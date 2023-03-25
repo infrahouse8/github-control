@@ -16,7 +16,6 @@ locals {
       secrets = {
         AWS_ROLE = "arn:aws:iam::${local.aws_account_id}:role/aws-admin"
       }
-
     }
     "infrahouse-aws-control" : {
       description       = "InfraHouse AWS Infrastructure"
@@ -26,7 +25,6 @@ locals {
       secrets = {
         AWS_ROLE = "arn:aws:iam::${local.aws_account_id}:role/aws-admin"
       }
-
     }
     "cookiecutter-github-control" : {
       description = "Template for a GitHub Control repository"
@@ -58,5 +56,19 @@ module "repos" {
       {}
     )
   )
+}
 
+module "ih_tf_template" {
+  source = "./modules/repo-template"
+  repo_description = join(
+    " ",
+    [
+      "Template repository for a Terraform project.",
+      "This repository is not supposed to become a cookiecutter.",
+      "If you need one - check out https://github.com/infrahouse/cookiecutter-github-control .",
+      "This repository will be used as a template to instantiate a new empty Terraform repository."
+    ]
+  )
+  repo_name = "terraform-template"
+  team_id   = github_team.dev.id
 }

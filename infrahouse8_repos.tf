@@ -9,14 +9,14 @@ locals {
     }
     aws-control = {
       description       = "InfraHouse Basic AWS configuration"
-      template_repo     = github_repository.terraform-template.name
+      template_repo     = module.ih8_tf_template.name
       tf_admin_username = "tf_aws"
       secrets = {
       }
     }
     aws-s3-control = {
       description       = "InfraHouse Terraform State Buckets"
-      template_repo     = github_repository.terraform-template.name
+      template_repo     = module.ih8_tf_template.name
       tf_admin_username = "tf_s3"
       secrets = {
         AWS_ROLE = "arn:aws:iam::${local.aws_account_id}:role/s3-admin"
@@ -49,9 +49,9 @@ module "ih_8_repos" {
   }
 }
 
-resource "github_repository" "terraform-template" {
-  name = "terraform-template"
-  description = join(
+module "ih8_tf_template" {
+  source = "./modules/repo-template"
+  repo_description = join(
     " ",
     [
       "Template repository for a Terraform project.",
@@ -60,5 +60,9 @@ resource "github_repository" "terraform-template" {
       "This repository will be used as a template to instantiate a new empty Terraform repository."
     ]
   )
-  is_template = true
+  repo_name = "terraform-template"
+  team_id   = github_team.dev.id
+  providers = {
+    github = github.infrahouse8
+  }
 }
