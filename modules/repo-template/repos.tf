@@ -7,6 +7,7 @@ resource "github_repository" "repo" {
 }
 
 resource "github_team_repository" "dev" {
+  count      = var.team_id != null ? 1 : 0
   repository = github_repository.repo.name
   team_id    = var.team_id
   permission = "push"
