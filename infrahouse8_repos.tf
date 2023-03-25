@@ -61,7 +61,6 @@ module "ih8_tf_template" {
     ]
   )
   repo_name = "terraform-template"
-  team_id   = github_team.dev.id
   providers = {
     github = github.infrahouse8
   }
