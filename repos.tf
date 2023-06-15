@@ -1,7 +1,7 @@
 locals {
   repos = {
     "infrahouse-toolkit" : {
-      description = "InfraHouse Toolkit"
+      description = "(UPDATE): InfraHouse Toolkit"
       team_id     = github_team.dev.id
       type        = "python_app"
       secrets = {
@@ -26,8 +26,8 @@ locals {
         AWS_ROLE = "arn:aws:iam::${local.aws_account_id}:role/aws-admin"
       }
     }
-    "cookiecutter-github-control" : {
-      description = "Template for a GitHub Control repository"
+    "demo-repo" : {
+      description = "This is a demo repo"
       team_id     = github_team.dev.id
       type        = "other"
     }
