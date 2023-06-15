@@ -31,6 +31,11 @@ locals {
       team_id     = github_team.dev.id
       type        = "other"
     }
+    "proxysql-sandbox" : {
+      description = "Terraform live module to deploy ProxySQL sandbox on AWS"
+      team_id     = github_team.dev.id
+      type        = "other"
+    }
   }
 }
 
