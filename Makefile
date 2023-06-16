@@ -49,7 +49,8 @@ format:  ## Format terraform files
 
 .PHONY: init
 init:
-	terraform init
+	terraform --version
+	terraform init -upgrade
 
 .PHONY: plan
 plan: init ## Run terraform plan
