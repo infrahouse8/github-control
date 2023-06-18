@@ -36,6 +36,11 @@ locals {
       team_id     = github_team.dev.id
       type        = "other"
     }
+    "terraform-aws-service-network" : {
+      description = "Terraform service network module"
+      team_id     = github_team.dev.id
+      type        = "terraform_module"
+    }
   }
 }
 
