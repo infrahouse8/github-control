@@ -8,24 +8,17 @@ provider "github" {
 }
 
 provider "aws" {
+  alias  = "aws-303467602807-uw1"
   region = "us-west-1"
   assume_role {
-    role_arn = "arn:aws:iam::990466748045:role/github-admin"
+    role_arn = "arn:aws:iam::303467602807:role/ih-tf-cicd-control"
   }
 }
 
 provider "aws" {
+  alias  = "aws-303467602807-uw2"
   region = "us-west-1"
-  alias  = "uw1"
   assume_role {
-    role_arn = "arn:aws:iam::990466748045:role/github-admin"
-  }
-}
-
-provider "aws" {
-  region = "us-west-2"
-  alias  = "uw2"
-  assume_role {
-    role_arn = "arn:aws:iam::990466748045:role/github-admin"
+    role_arn = "arn:aws:iam::303467602807:role/ih-tf-cicd-control"
   }
 }

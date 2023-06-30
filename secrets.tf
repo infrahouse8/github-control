@@ -1,5 +1,5 @@
 resource "aws_secretsmanager_secret" "pypi_api_token" {
-  provider                       = aws.uw1
+  provider                       = aws.aws-303467602807-uw1
   name                           = "${data.aws_ssm_parameter.gh_secrets_namespace.value}PYPI_API_TOKEN"
   description                    = <<-EOT
 Token for "GitHub Publishing"

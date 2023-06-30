@@ -34,10 +34,8 @@ module "ih_8_repos" {
   template_repo    = contains(keys(each.value), "template_repo") ? each.value["template_repo"] : null
   secrets = merge(contains(keys(each.value), "secrets") ? each.value["secrets"] : {},
     {
-      AWS_DEFAULT_REGION    = "us-west-1"
-      AWS_ACCESS_KEY_ID     = module.aws_creds[each.key].aws_access_key_id
-      AWS_SECRET_ACCESS_KEY = module.aws_creds[each.key].aws_secret_access_key
-      GH_TOKEN              = data.external.env.result["GH_TOKEN"]
+      AWS_DEFAULT_REGION = "us-west-1"
+      GH_TOKEN           = data.external.env.result["GH_TOKEN"]
     }
   )
   collaborators = [
