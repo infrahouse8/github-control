@@ -8,9 +8,9 @@ locals {
       }
     }
     aws-control = {
-      description       = "InfraHouse Basic AWS configuration"
-      template_repo     = module.ih8_tf_template.name
-      tf_admin_username = "tf_aws"
+      description   = "InfraHouse Basic AWS configuration"
+      template_repo = module.ih8_tf_template.name
+      archived      = true
       secrets = {
       }
     }
@@ -31,6 +31,7 @@ module "ih_8_repos" {
   for_each         = local.infrahouse_8_repos
   repo_name        = each.key
   repo_description = each.value["description"]
+  archived         = contains(keys(each.value), "archived") ? each.value["archived"] : null
   template_repo    = contains(keys(each.value), "template_repo") ? each.value["template_repo"] : null
   secrets = merge(contains(keys(each.value), "secrets") ? each.value["secrets"] : {},
     {

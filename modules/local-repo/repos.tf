@@ -6,6 +6,7 @@ resource "github_repository" "repo" {
   has_projects         = false
   has_wiki             = false
   vulnerability_alerts = true
+  archived             = var.archived
   dynamic "template" {
     for_each = toset(
       var.template_repo != null ? ["one"] : []
