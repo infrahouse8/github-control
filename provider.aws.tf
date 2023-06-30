@@ -1,12 +1,3 @@
-provider "github" {
-  owner = "infrahouse"
-}
-
-provider "github" {
-  owner = "infrahouse8"
-  alias = "infrahouse8"
-}
-
 provider "aws" {
   alias  = "aws-303467602807-uw1"
   region = "us-west-1"
