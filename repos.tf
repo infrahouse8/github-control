@@ -1,5 +1,29 @@
 locals {
   repos = {
+    "aws-control" : {
+      description = "InfraHouse Main AWS Account 990466748045"
+      team_id     = github_team.dev.id
+      type        = "terraform_aws"
+    }
+
+    "aws-control-289256138624" : {
+      description = "InfraHouse Terraform Control AWS Account 289256138624"
+      team_id     = github_team.dev.id
+      type        = "terraform_aws"
+    }
+
+    "aws-control-303467602807" : {
+      description = "InfraHouse CI/CD AWS Account 303467602807"
+      team_id     = github_team.dev.id
+      type        = "terraform_aws"
+    }
+
+    "infrahouse-aws-control" : {
+      description = "DEPRECATED: InfraHouse AWS Infrastructure"
+      team_id     = github_team.dev.id
+      type        = "terraform_aws"
+    }
+
     "infrahouse-toolkit" : {
       description = "InfraHouse Toolkit"
       team_id     = github_team.dev.id
@@ -8,34 +32,25 @@ locals {
         PYPI_API_TOKEN = data.aws_secretsmanager_secret_version.pypi_api_token.secret_string
       }
     }
+
     "infrahouse-website-infra" : {
-      description       = "InfraHouse Website Infrastructure"
-      team_id           = github_team.dev.id
-      type              = "terraform_aws"
-      tf_admin_username = "tf_aws"
-      secrets = {
-        AWS_ROLE = "arn:aws:iam::${local.aws_account_id}:role/aws-admin"
-      }
+      description = "InfraHouse Website Infrastructure"
+      team_id     = github_team.dev.id
+      type        = "terraform_aws"
     }
-    "infrahouse-aws-control" : {
-      description       = "InfraHouse AWS Infrastructure"
-      team_id           = github_team.dev.id
-      type              = "terraform_aws"
-      tf_admin_username = "tf_aws"
-      secrets = {
-        AWS_ROLE = "arn:aws:iam::${local.aws_account_id}:role/aws-admin"
-      }
-    }
+
     "cookiecutter-github-control" : {
       description = "Template for a GitHub Control repository"
       team_id     = github_team.dev.id
       type        = "other"
     }
+
     "proxysql-sandbox" : {
       description = "Terraform live module to deploy ProxySQL sandbox on AWS"
       team_id     = github_team.dev.id
       type        = "other"
     }
+
     "terraform-aws-service-network" : {
       description = "Terraform service network module"
       team_id     = github_team.dev.id
@@ -56,7 +71,7 @@ module "repos" {
       {
         GH_TOKEN = data.external.env.result["GH_TOKEN"]
       },
-      contains(keys(each.value), "tf_admin_username") ?
+      each.value["type"] == "terraform_aws" ?
       {
         AWS_DEFAULT_REGION = local.aws_default_region
 
