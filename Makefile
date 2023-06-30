@@ -54,7 +54,7 @@ init:
 
 .PHONY: plan
 plan: init ## Run terraform plan
-	set -o pipefail ; terraform plan -var-file=configuration.tfvars --out=tf.plan 2> plan.stderr | tee plan.stdout || (cat plan.stderr; exit 1)
+	set -o pipefail ; terraform plan -var-file=configuration.tfvars -no-color --out=tf.plan 2> plan.stderr | tee plan.stdout || (cat plan.stderr; exit 1)
 
 
 .PHONY: apply
