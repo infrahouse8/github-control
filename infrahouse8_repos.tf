@@ -7,13 +7,6 @@ locals {
         AWS_ROLE = "arn:aws:iam::${local.aws_account_id}:role/github-admin"
       }
     }
-    aws-control = {
-      description   = "InfraHouse Basic AWS configuration"
-      template_repo = module.ih8_tf_template.name
-      archived      = true
-      secrets = {
-      }
-    }
     aws-s3-control = {
       description       = "InfraHouse Terraform State Buckets"
       template_repo     = module.ih8_tf_template.name
