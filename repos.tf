@@ -18,12 +18,6 @@ locals {
       type        = "terraform_aws"
     }
 
-    "infrahouse-aws-control" : {
-      description = "DEPRECATED: InfraHouse AWS Infrastructure"
-      team_id     = github_team.dev.id
-      type        = "terraform_aws"
-    }
-
     "infrahouse-toolkit" : {
       description = "InfraHouse Toolkit"
       team_id     = github_team.dev.id
