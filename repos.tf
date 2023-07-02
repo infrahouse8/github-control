@@ -50,6 +50,11 @@ locals {
       team_id     = github_team.dev.id
       type        = "terraform_module"
     }
+    "terraform-aws-gha-admin" : {
+      description = "Module for two roles to manage AWS with GitHub actions"
+      team_id     = github_team.dev.id
+      type        = "terraform_module"
+    }
   }
 }
 
