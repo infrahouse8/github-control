@@ -55,6 +55,11 @@ locals {
       team_id     = github_team.dev.id
       type        = "terraform_module"
     }
+    "terraform-aws-gh-identity-provider" : {
+      description = "Module the configures GitHub OpenID connector"
+      team_id     = github_team.dev.id
+      type        = "terraform_module"
+    }
   }
 }
 
