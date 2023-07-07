@@ -23,7 +23,8 @@ locals {
       team_id     = github_team.dev.id
       type        = "python_app"
       secrets = {
-        PYPI_API_TOKEN = data.aws_secretsmanager_secret_version.pypi_api_token.secret_string
+        PYPI_API_TOKEN       = data.aws_secretsmanager_secret_version.pypi_api_token.secret_string
+        CODACY_PROJECT_TOKEN = data.aws_secretsmanager_secret_version.codacy_api_token.secret_string
       }
     }
 
