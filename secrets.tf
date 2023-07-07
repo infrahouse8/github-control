@@ -10,3 +10,12 @@ EOT
   force_overwrite_replica_secret = true
   recovery_window_in_days        = 0
 }
+
+
+resource "aws_secretsmanager_secret" "codacy_api_token" {
+  provider                       = aws.aws-303467602807-uw1
+  name                           = "${data.aws_ssm_parameter.gh_secrets_namespace.value}CODACY_PROJECT_TOKEN"
+  description                    = "Token for Codacy Coverage"
+  force_overwrite_replica_secret = true
+  recovery_window_in_days        = 0
+}
