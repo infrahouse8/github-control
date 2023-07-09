@@ -18,6 +18,12 @@ locals {
       type        = "terraform_aws"
     }
 
+    "aws-control-493370826424" : {
+      description = "InfraHouse Management AWS Account 493370826424"
+      team_id     = github_team.dev.id
+      type        = "terraform_aws"
+    }
+
     "infrahouse-toolkit" : {
       description = "InfraHouse Toolkit"
       team_id     = github_team.dev.id
