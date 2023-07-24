@@ -67,6 +67,11 @@ locals {
       team_id     = github_team.dev.id
       type        = "terraform_module"
     }
+    "terraform-aws-debian-repo" : {
+      description = "Module that creates a Debian repository backed by S3 and fronted by CloudFront."
+      team_id     = github_team.dev.id
+      type        = "terraform_module"
+    }
   }
 }
 
