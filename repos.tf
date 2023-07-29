@@ -87,7 +87,7 @@ module "repos" {
       {
         GH_TOKEN = data.external.env.result["GH_TOKEN"]
       },
-      each.value["type"] == "terraform_aws" ?
+      contains(["terraform_aws", "python_app"], each.value["type"]) ?
       {
         AWS_DEFAULT_REGION = local.aws_default_region
 
