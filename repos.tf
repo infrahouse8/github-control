@@ -52,21 +52,30 @@ locals {
       type        = "other"
     }
 
+    "puppet-code" : {
+      description = "Puppet Configuration. Modules, Manifests and Hiera."
+      team_id     = github_team.dev.id
+      type        = "other"
+    }
+
     "terraform-aws-service-network" : {
       description = "Terraform service network module"
       team_id     = github_team.dev.id
       type        = "terraform_module"
     }
+
     "terraform-aws-gha-admin" : {
       description = "Module for two roles to manage AWS with GitHub actions"
       team_id     = github_team.dev.id
       type        = "terraform_module"
     }
+
     "terraform-aws-gh-identity-provider" : {
       description = "Module the configures GitHub OpenID connector"
       team_id     = github_team.dev.id
       type        = "terraform_module"
     }
+
     "terraform-aws-debian-repo" : {
       description = "Module that creates a Debian repository backed by S3 and fronted by CloudFront."
       team_id     = github_team.dev.id
