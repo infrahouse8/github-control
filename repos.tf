@@ -74,7 +74,13 @@ locals {
     }
 
     "terraform-aws-gh-identity-provider" : {
-      description = "Module the configures GitHub OpenID connector"
+      description = "Module that configures GitHub OpenID connector"
+      team_id     = github_team.dev.id
+      type        = "terraform_module"
+    }
+
+    "terraform-aws-instance-profile" : {
+      description = "Module bundlers AWS resources to create an instance profile."
       team_id     = github_team.dev.id
       type        = "terraform_module"
     }
