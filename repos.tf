@@ -80,7 +80,7 @@ locals {
     }
 
     "terraform-aws-instance-profile" : {
-      description = "Module bundlers AWS resources to create an instance profile."
+      description = "Module bundles AWS resources to create an instance profile."
       team_id     = github_team.dev.id
       type        = "terraform_module"
     }
