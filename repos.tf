@@ -90,6 +90,12 @@ locals {
       team_id     = github_team.dev.id
       type        = "terraform_module"
     }
+
+    "terraform-aws-website-pod" : {
+      description = "Module that creates an autoscaling group with an ALB and SSL certificate for a website."
+      team_id     = github_team.dev.id
+      type        = "terraform_module"
+    }
   }
 }
 
