@@ -5,7 +5,7 @@ resource "github_organization_settings" "infrahouse" {
   email                                                        = "github@infrahouse.com"
   location                                                     = "San Francisco, California"
   name                                                         = "InfraHouse"
-  description                                                  = "Cloud infrastructure professional services."
+  description                                                  = "MySQL on AWS."
   has_organization_projects                                    = true
   has_repository_projects                                      = true
   default_repository_permission                                = "read"
