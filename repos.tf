@@ -44,6 +44,9 @@ locals {
       description = "InfraHouse.com content"
       team_id     = github_team.dev.id
       type        = "other"
+      secrets = {
+        AWS_DEFAULT_REGION = local.aws_default_region
+      }
     }
 
     "cookiecutter-github-control" : {
