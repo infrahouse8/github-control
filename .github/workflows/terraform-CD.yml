@@ -19,6 +19,7 @@ jobs:
     timeout-minutes: 5
     env:
       GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      AWS_DEFAULT_REGION: "us-west-1"
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -35,7 +36,7 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::289256138624:role/ih-tf-github-control
           role-session-name: ih-tf-terraform-control-github-control
-          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+          aws-region: ${{ env.AWS_DEFAULT_REGION }}
 
       # Install the latest version of Terraform CLI
       - name: Setup Terraform
