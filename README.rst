@@ -57,18 +57,6 @@ Secrets
 ~~~~~~~
 Defined in https://github.com/infrahouse8/github-control/settings/secrets/actions.
 
-``AWS_ACCESS_KEY_ID``, ``AWS_SECRET_ACCESS_KEY``, ``AWS_DEFAULT_REGION``
-    AWS credentials of a user that has privileges to work with a Terraform state in S3.
-    Minimal privileges required [#]_:
-
-    * ``ListBucket``
-    * ``GetObject``
-    * ``PutObject``
-    * ``DeleteObject``
-
 ``GH_TOKEN``
     Personal token of a user `infrahouse8 <https://github.com/infrahouse8>`_.
     Created in https://github.com/settings/tokens.
-
-.. [#] The repository doesn't use Terraform state locking at the moment.
-    If it did, additional privileges would be needed to work with a DynamoDB table.

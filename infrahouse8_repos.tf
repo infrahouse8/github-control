@@ -4,7 +4,6 @@ locals {
       description       = "InfraHouse GitHub configuration"
       tf_admin_username = "tf_github"
       secrets = {
-        AWS_ROLE = "arn:aws:iam::${local.aws_account_id}:role/github-admin"
       }
     }
   }
@@ -20,8 +19,7 @@ module "ih_8_repos" {
   template_repo    = contains(keys(each.value), "template_repo") ? each.value["template_repo"] : null
   secrets = merge(contains(keys(each.value), "secrets") ? each.value["secrets"] : {},
     {
-      AWS_DEFAULT_REGION = "us-west-1"
-      GH_TOKEN           = data.external.env.result["GH_TOKEN"]
+      GH_TOKEN = data.external.env.result["GH_TOKEN"]
     }
   )
   collaborators = [
