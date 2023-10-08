@@ -7,14 +7,6 @@ locals {
         AWS_ROLE = "arn:aws:iam::${local.aws_account_id}:role/github-admin"
       }
     }
-    aws-s3-control = {
-      description       = "InfraHouse Terraform State Buckets"
-      template_repo     = module.ih8_tf_template.name
-      tf_admin_username = "tf_s3"
-      secrets = {
-        AWS_ROLE = "arn:aws:iam::${local.aws_account_id}:role/s3-admin"
-      }
-    }
   }
 }
 
