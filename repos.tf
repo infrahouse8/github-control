@@ -82,6 +82,12 @@ locals {
       type        = "terraform_module"
     }
 
+    "terraform-aws-state-manager" : {
+      description = "Module create an IAM role that can manage a Terraform state"
+      team_id     = github_team.dev.id
+      type        = "terraform_module"
+    }
+
     "terraform-aws-gh-identity-provider" : {
       description = "Module that configures GitHub OpenID connector"
       team_id     = github_team.dev.id
