@@ -1,31 +1,31 @@
 locals {
   repos = {
     "aws-control" : {
-      description = "InfraHouse Main AWS Account 990466748045"
+      description = "InfraHouse Main AWS Account 990466748045."
       team_id     = github_team.dev.id
       type        = "terraform_aws"
     }
 
     "aws-control-289256138624" : {
-      description = "InfraHouse Terraform Control AWS Account 289256138624"
+      description = "InfraHouse Terraform Control AWS Account 289256138624."
       team_id     = github_team.dev.id
       type        = "terraform_aws"
     }
 
     "aws-control-303467602807" : {
-      description = "InfraHouse CI/CD AWS Account 303467602807"
+      description = "InfraHouse CI/CD AWS Account 303467602807."
       team_id     = github_team.dev.id
       type        = "terraform_aws"
     }
 
     "aws-control-493370826424" : {
-      description = "InfraHouse Management AWS Account 493370826424"
+      description = "InfraHouse Management AWS Account 493370826424."
       team_id     = github_team.dev.id
       type        = "terraform_aws"
     }
 
     "infrahouse-toolkit" : {
-      description = "InfraHouse Toolkit"
+      description = "InfraHouse Toolkit."
       team_id     = github_team.dev.id
       type        = "python_app"
       secrets = {
@@ -35,13 +35,13 @@ locals {
     }
 
     "infrahouse-website-infra" : {
-      description = "InfraHouse Website Infrastructure"
+      description = "InfraHouse Website Infrastructure."
       team_id     = github_team.dev.id
       type        = "terraform_aws"
     }
 
     "infrahouse-com" : {
-      description = "InfraHouse.com content"
+      description = "InfraHouse.com content."
       team_id     = github_team.dev.id
       type        = "other"
       secrets = {
@@ -50,13 +50,13 @@ locals {
     }
 
     "cookiecutter-github-control" : {
-      description = "Template for a GitHub Control repository"
+      description = "Template for a GitHub Control repository."
       team_id     = github_team.dev.id
       type        = "other"
     }
 
     "proxysql-sandbox" : {
-      description = "Terraform live module to deploy ProxySQL sandbox on AWS"
+      description = "Terraform live module to deploy ProxySQL sandbox on AWS."
       team_id     = github_team.dev.id
       type        = "other"
     }
@@ -71,25 +71,25 @@ locals {
     }
 
     "terraform-aws-service-network" : {
-      description = "Terraform service network module"
+      description = "Terraform service network module."
       team_id     = github_team.dev.id
       type        = "terraform_module"
     }
 
     "terraform-aws-gha-admin" : {
-      description = "Module for two roles to manage AWS with GitHub actions"
+      description = "Module for two roles to manage AWS with GitHub actions."
       team_id     = github_team.dev.id
       type        = "terraform_module"
     }
 
     "terraform-aws-state-manager" : {
-      description = "Module create an IAM role that can manage a Terraform state"
+      description = "Module creates an IAM role that can manage a Terraform state."
       team_id     = github_team.dev.id
       type        = "terraform_module"
     }
 
     "terraform-aws-gh-identity-provider" : {
-      description = "Module that configures GitHub OpenID connector"
+      description = "Module that configures GitHub OpenID connector."
       team_id     = github_team.dev.id
       type        = "terraform_module"
     }
