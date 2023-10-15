@@ -117,6 +117,12 @@ locals {
       team_id     = github_team.dev.id
       type        = "terraform_module"
     }
+
+    "terraform-aws-state-bucket" : {
+      description = "Module that creates an S3 bucket for a Terraform state."
+      team_id     = github_team.dev.id
+      type        = "terraform_module"
+    }
   }
 }
 
