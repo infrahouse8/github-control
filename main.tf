@@ -28,7 +28,7 @@ resource "github_organization_settings" "infrahouse" {
 
 
 module "gha" {
-  source = "./modules/tf-essentials"
+  source = "modules/ci-cd"
   providers = {
     aws           = aws.aws-303467602807-uw1
     aws.cicd      = aws.aws-303467602807-uw1
