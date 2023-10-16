@@ -18,3 +18,7 @@ variable "gh_org" {
 variable "gh_repo" {
   description = "Repository name in GitHub. Without the organization part."
 }
+
+variable "state_bucket" {
+  description = "Name of S3 bucket for Terraform state. The module will create it."
+}

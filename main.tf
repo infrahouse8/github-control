@@ -25,3 +25,16 @@ resource "github_organization_settings" "infrahouse" {
   secret_scanning_enabled_for_new_repositories                 = false
   secret_scanning_push_protection_enabled_for_new_repositories = false
 }
+
+
+module "gha" {
+  source = "./modules/tf-essentials"
+  providers = {
+    aws           = aws.aws-303467602807-uw1
+    aws.cicd      = aws.aws-303467602807-uw1
+    aws.tf-states = aws.aws-289256138624-uw1
+  }
+  gh_org       = "infrahouse"
+  gh_repo      = "foo"
+  state_bucket = "infrahouse-foo"
+}
