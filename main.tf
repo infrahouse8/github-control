@@ -27,14 +27,14 @@ resource "github_organization_settings" "infrahouse" {
 }
 
 
-module "gha" {
-  source = "modules/ci-cd"
+module "infrahouse8-github-control" {
+  source = "./modules/ci-cd"
   providers = {
-    aws           = aws.aws-303467602807-uw1
-    aws.cicd      = aws.aws-303467602807-uw1
-    aws.tf-states = aws.aws-289256138624-uw1
+    aws          = aws.aws-303467602807-uw1
+    aws.cicd     = aws.aws-303467602807-uw1
+    aws.tfstates = aws.aws-289256138624-uw1
   }
-  gh_org       = "infrahouse"
-  gh_repo      = "foo"
-  state_bucket = "infrahouse-foo"
+  gh_org       = "infrahouse8"
+  gh_repo      = "github-control"
+  state_bucket = "infrahouse-github-control-state"
 }

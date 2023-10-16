@@ -4,8 +4,8 @@ variable "admin_policy_name" {
   default     = "AdministratorAccess"
 }
 
-variable "admin_allowed_arns" {
-  description = "A list of ARNs besides `ih-tf-{var.repo_name}-github` that are allowed to assume the `ih-tf-{var.repo_name}-admin` role."
+variable "trusted_arns" {
+  description = "A list of ARNs besides `ih-tf-{var.repo_name}-github` that are allowed to assume the `ih-tf-{var.repo_name}-admin` and `ih-tf-{var.repo_name}-state-manager` role."
   type        = list(string)
   default     = []
 }
