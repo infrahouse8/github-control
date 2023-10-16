@@ -37,4 +37,7 @@ module "infrahouse8-github-control" {
   gh_org       = "infrahouse8"
   gh_repo      = "github-control"
   state_bucket = "infrahouse-github-control-state"
+  trusted_arns = [
+    local.me_arn
+  ]
 }
