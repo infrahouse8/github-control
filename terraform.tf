@@ -1,9 +1,9 @@
 terraform {
   backend "s3" {
-    bucket   = "infrahouse-github-state"
-    key      = "github.state"
+    bucket   = "infrahouse-github-control-state"
+    key      = "terraform.tfstate"
     region   = "us-west-1"
-    role_arn = "arn:aws:iam::289256138624:role/ih-tf-terraform-control"
+    role_arn = "arn:aws:iam::289256138624:role/ih-tf-github-control-state-manager"
   }
 
   required_providers {
