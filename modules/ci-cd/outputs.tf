@@ -6,6 +6,10 @@ output "admin-role" {
   value = module.gha-admin.admin_role_arn
 }
 
+output "state-manager-role" {
+  value = module.gha-admin.state_manager_role_arn
+}
+
 output "bucket_name" {
   value = module.state-bucket.bucket_name
 }
