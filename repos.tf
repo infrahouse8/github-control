@@ -123,11 +123,6 @@ locals {
       team_id     = github_team.dev.id
       type        = "terraform_module"
     }
-    "test" : {
-      description = "Module that creates an S3 bucket for a Terraform state."
-      team_id     = github_team.dev.id
-      type        = "terraform_module"
-    }
   }
 }
 
