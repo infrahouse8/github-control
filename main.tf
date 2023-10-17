@@ -37,6 +37,9 @@ module "infrahouse8-github-control" {
   gh_org       = "infrahouse8"
   gh_repo      = "github-control"
   state_bucket = "infrahouse-github-control-state"
+  allowed_arns = [
+    "arn:aws:iam::289256138624:role/ih-tf-terraform-control"
+  ]
   trusted_arns = [
     local.me_arn
   ]

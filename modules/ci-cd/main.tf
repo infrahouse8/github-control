@@ -1,6 +1,6 @@
 module "gha-admin" {
   source  = "infrahouse/gha-admin/aws"
-  version = "~> 3.1"
+  version = "~> 3.2"
   providers = {
     aws          = aws
     aws.cicd     = aws.cicd
@@ -13,6 +13,7 @@ module "gha-admin" {
 
   admin_policy_name = var.admin_policy_name
   trusted_arns      = var.trusted_arns
+  allowed_arns      = var.allowed_arns
 }
 
 module "state-bucket" {
