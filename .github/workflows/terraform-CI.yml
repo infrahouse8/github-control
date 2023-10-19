@@ -45,7 +45,7 @@ jobs:
 
       # Run all required linters
       - name: Code Style Check
-        run: make lint
+        run: make lint lint/validate
 
       # Generates an execution plan for Terraform
       - name: Terraform Plan
