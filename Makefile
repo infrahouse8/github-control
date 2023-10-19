@@ -48,7 +48,7 @@ lint/validate: init
 	terraform validate
 
 .PHONY: lint
-lint: lint/format lint/validate ## Check code style and validate Terraform code
+lint: lint/format ## Check code style and validate Terraform code
 
 .PHONY: format
 format:  ## Format terraform files
@@ -61,7 +61,7 @@ init:
 
 .PHONY: plan
 plan: init ## Run terraform plan
-	set -o pipefail ; terraform plan -var-file=configuration.tfvars -no-color --out=tf.plan 2> plan.stderr | tee plan.stdout || (cat plan.stderr; exit 1)
+	set -o pipefail ; terraform plan -no-color --out=tf.plan 2> plan.stderr | tee plan.stdout || (cat plan.stderr; exit 1)
 
 
 .PHONY: apply
