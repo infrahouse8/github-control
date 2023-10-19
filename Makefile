@@ -36,7 +36,7 @@ bootstrap-ci:  ## Build environment for CI
 	pip install -r requirements-ci.txt
 
 .PHONY: lint
-lint:  ## Check code style
+lint:  init ## Check code style
 	yamllint \
 		.github/workflows \
 		.readthedocs.yaml
