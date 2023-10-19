@@ -70,30 +70,35 @@ module "infrahouse8-github-control" {
 
 
 resource "github_actions_variable" "role_admin" {
+  provider      = github.infrahouse8
   repository    = module.ih_8_repos["github-control"].repo_name
   value         = module.infrahouse8-github-control.admin-role
   variable_name = "role_admin"
 }
 
 resource "github_actions_variable" "role_github" {
+  provider      = github.infrahouse8
   repository    = module.ih_8_repos["github-control"].repo_name
   value         = module.infrahouse8-github-control.github-role
   variable_name = "role_github"
 }
 
 resource "github_actions_variable" "role_state_manager" {
+  provider      = github.infrahouse8
   repository    = module.ih_8_repos["github-control"].repo_name
   value         = module.infrahouse8-github-control.state-manager-role
   variable_name = "role_state_manager"
 }
 
 resource "github_actions_variable" "state_bucket" {
+  provider      = github.infrahouse8
   repository    = module.ih_8_repos["github-control"].repo_name
   value         = module.infrahouse8-github-control.bucket_name
   variable_name = "state_bucket"
 }
 
 resource "github_actions_variable" "dynamodb_lock_table_name" {
+  provider      = github.infrahouse8
   repository    = module.ih_8_repos["github-control"].repo_name
   value         = module.infrahouse8-github-control.lock_table_name
   variable_name = "dynamodb_lock_table_name"
