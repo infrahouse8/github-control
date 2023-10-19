@@ -28,7 +28,8 @@ resource "github_organization_settings" "infrahouse" {
 
 
 module "infrahouse8-github-control" {
-  source = "./modules/ci-cd"
+  source  = "infrahouse/ci-cd/aws"
+  version = "~> 1.0"
   providers = {
     aws          = aws.aws-303467602807-uw1
     aws.cicd     = aws.aws-303467602807-uw1
