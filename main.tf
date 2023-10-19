@@ -25,23 +25,3 @@ resource "github_organization_settings" "infrahouse" {
   secret_scanning_enabled_for_new_repositories                 = false
   secret_scanning_push_protection_enabled_for_new_repositories = false
 }
-
-
-module "infrahouse8-github-control" {
-  source  = "infrahouse/ci-cd/aws"
-  version = "~> 1.0"
-  providers = {
-    aws          = aws.aws-303467602807-uw1
-    aws.cicd     = aws.aws-303467602807-uw1
-    aws.tfstates = aws.aws-289256138624-uw1
-  }
-  gh_org       = "infrahouse8"
-  gh_repo      = "github-control"
-  state_bucket = "infrahouse-github-control-state"
-  allowed_arns = [
-    "arn:aws:iam::289256138624:role/ih-tf-terraform-control"
-  ]
-  trusted_arns = [
-    local.me_arn
-  ]
-}

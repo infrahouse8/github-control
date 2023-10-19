@@ -47,3 +47,54 @@ module "ih8_tf_template" {
     github = github.infrahouse8
   }
 }
+
+
+module "infrahouse8-github-control" {
+  source  = "infrahouse/ci-cd/aws"
+  version = "~> 1.0"
+  providers = {
+    aws          = aws.aws-303467602807-uw1
+    aws.cicd     = aws.aws-303467602807-uw1
+    aws.tfstates = aws.aws-289256138624-uw1
+  }
+  gh_org       = "infrahouse8"
+  gh_repo      = "github-control"
+  state_bucket = "infrahouse-github-control-state"
+  allowed_arns = [
+    "arn:aws:iam::289256138624:role/ih-tf-terraform-control"
+  ]
+  trusted_arns = [
+    local.me_arn
+  ]
+}
+
+
+resource "github_actions_variable" "role_admin" {
+  repository    = module.ih_8_repos["github-control"].repo_name
+  value         = module.infrahouse8-github-control.admin-role
+  variable_name = "role_admin"
+}
+
+resource "github_actions_variable" "role_github" {
+  repository    = module.ih_8_repos["github-control"].repo_name
+  value         = module.infrahouse8-github-control.github-role
+  variable_name = "role_github"
+}
+
+resource "github_actions_variable" "role_state_manager" {
+  repository    = module.ih_8_repos["github-control"].repo_name
+  value         = module.infrahouse8-github-control.state-manager-role
+  variable_name = "role_state_manager"
+}
+
+resource "github_actions_variable" "state_bucket" {
+  repository    = module.ih_8_repos["github-control"].repo_name
+  value         = module.infrahouse8-github-control.bucket_name
+  variable_name = "state_bucket"
+}
+
+resource "github_actions_variable" "dynamodb_lock_table_name" {
+  repository    = module.ih_8_repos["github-control"].repo_name
+  value         = module.infrahouse8-github-control.lock_table_name
+  variable_name = "dynamodb_lock_table_name"
+}
