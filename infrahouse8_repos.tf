@@ -69,32 +69,32 @@ module "infrahouse8-github-control" {
 }
 
 
-resource "github_actions_variable" "role-admin" {
+resource "github_actions_variable" "role_admin" {
   repository    = module.ih_8_repos["github-control"].repo_name
   value         = module.infrahouse8-github-control.admin-role
-  variable_name = "role-admin"
+  variable_name = "role_admin"
 }
 
-resource "github_actions_variable" "role-github" {
+resource "github_actions_variable" "role_github" {
   repository    = module.ih_8_repos["github-control"].repo_name
   value         = module.infrahouse8-github-control.github-role
-  variable_name = "role-github"
+  variable_name = "role_github"
 }
 
-resource "github_actions_variable" "role-state-manager" {
+resource "github_actions_variable" "role_state_manager" {
   repository    = module.ih_8_repos["github-control"].repo_name
   value         = module.infrahouse8-github-control.state-manager-role
-  variable_name = "role-state-manager"
+  variable_name = "role_state_manager"
 }
 
-resource "github_actions_variable" "state-bucket" {
+resource "github_actions_variable" "state_bucket" {
   repository    = module.ih_8_repos["github-control"].repo_name
   value         = module.infrahouse8-github-control.bucket_name
-  variable_name = "state-bucket"
+  variable_name = "state_bucket"
 }
 
-resource "github_actions_variable" "dynamodb-lock-table-name" {
+resource "github_actions_variable" "dynamodb_lock_table_name" {
   repository    = module.ih_8_repos["github-control"].repo_name
   value         = module.infrahouse8-github-control.lock_table_name
-  variable_name = "dynamodb-lock-table-name"
+  variable_name = "dynamodb_lock_table_name"
 }

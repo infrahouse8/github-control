@@ -41,6 +41,7 @@ lint:  ## Check code style
 		.github/workflows \
 		.readthedocs.yaml
 	terraform fmt -check -recursive
+	terraform validate
 
 
 .PHONY: format
