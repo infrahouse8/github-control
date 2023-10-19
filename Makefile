@@ -35,14 +35,20 @@ bootstrap: hooks ## Build development environment
 bootstrap-ci:  ## Build environment for CI
 	pip install -r requirements-ci.txt
 
-.PHONY: lint
-lint:  init ## Check code style
+
+.PHONY: lint/format
+lint/format:
 	yamllint \
 		.github/workflows \
 		.readthedocs.yaml
 	terraform fmt -check -recursive
+
+.PHONY: lint/validate
+lint/validate: init
 	terraform validate
 
+.PHONY: lint
+lint: lint/format lint/validate ## Check code style and validate Terraform code
 
 .PHONY: format
 format:  ## Format terraform files
