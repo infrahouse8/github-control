@@ -17,8 +17,6 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       AWS_DEFAULT_REGION: "us-west-1"
-      GHA_ROLE: "arn:aws:iam::303467602807:role/ih-tf-github-control-github"
-      STATE_MANAGER_ROLE: "arn:aws:iam::289256138624:role/ih-tf-github-control-state-manager"
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -33,7 +31,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: ${{ env.GHA_ROLE }}
+          role-to-assume: ${{ vars.ROLE_GITHUB }}
           role-session-name: ih-tf-terraform-control-github-control
           aws-region: ${{ env.AWS_DEFAULT_REGION }}
 
@@ -58,5 +56,5 @@ jobs:
       # Upload Terraform Plan
       - name: Upload Terraform Plan
         run: |
-          ih-plan --aws-assume-role-arn ${{ env.STATE_MANAGER_ROLE }} \
+          ih-plan --aws-assume-role-arn ${{ vars.ROLE_STATE_MANAGER }} \
             upload --key-name=plans/${{ github.event.pull_request.number }}.plan tf.plan
