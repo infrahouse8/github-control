@@ -129,6 +129,11 @@ locals {
       team_id     = github_team.dev.id
       type        = "terraform_module"
     }
+    "terraform-aws-jumphost" : {
+      description = "Module that creates a jumphost."
+      team_id     = github_team.dev.id
+      type        = "terraform_module"
+    }
   }
 }
 
