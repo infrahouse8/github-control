@@ -33,6 +33,14 @@ locals {
       "team_id" = github_team.dev.id
       "type"    = "other"
     }
+    "infrahouse-puppet-data" = {
+      "description" = "InfraHouse Puppet Hiera Data."
+      "secrets" = {
+        "AWS_DEFAULT_REGION" = local.aws_default_region
+      }
+      "team_id" = github_team.dev.id
+      "type"    = "other"
+    }
     "infrahouse-toolkit" = {
       "description" = "InfraHouse Toolkit."
       "secrets" = {
@@ -53,7 +61,7 @@ locals {
       "type"        = "other"
     }
     "puppet-code" = {
-      "description" = "Puppet Configuration. Modules, Manifests and Hiera."
+      "description" = "Puppet Configuration. Modules and Manifests. Hiera has moved to infrahouse-puppet-data."
       "secrets" = {
         "AWS_DEFAULT_REGION" = local.aws_default_region
       }
