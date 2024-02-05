@@ -1,8 +1,9 @@
 resource "github_repository" "repo" {
-  name        = var.repo_name
-  description = var.repo_description
-  has_issues  = true
-  visibility  = "public"
+  name                        = var.repo_name
+  description                 = var.repo_description
+  has_issues                  = true
+  visibility                  = "public"
+  web_commit_signoff_required = true
 }
 
 resource "github_team_repository" "dev" {
