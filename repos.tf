@@ -88,6 +88,11 @@ locals {
       "team_id"     = github_team.dev.id
       "type"        = "terraform_module"
     }
+    "terraform-aws-elasticsearch" = {
+      "description" = "Module that deploys an Elasticsearch cluster"
+      "team_id"     = github_team.dev.id
+      "type"        = "terraform_module"
+    }
     "terraform-aws-gh-identity-provider" = {
       "description" = "Module that configures GitHub OpenID connector."
       "team_id"     = github_team.dev.id
