@@ -133,6 +133,11 @@ locals {
       "team_id"     = github_team.dev.id
       "type"        = "terraform_module"
     }
+    "terraform-aws-update-dns" = {
+      "description" = "Module creates a lambda that manages DNS A records for instances in an autoscaling group."
+      "team_id"     = github_team.dev.id
+      "type"        = "terraform_module"
+    }
     "terraform-aws-website-pod" = {
       "description" = "Module that creates an autoscaling group with an ALB and SSL certificate for a website."
       "team_id"     = github_team.dev.id
