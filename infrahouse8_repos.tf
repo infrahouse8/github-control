@@ -50,8 +50,7 @@ module "ih8_tf_template" {
 
 
 module "infrahouse8-github-control" {
-  source  = "infrahouse/ci-cd/aws"
-  version = "~> 1.0"
+  source = "git::https://github.com/infrahouse/terraform-aws-ci-cd.git?ref=1.0.3"
   providers = {
     aws          = aws.aws-303467602807-uw1
     aws.cicd     = aws.aws-303467602807-uw1
