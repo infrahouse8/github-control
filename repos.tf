@@ -68,6 +68,11 @@ locals {
       "team_id" = github_team.dev.id
       "type"    = "other"
     }
+    "terraform-aws-aerospike" = {
+      "description" = "Module that deploys Aerospike cluster."
+      "team_id"     = github_team.dev.id
+      "type"        = "terraform_module"
+    }
     "terraform-aws-ci-cd" = {
       "description" = "Module that creates roles, state bucket, and dynamodb table for Terraform CI/CD."
       "team_id"     = github_team.dev.id
