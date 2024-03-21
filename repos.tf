@@ -128,6 +128,11 @@ locals {
       "team_id"     = github_team.dev.id
       "type"        = "terraform_module"
     }
+    "terraform-aws-postfix" = {
+      "description" = "Terraform module that deploys Postfix as a MX server."
+      "team_id"     = github_team.dev.id
+      "type"        = "terraform_module"
+    }
     "terraform-aws-pypiserver" = {
       "description" = "Terraform module that deploys a private PyPI server."
       "team_id"     = github_team.dev.id
