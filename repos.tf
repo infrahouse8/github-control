@@ -52,8 +52,8 @@ locals {
     }
     "homebrew-infrahouse-toolkit" = {
       "description" = "Homebrew Formula for infrahouse-toolkit"
-      "team_id" = github_team.dev.id
-      "type"    = "otehr"
+      "team_id"     = github_team.dev.id
+      "type"        = "other"
     }
     "infrahouse-website-infra" = {
       "description" = "InfraHouse Website Infrastructure."
