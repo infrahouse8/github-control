@@ -50,6 +50,11 @@ locals {
       "team_id" = github_team.dev.id
       "type"    = "python_app"
     }
+    "homebrew-infrahouse-toolkit" = {
+      "description" = "Homebrew Formula for infrahouse-toolkit"
+      "team_id" = github_team.dev.id
+      "type"    = "otehr"
+    }
     "infrahouse-website-infra" = {
       "description" = "InfraHouse Website Infrastructure."
       "team_id"     = github_team.dev.id
