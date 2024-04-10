@@ -73,6 +73,11 @@ locals {
       "team_id" = github_team.dev.id
       "type"    = "other"
     }
+    "terraform-aws-actions-runner" = {
+      "description" = "Module that deploys self-hosted GitHub Actions runner."
+      "team_id"     = github_team.dev.id
+      "type"        = "terraform_module"
+    }
     "terraform-aws-aerospike" = {
       "description" = "Module that deploys Aerospike cluster."
       "team_id"     = github_team.dev.id
