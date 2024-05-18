@@ -50,6 +50,11 @@ locals {
       "team_id" = github_team.dev.id
       "type"    = "python_app"
     }
+    "hiera-aws-sm" = {
+      "description" = "A Hiera 5 backend for AWS Secrets Manager(accenture/hiera-aws-sm fork)."
+      "team_id"     = github_team.dev.id
+      "type"        = "other"
+    }
     "homebrew-infrahouse-toolkit" = {
       "description" = "Homebrew Formula for infrahouse-toolkit"
       "team_id"     = github_team.dev.id
