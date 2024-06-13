@@ -163,6 +163,11 @@ locals {
       "team_id"     = github_team.dev.id
       "type"        = "terraform_module"
     }
+    "terraform-aws-secret-policy" = {
+      "description" = "Terraform module that creates AWS secret permissions policy."
+      "team_id"     = github_team.dev.id
+      "type"        = "terraform_module"
+    }
     "terraform-aws-service-network" = {
       "description" = "Terraform service network module."
       "team_id"     = github_team.dev.id
