@@ -10,12 +10,12 @@ resource "aws_s3_bucket_public_access_block" "public_access" {
   restrict_public_buckets = true
 }
 
-resource "aws_s3_bucket_policy" "infrahouse-backup" {
+resource "aws_s3_bucket_policy" "infrahouse-backup-bucket" {
   bucket = aws_s3_bucket.infrahouse-backup.id
-  policy = data.aws_iam_policy_document.access_logs[count.index].json
+  policy = data.aws_iam_policy_document.infrahouse-backup-bucket.json
 }
 
-data "aws_iam_policy_document" "access_logs" {
+data "aws_iam_policy_document" "infrahouse-backup-bucket" {
   statement {
     principals {
       type = "AWS"
