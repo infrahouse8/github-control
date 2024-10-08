@@ -26,10 +26,8 @@ data "aws_iam_policy_document" "infrahouse-backup-trust" {
   statement {
     actions = ["sts:AssumeRole"]
     principals {
-      type = "AWS"
-      identifiers = [
-        local.infrahouse_role
-      ]
+      type        = "AWS"
+      identifiers = local.infrahouse_roles
     }
   }
 }
