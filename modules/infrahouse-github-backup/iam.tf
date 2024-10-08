@@ -44,6 +44,12 @@ data "aws_iam_policy_document" "infrahouse-backup" {
       "arn:aws:s3:::${aws_s3_bucket.infrahouse-backup.id}/*"
     ]
   }
+  statement {
+    actions = ["s3:ListBucket"]
+    resources = [
+      aws_s3_bucket.infrahouse-backup.arn
+    ]
+  }
 }
 
 resource "aws_iam_policy" "infrahouse-backup" {
