@@ -138,6 +138,11 @@ locals {
       "team_id"     = github_team.dev.id
       "type"        = "terraform_module"
     }
+    "terraform-aws-github-backup-configuration" = {
+      "description" = "Module that configures infrahouse-github-backup GitHub App client."
+      "team_id"     = github_team.dev.id
+      "type"        = "terraform_module"
+    }
     "terraform-aws-github-role" = {
       "description" = "Module that creates a role for a GitHub Action worker."
       "team_id"     = github_team.dev.id
