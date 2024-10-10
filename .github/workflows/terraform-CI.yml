@@ -24,7 +24,7 @@ jobs:
 
     steps:
       - name: "Get token"
-        id: "app-token-"
+        id: "app-token"
         uses: "actions/create-github-app-token@v1"
         with:
           private-key: ${{ secrets.IH_GH_TF_APP_KEY }}
