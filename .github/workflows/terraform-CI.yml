@@ -23,13 +23,13 @@ jobs:
         shell: bash
 
     steps:
-#      - name: "Get token"
-#        id: "app-token"
-#        uses: "actions/create-github-app-token@v1"
-#        with:
-#          private-key: ${{ secrets.IH_GH_TF_APP_KEY }}
-#          app-id: "1016363"
-#          owner: "infrahouse"
+      #      - name: "Get token"
+      #        id: "app-token"
+      #        uses: "actions/create-github-app-token@v1"
+      #        with:
+      #          private-key: ${{ secrets.IH_GH_TF_APP_KEY }}
+      #          app-id: "1016363"
+      #          owner: "infrahouse"
       - name: Checkout
         uses: actions/checkout@v3
 
