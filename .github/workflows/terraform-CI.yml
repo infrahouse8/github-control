@@ -54,8 +54,8 @@ jobs:
 
       # Generates an execution plan for Terraform
       - name: Terraform Plan
-#        env:
-#          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+        #        env:
+        #          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
           make plan
           ih-plan publish ${{ github.repository }} ${{ github.event.pull_request.number }} plan.stdout plan.stderr
