@@ -7,6 +7,6 @@ module "infrahouse-github-terraform-pem" {
   secret_description = "infrahouse-github-terraform App private key (pem)"
   secret_name        = "infrahouse-github-terraform-app-key"
   writers = [
-    data.aws_iam_roles.sso-admin.arns[0]
+    tolist(data.aws_iam_roles.sso-admin.arns)[0]
   ]
 }
