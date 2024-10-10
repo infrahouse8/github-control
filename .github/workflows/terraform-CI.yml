@@ -23,13 +23,13 @@ jobs:
         shell: bash
 
     steps:
-      #      - name: "Get token"
-      #        id: "app-token"
-      #        uses: "actions/create-github-app-token@v1"
-      #        with:
-      #          private-key: ${{ secrets.IH_GH_TF_APP_KEY }}
-      #          app-id: "1016363"
-      #          owner: "infrahouse"
+      - name: "Get token"
+        id: "app-token-"
+        uses: "actions/create-github-app-token@v1"
+        with:
+          private-key: ${{ secrets.IH_GH_TF_APP_KEY }}
+          app-id: "1016363"
+          owner: "infrahouse8"
       - name: Checkout
         uses: actions/checkout@v3
 
@@ -54,8 +54,8 @@ jobs:
 
       # Generates an execution plan for Terraform
       - name: Terraform Plan
-        #        env:
-        #          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
           make plan
           ih-plan publish ${{ github.repository }} ${{ github.event.pull_request.number }} plan.stdout plan.stderr
