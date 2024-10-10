@@ -230,9 +230,6 @@ module "repos" {
   secrets = merge(
     contains(keys(each.value), "secrets") ? each.value["secrets"] : {},
     merge(
-      {
-        GH_TOKEN = data.external.env.result["GH_TOKEN"]
-      },
       contains(["terraform_aws", "python_app"], each.value["type"]) ?
       {
         AWS_DEFAULT_REGION = local.aws_default_region

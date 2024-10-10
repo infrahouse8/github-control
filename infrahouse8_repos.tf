@@ -19,7 +19,6 @@ module "ih_8_repos" {
   template_repo    = contains(keys(each.value), "template_repo") ? each.value["template_repo"] : null
   secrets = merge(contains(keys(each.value), "secrets") ? each.value["secrets"] : {},
     {
-      GH_TOKEN         = data.external.env.result["GH_TOKEN"]
       IH_GH_TF_APP_KEY = module.infrahouse-github-terraform-pem.secret_value
     }
   )

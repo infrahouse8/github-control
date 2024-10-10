@@ -18,7 +18,6 @@ jobs:
     environment: production
     timeout-minutes: 5
     env:
-      GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       AWS_DEFAULT_REGION: "us-west-1"
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
