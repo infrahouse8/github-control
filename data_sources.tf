@@ -25,3 +25,9 @@ data "aws_secretsmanager_secret_version" "codacy_api_token" {
   provider  = aws.aws-303467602807-uw1
   secret_id = aws_secretsmanager_secret.codacy_api_token.id
 }
+
+data "aws_iam_roles" "sso-admin" {
+  provider    = aws.aws-303467602807-uw1
+  name_regex  = "AWSReservedSSO_AWSAdministratorAccess_.*"
+  path_prefix = "/aws-reserved/sso.amazonaws.com/"
+}
