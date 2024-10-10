@@ -29,6 +29,7 @@ jobs:
         with:
           private-key: ${{ secrets.IH_GH_TF_APP_KEY }}
           app-id: "1016363"
+          owner: ${{ github.repository_owner }}
       - name: Checkout
         uses: actions/checkout@v3
 
