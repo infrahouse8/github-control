@@ -60,7 +60,7 @@ jobs:
         run: |
           make plan
           ih-plan publish \
-            --github-token ${{ secrets.GITHU_TOKEN }} \
+            --github-token ${{ secrets.GITHUB_TOKEN }} \
             ${{ github.repository }} \
             ${{ github.event.pull_request.number }} \
             plan.stdout plan.stderr
