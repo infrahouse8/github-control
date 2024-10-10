@@ -7,6 +7,7 @@ on:  # yamllint disable-line rule:truthy
 permissions:
   id-token: write  # This is required for requesting the JWT
   contents: read
+  pull-requests: write  # needed for InfraHouse tool (to make PR comments)
 
 jobs:
   terraform:
@@ -59,7 +60,7 @@ jobs:
         run: |
           make plan
           ih-plan publish \
-            --github-token ${{ steps.app-token.outputs.token }} \
+            --github-token ${{ secrets.GITHU_TOKEN }} \
             ${{ github.repository }} \
             ${{ github.event.pull_request.number }} \
             plan.stdout plan.stderr
