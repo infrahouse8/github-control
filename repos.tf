@@ -104,7 +104,12 @@ locals {
       "type"        = "terraform_module"
     }
     "terraform-aws-cloud-init" = {
-      "description" = "Module that creates an cloud init configuration for an InfraHouse EC2 instance."
+      "description" = "Module that creates a cloud init configuration for an InfraHouse EC2 instance."
+      "team_id"     = github_team.dev.id
+      "type"        = "terraform_module"
+    }
+    "terraform-aws-cost-alert" = {
+      "description" = "Module that creates a alert for AWS cost per period."
       "team_id"     = github_team.dev.id
       "type"        = "terraform_module"
     }
