@@ -3,7 +3,7 @@ resource "github_organization_settings" "infrahouse" {
   company                                                      = "InfraHouse Inc."
   blog                                                         = "https://infrahouse.com"
   email                                                        = "github@infrahouse.com"
-  location                                                     = "San Francisco, California"
+  location                                                     = "United States of America"
   name                                                         = "InfraHouse"
   description                                                  = "Simplifying Cloud Complexity"
   has_organization_projects                                    = true
