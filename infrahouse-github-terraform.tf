@@ -1,5 +1,6 @@
 data "aws_iam_role" "actions-runner-tester" {
-  name = "actions-runner-tester"
+  provider = aws.aws-303467602807-uw1
+  name     = "actions-runner-tester"
 }
 
 module "infrahouse-github-terraform-pem" {
