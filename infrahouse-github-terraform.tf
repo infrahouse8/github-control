@@ -1,3 +1,7 @@
+data "aws_iam_role" "actions-runner-tester" {
+  name = "actions-runner-tester"
+}
+
 module "infrahouse-github-terraform-pem" {
   providers = {
     aws = aws.aws-303467602807-uw1
@@ -8,5 +12,8 @@ module "infrahouse-github-terraform-pem" {
   secret_name        = "infrahouse-github-terraform-app-key"
   writers = [
     tolist(data.aws_iam_roles.sso-admin.arns)[0]
+  ]
+  readers = [
+    data.aws_iam_role.actions-runner-tester.arn
   ]
 }
