@@ -8,7 +8,7 @@ module "infrahouse-github-terraform-pem" {
     aws = aws.aws-303467602807-uw1
   }
   source             = "registry.infrahouse.com/infrahouse/secret/aws"
-  version            = "~> 0.6"
+  version            = "0.6.0"
   secret_description = "infrahouse-github-terraform App private key (pem)"
   secret_name        = "infrahouse-github-terraform-app-key"
   writers = [
