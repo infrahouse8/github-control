@@ -14,7 +14,4 @@ module "infrahouse-github-terraform-pem" {
   writers = [
     tolist(data.aws_iam_roles.sso-admin.arns)[0]
   ]
-  readers = [
-    data.aws_iam_role.actions-runner-tester.arn
-  ]
 }
