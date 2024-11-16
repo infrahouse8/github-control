@@ -31,6 +31,7 @@ module "actions-runner-pem" {
   secret_name_prefix = "action-runner-pem-"
   secret_value       = module.infrahouse-github-terraform-pem.secret_value
   readers = [
-    data.aws_iam_role.actions-runner-tester.arn
+    data.aws_iam_role.actions-runner-tester.arn,
+    tolist(data.aws_iam_roles.sso-admin.arns)[0]
   ]
 }
