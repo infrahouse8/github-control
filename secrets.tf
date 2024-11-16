@@ -32,6 +32,7 @@ module "actions-runner-pem" {
   secret_value       = module.infrahouse-github-terraform-pem.secret_value
   readers = [
     data.aws_iam_role.actions-runner-tester.arn,
-    tolist(data.aws_iam_roles.sso-admin.arns)[0]
+    tolist(data.aws_iam_roles.sso-admin.arns)[0],
+    "arn:aws:iam::303467602807:role/infrahouse-registration*"
   ]
 }
