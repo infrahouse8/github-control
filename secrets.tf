@@ -30,9 +30,12 @@ module "actions-runner-pem" {
   secret_description = "A copy of infrahouse-github-terraform App private key (pem) for actions-runner tests"
   secret_name_prefix = "action-runner-pem-"
   secret_value       = module.infrahouse-github-terraform-pem.secret_value
+  admins = [
+    tolist(data.aws_iam_roles.sso-admin.arns)[0],
+  ]
   readers = [
     data.aws_iam_role.actions-runner-tester.arn,
-    tolist(data.aws_iam_roles.sso-admin.arns)[0],
-    "arn:aws:iam::303467602807:role/infrahouse-registration*"
+    # tolist(data.aws_iam_roles.sso-admin.arns)[0],
+    # "arn:aws:iam::303467602807:role/infrahouse-registration*"
   ]
 }
