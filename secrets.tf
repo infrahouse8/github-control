@@ -19,3 +19,18 @@ resource "aws_secretsmanager_secret" "codacy_api_token" {
   force_overwrite_replica_secret = true
   recovery_window_in_days        = 0
 }
+
+
+module "actions-runner-pem" {
+  providers = {
+    aws = aws.aws-303467602807-uw1
+  }
+  source             = "registry.infrahouse.com/infrahouse/secret/aws"
+  version            = "~> 0.6"
+  secret_description = "A copy of infrahouse-github-terraform App private key (pem) for actions-runner tests"
+  secret_name_prefix = "action-runner-pem-"
+  secret_value       = module.infrahouse-github-terraform-pem.secret_value
+  readers = [
+    data.aws_iam_role.actions-runner-tester.arn
+  ]
+}
