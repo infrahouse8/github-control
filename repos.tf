@@ -65,6 +65,11 @@ locals {
       "team_id"     = github_team.dev.id
       "type"        = "terraform_aws"
     }
+    "prometheus-elasticsearch-exporter" = {
+      "description" = "InfraHouse fork of Elasticsearch stats exporter for Prometheus."
+      "team_id"     = github_team.dev.id
+      "type"        = "other"
+    }
     "proxysql-sandbox" = {
       "description" = "Terraform live module to deploy ProxySQL sandbox on AWS."
       "team_id"     = github_team.dev.id
@@ -99,7 +104,12 @@ locals {
       "type"        = "terraform_module"
     }
     "terraform-aws-cloud-init" = {
-      "description" = "Module that creates an cloud init configuration for an InfraHouse EC2 instance."
+      "description" = "Module that creates a cloud init configuration for an InfraHouse EC2 instance."
+      "team_id"     = github_team.dev.id
+      "type"        = "terraform_module"
+    }
+    "terraform-aws-cost-alert" = {
+      "description" = "Module that creates a alert for AWS cost per period."
       "team_id"     = github_team.dev.id
       "type"        = "terraform_module"
     }
@@ -230,9 +240,6 @@ module "repos" {
   secrets = merge(
     contains(keys(each.value), "secrets") ? each.value["secrets"] : {},
     merge(
-      {
-        GH_TOKEN = data.external.env.result["GH_TOKEN"]
-      },
       contains(["terraform_aws", "python_app"], each.value["type"]) ?
       {
         AWS_DEFAULT_REGION = local.aws_default_region
