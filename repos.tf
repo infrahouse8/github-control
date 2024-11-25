@@ -213,6 +213,11 @@ locals {
       "team_id"     = github_team.dev.id
       "type"        = "terraform_module"
     }
+    "terraform-aws-tcp-pod" = {
+      "description" = "Module that creates an autoscaling group with an NLB for a TCP based services."
+      "team_id"     = github_team.dev.id
+      "type"        = "terraform_module"
+    }
     "terraform-aws-terraformer" = {
       "description" = "Module that deploys an instances allowed to manage Terraform root modules."
       "team_id"     = github_team.dev.id
