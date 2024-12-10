@@ -86,7 +86,7 @@ locals {
     "pytest-infrahouse" = {
       "description" = "InfraHouse Pytest Plugin."
       "secrets" = {
-        "PYPI_API_TOKEN"       = data.aws_secretsmanager_secret_version.pypi_api_token.secret_string
+        "PYPI_API_TOKEN" = data.aws_secretsmanager_secret_version.pypi_api_token.secret_string
       }
       "team_id" = github_team.dev.id
       "type"    = "python_app"
