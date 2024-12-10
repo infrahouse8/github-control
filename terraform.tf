@@ -3,7 +3,9 @@ terraform {
     bucket         = "infrahouse-github-control-state"
     key            = "terraform.tfstate"
     region         = "us-west-1"
-    role_arn       = "arn:aws:iam::289256138624:role/ih-tf-github-control-state-manager"
+    assume_role = {
+      role_arn       = "arn:aws:iam::289256138624:role/ih-tf-github-control-state-manager"
+    }
     dynamodb_table = "infrahouse-github-control-state-polished-lioness"
     encrypt        = true
   }
