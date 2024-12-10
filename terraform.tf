@@ -1,10 +1,10 @@
 terraform {
   backend "s3" {
-    bucket         = "infrahouse-github-control-state"
-    key            = "terraform.tfstate"
-    region         = "us-west-1"
+    bucket = "infrahouse-github-control-state"
+    key    = "terraform.tfstate"
+    region = "us-west-1"
     assume_role = {
-      role_arn       = "arn:aws:iam::289256138624:role/ih-tf-github-control-state-manager"
+      role_arn = "arn:aws:iam::289256138624:role/ih-tf-github-control-state-manager"
     }
     dynamodb_table = "infrahouse-github-control-state-polished-lioness"
     encrypt        = true
