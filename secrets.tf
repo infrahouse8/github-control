@@ -33,6 +33,7 @@ module "actions-runner-pem" {
   readers = [
     data.aws_iam_role.actions-runner-tester.arn,
     tolist(data.aws_iam_roles.sso-admin.arns)[0],
+    data.aws_iam_role.ih-tf-aws-control-303467602807-admin.arn,
     "arn:aws:iam::303467602807:role/infrahouse-registration*"
   ]
 }

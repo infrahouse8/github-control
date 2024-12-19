@@ -27,3 +27,8 @@ data "aws_iam_roles" "sso-admin" {
   name_regex  = "AWSReservedSSO_AWSAdministratorAccess_.*"
   path_prefix = "/aws-reserved/sso.amazonaws.com/"
 }
+
+data "aws_iam_role" "ih-tf-aws-control-303467602807-admin" {
+  provider = aws.aws-303467602807-uw1
+  name     = "ih-tf-aws-control-303467602807-admin"
+}
