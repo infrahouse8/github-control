@@ -83,6 +83,15 @@ locals {
       "team_id" = github_team.dev.id
       "type"    = "other"
     }
+    "pytest-infrahouse" = {
+      "description" = "InfraHouse Pytest Plugin."
+      "secrets" = {
+        "PYPI_API_TOKEN" = data.aws_secretsmanager_secret_version.pypi_api_token.secret_string
+      }
+      "team_id" = github_team.dev.id
+      "type"    = "python_app"
+
+    }
     "terraform-aws-actions-runner" = {
       "description" = "Module that deploys self-hosted GitHub Actions runner."
       "team_id"     = github_team.dev.id
@@ -210,6 +219,11 @@ locals {
     }
     "terraform-aws-tags-override" = {
       "description" = "Module to override tags list for ECS"
+      "team_id"     = github_team.dev.id
+      "type"        = "terraform_module"
+    }
+    "terraform-aws-tcp-pod" = {
+      "description" = "Module that creates an autoscaling group with an NLB for a TCP based services."
       "team_id"     = github_team.dev.id
       "type"        = "terraform_module"
     }

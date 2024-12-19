@@ -43,9 +43,15 @@ jobs:
           role-session-name: ih-tf-terraform-control-github-control
           aws-region: ${{ env.AWS_DEFAULT_REGION }}
 
-      # Install the latest version of Terraform CLI
+      - name: Set Terraform version
+        id: "terraform_version"
+        run: echo "IH_TF_VERSION=$(cat .terraform-version)" >> "$GITHUB_OUTPUT"
+
+      # Install the $IH_TF_VERSION version of Terraform CLI
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ steps.terraform_version.outputs.IH_TF_VERSION }}
 
       # Prepare Python environment
       - name: Setup Python Environment
