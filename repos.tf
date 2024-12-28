@@ -232,6 +232,11 @@ locals {
       "team_id"     = github_team.dev.id
       "type"        = "terraform_module"
     }
+    "terraform-aws-truststore" = {
+      "description" = "Module that creates a trust store with a generated CA certificate."
+      "team_id"     = github_team.dev.id
+      "type"        = "terraform_module"
+    }
     "terraform-aws-update-dns" = {
       "description" = "Module creates a lambda that manages DNS A records for instances in an autoscaling group."
       "team_id"     = github_team.dev.id
