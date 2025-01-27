@@ -112,6 +112,11 @@ locals {
       "team_id"     = github_team.dev.id
       "type"        = "terraform_module"
     }
+    "terraform-aws-cloudcraft-role" = {
+      "description" = "Module that creates a role for CloudCraft scanner."
+      "team_id"     = github_team.dev.id
+      "type"        = "terraform_module"
+    }
     "terraform-aws-cloud-init" = {
       "description" = "Module that creates a cloud init configuration for an InfraHouse EC2 instance."
       "team_id"     = github_team.dev.id
