@@ -137,6 +137,11 @@ locals {
       "team_id"     = github_team.dev.id
       "type"        = "terraform_module"
     }
+    "terraform-aws-ecr" = {
+      "description" = "Module that creates a container registry (AWS ECR service)."
+      "team_id"     = github_team.dev.id
+      "type"        = "terraform_module"
+    }
     "terraform-aws-elasticsearch" = {
       "description" = "Module that deploys an Elasticsearch cluster"
       "team_id"     = github_team.dev.id
