@@ -33,6 +33,15 @@ locals {
       "team_id" = github_team.dev.id
       "type"    = "other"
     }
+    "infrahouse-core" = {
+      "description" = "Python library with AWS classes."
+      "secrets" = {
+        "PYPI_API_TOKEN" = data.aws_secretsmanager_secret_version.pypi_api_token.secret_string
+      }
+      "team_id" = github_team.dev.id
+      "type"    = "python_app"
+
+    }
     "infrahouse-puppet-data" = {
       "description" = "InfraHouse Puppet Hiera Data."
       "secrets" = {
