@@ -186,6 +186,11 @@ locals {
       "team_id"     = github_team.dev.id
       "type"        = "terraform_module"
     }
+    "terraform-aws-guardduty-configuration" = {
+      "description" = "Module that configures GuardDuty and email notifications."
+      "team_id"     = github_team.dev.id
+      "type"        = "terraform_module"
+    }
     "terraform-aws-instance-profile" = {
       "description" = "Module bundles AWS resources to create an instance profile."
       "team_id"     = github_team.dev.id
