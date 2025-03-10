@@ -30,8 +30,9 @@ locals {
       "secrets" = {
         "AWS_DEFAULT_REGION" = local.aws_default_region
       }
-      "team_id" = github_team.dev.id
-      "type"    = "other"
+      "team_id"   = github_team.dev.id
+      "type"      = "other"
+      public_repo = false
     }
     "infrahouse-core" = {
       "description" = "Python library with AWS classes."
@@ -280,6 +281,7 @@ module "repos" {
   repo_name        = each.key
   repo_description = each.value["description"]
   team_id          = each.value["team_id"]
+  public_repo      = contains(keys(each.value), "public_repo") ? each.value["public_repo"] : null
   secrets = merge(
     contains(keys(each.value), "secrets") ? each.value["secrets"] : {},
     merge(

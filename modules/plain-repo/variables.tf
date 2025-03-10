@@ -15,3 +15,9 @@ variable "secrets" {
   type        = map(string)
   default     = {}
 }
+
+variable "public_repo" {
+  description = "True if the repo is public."
+  type        = bool
+  default     = true
+}
