@@ -3,7 +3,7 @@ resource "github_repository" "repo" {
   description          = var.repo_description
   has_issues           = true
   visibility           = var.public_repo ? "public" : "private"
-  vulnerability_alerts = true
+  vulnerability_alerts = var.public_repo
 }
 
 resource "github_team_repository" "dev" {
