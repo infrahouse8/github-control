@@ -79,6 +79,9 @@ locals {
       "description" = "Vulnerability scanner written in Go which uses the data provided by https://osv.dev"
       "team_id"     = github_team.dev.id
       "type"        = "other"
+      "secrets" = {
+        "AWS_DEFAULT_REGION" = local.aws_default_region
+      }
     }
     "prometheus-elasticsearch-exporter" = {
       "description" = "InfraHouse fork of Elasticsearch stats exporter for Prometheus."
