@@ -75,6 +75,11 @@ locals {
       "team_id"     = github_team.dev.id
       "type"        = "terraform_aws"
     }
+    "osv-scanner" = {
+      "description" = "Vulnerability scanner written in Go which uses the data provided by https://osv.dev"
+      "team_id"     = github_team.dev.id
+      "type"        = "other"
+    }
     "prometheus-elasticsearch-exporter" = {
       "description" = "InfraHouse fork of Elasticsearch stats exporter for Prometheus."
       "team_id"     = github_team.dev.id
