@@ -31,3 +31,14 @@ provider "aws" {
     tags = var.default_tags
   }
 }
+
+provider "aws" {
+  alias  = "aws-493370826424-uw1"
+  region = "us-west-1"
+  assume_role {
+    role_arn = "arn:aws:iam::493370826424:role/ih-tf-aws-control-493370826424-admin"
+  }
+  default_tags {
+    tags = var.default_tags
+  }
+}
