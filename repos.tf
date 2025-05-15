@@ -160,6 +160,11 @@ locals {
       "team_id"     = github_team.dev.id
       "type"        = "terraform_module"
     }
+    "terraform-aws-dms" = {
+      "description" = "Module for deploying AWS Data Migration Service"
+      "team_id"     = github_team.dev.id
+      "type"        = "terraform_module"
+    }
     "terraform-aws-elasticsearch" = {
       "description" = "Module that deploys an Elasticsearch cluster"
       "team_id"     = github_team.dev.id
