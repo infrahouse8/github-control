@@ -38,14 +38,14 @@ module "actions-runner-pem" {
   ]
 }
 
-module "actions-runner-pem-493370826424-uw1" {
-  providers = {
-    aws = aws.aws-493370826424-uw1
-  }
-  source             = "registry.infrahouse.com/infrahouse/secret/aws"
-  version            = "~> 1.0"
-  secret_description = "A copy of infrahouse-github-terraform App private key (pem) for actions-runner tests"
-  secret_name_prefix = "action-runner-pem-"
-  secret_value       = module.infrahouse-github-terraform-pem.secret_value
-  environment        = "production"
-}
+# module "actions-runner-pem-493370826424-uw1" {
+#   providers = {
+#     aws = aws.aws-493370826424-uw1
+#   }
+#   source             = "registry.infrahouse.com/infrahouse/secret/aws"
+#   version            = "~> 1.0"
+#   secret_description = "A copy of infrahouse-github-terraform App private key (pem) for actions-runner tests"
+#   secret_name_prefix = "action-runner-pem-"
+#   secret_value       = module.infrahouse-github-terraform-pem.secret_value
+#   environment        = "production"
+# }
