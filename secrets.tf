@@ -26,7 +26,8 @@ module "actions-runner-pem" {
     aws = aws.aws-303467602807-uw1
   }
   source             = "registry.infrahouse.com/infrahouse/secret/aws"
-  version            = "~> 0.7"
+  version            = "1.0.1"
+  environment        = local.environment
   secret_description = "A copy of infrahouse-github-terraform App private key (pem) for actions-runner tests"
   secret_name_prefix = "action-runner-pem-"
   secret_value       = module.infrahouse-github-terraform-pem.secret_value
@@ -43,9 +44,9 @@ module "actions-runner-pem-493370826424-uw1" {
     aws = aws.aws-493370826424-uw1
   }
   source             = "registry.infrahouse.com/infrahouse/secret/aws"
-  version            = "~> 1.0"
+  version            = "1.0.1"
+  environment        = local.environment
   secret_description = "A copy of infrahouse-github-terraform App private key (pem) for actions-runner tests"
   secret_name_prefix = "action-runner-pem-"
   secret_value       = module.infrahouse-github-terraform-pem.secret_value
-  environment        = "production"
 }
