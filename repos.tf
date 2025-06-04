@@ -210,6 +210,11 @@ locals {
       "team_id"     = github_team.dev.id
       "type"        = "terraform_module"
     }
+    "terraform-aws-iso27001" = {
+      "description" = "Module configures ISO 27001 compliance for AWS."
+      "team_id"     = github_team.dev.id
+      "type"        = "terraform_module"
+    }
     "terraform-aws-jumphost" = {
       "description" = "Module that creates a jumphost."
       "team_id"     = github_team.dev.id
