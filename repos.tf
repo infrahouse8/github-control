@@ -239,6 +239,7 @@ locals {
       "description" = "Terraform module for a secret with owner/writer/reader roles."
       "team_id"     = github_team.dev.id
       "type"        = "terraform_module"
+      auto_merge    = true
     }
     "terraform-aws-secret-policy" = {
       "description" = "Terraform module that creates AWS secret permissions policy."
@@ -309,7 +310,8 @@ module "repos" {
   repo_name        = each.key
   repo_description = each.value["description"]
   team_id          = each.value["team_id"]
-  public_repo      = contains(keys(each.value), "public_repo") ? each.value["public_repo"] : null
+  public_repo      = try(each.value["public_repo"], null)
+  allow_auto_merge = try(each.value["auto_merge"], null)
   secrets = merge(
     contains(keys(each.value), "secrets") ? each.value["secrets"] : {},
     merge(
