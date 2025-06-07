@@ -5,6 +5,7 @@ resource "github_repository" "repo" {
   visibility             = var.public_repo ? "public" : "private"
   vulnerability_alerts   = var.public_repo
   delete_branch_on_merge = true
+  allow_auto_merge       = var.allow_auto_merge
 }
 
 resource "github_team_repository" "dev" {

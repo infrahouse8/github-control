@@ -22,3 +22,9 @@ variable "public_repo" {
   default     = true
   nullable    = false
 }
+
+variable "allow_auto_merge" {
+  description = "Merge pull requests automatically if all statuses are successful"
+  type        = bool
+  default     = false
+}
