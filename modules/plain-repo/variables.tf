@@ -6,6 +6,11 @@ variable "repo_name" {
   description = "Repository short name"
 }
 
+variable "repo_type" {
+  description = "Kind of source code stored in the repository"
+  default     = null
+}
+
 variable "team_id" {
   description = "Team identifier that has a push permission"
 }
