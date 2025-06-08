@@ -312,6 +312,7 @@ module "repos" {
   team_id          = each.value["team_id"]
   public_repo      = try(each.value["public_repo"], null)
   allow_auto_merge = try(each.value["auto_merge"], null)
+  repo_type        = try(each.value["type"], null)
   secrets = merge(
     contains(keys(each.value), "secrets") ? each.value["secrets"] : {},
     merge(
