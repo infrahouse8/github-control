@@ -286,6 +286,11 @@ locals {
       "team_id"     = github_team.dev.id
       "type"        = "terraform_module"
     }
+    "terraform-aws-teleport-agent" = {
+      "description" = "Module deploys roles and other resources on an account joining Teleport cluster."
+      "team_id"     = github_team.dev.id
+      "type"        = "terraform_module"
+    }
     "terraform-aws-terraformer" = {
       "description" = "Module that deploys an instances allowed to manage Terraform root modules."
       "team_id"     = github_team.dev.id
