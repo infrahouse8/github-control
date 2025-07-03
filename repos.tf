@@ -170,6 +170,11 @@ locals {
       "team_id"     = github_team.dev.id
       "type"        = "terraform_module"
     }
+    "terraform-aws-emrserverless" = {
+      "description" = "Module for deploying EMR serverless"
+      "team_id"     = github_team.dev.id
+      "type"        = "terraform_module"
+    }
     "terraform-aws-kibana" = {
       "description" = "Module that deploys Kibana"
       "team_id"     = github_team.dev.id
