@@ -230,6 +230,11 @@ locals {
       "team_id"     = github_team.dev.id
       "type"        = "terraform_module"
     }
+    "terraform-aws-key" = {
+      "description" = "Module that creates an encryption key in KMS."
+      "team_id"     = github_team.dev.id
+      "type"        = "terraform_module"
+    }
     "terraform-aws-openvpn" = {
       "description" = "Terraform module that deploys OpenVPN server."
       "team_id"     = github_team.dev.id
