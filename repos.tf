@@ -63,6 +63,7 @@ locals {
     "infrahouse-ubuntu-pro" = {
       "description" = "Ubuntu Pro AMI with InfraHouse packages."
       "type"        = "other"
+      "team_id"     = github_team.dev.id
     }
     "hiera-aws-sm" = {
       "description" = "A Hiera 5 backend for AWS Secrets Manager(accenture/hiera-aws-sm fork)."
