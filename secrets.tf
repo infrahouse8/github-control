@@ -50,3 +50,18 @@ module "actions-runner-pem-493370826424-uw1" {
   secret_name_prefix = "action-runner-pem-"
   secret_value       = module.infrahouse-github-terraform-pem.secret_value
 }
+
+
+module "github-token" {
+  source  = "infrahouse/secret/aws"
+  version = "1.0.3"
+  providers = {
+    aws = aws.aws-303467602807-uw1
+  }
+  environment        = local.environment
+  secret_description = "Classic GitHub token. Needed for action-runner tests"
+  secret_name_prefix = "github-token-"
+  readers = [
+    "arn:aws:iam::303467602807:role/actions-runner-tester"
+  ]
+}
