@@ -64,4 +64,7 @@ module "github-token" {
   readers = [
     "arn:aws:iam::303467602807:role/actions-runner-tester"
   ]
+  writers = [
+    tolist(data.aws_iam_roles.sso-admin.arns)[0],
+  ]
 }
