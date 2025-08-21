@@ -119,6 +119,9 @@ locals {
       "description" = "Module that deploys self-hosted GitHub Actions runner."
       "team_id"     = github_team.dev.id
       "type"        = "terraform_module"
+      "secrets" = {
+        "CI_TEST_TOKEN" = module.github-token.secret_value
+      }
     }
     "terraform-aws-aerospike" = {
       "description" = "Module that deploys Aerospike cluster."
