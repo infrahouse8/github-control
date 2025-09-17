@@ -33,3 +33,29 @@ variable "allow_auto_merge" {
   type        = bool
   default     = false
 }
+
+variable "use_merge_queue" {
+  description = "Set to true to enable merge queue in the repository"
+  type        = bool
+  default     = false
+  nullable    = false
+}
+
+variable "dismiss_stale_reviews" {
+  description = "Whether to dismiss stale reviews"
+  default     = true
+  nullable    = false
+}
+
+variable "require_code_owner_reviews" {
+  description = "If set to true CODEOWNERS must approve a pull request"
+  default     = true
+  type        = bool
+  nullable    = false
+}
+
+variable "approvals_count" {
+  description = "Number of approvals required for PR"
+  default     = 1
+  nullable    = false
+}
