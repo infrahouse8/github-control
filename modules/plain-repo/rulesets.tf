@@ -39,7 +39,7 @@ resource "github_repository_ruleset" "main" {
           concat(
             var.repo_type == "terraform_aws" ? ["Terraform Plan"] : [],
             [
-              # "vulnerability-check / osv-scan",
+              "vulnerability-check / osv-scan",
             ]
           )
         )
