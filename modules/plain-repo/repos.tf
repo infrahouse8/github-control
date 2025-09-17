@@ -20,3 +20,8 @@ resource "github_actions_secret" "secret" {
   secret_name     = each.key
   plaintext_value = each.value
 }
+
+resource "github_branch_default" "main" {
+  branch     = "main"
+  repository = github_repository.repo.name
+}
