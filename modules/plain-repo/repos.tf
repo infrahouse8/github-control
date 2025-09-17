@@ -6,6 +6,8 @@ resource "github_repository" "repo" {
   vulnerability_alerts   = var.public_repo
   delete_branch_on_merge = true
   allow_auto_merge       = var.allow_auto_merge
+
+  web_commit_signoff_required = true
 }
 
 resource "github_team_repository" "dev" {
