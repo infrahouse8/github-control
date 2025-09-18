@@ -1,5 +1,5 @@
 locals {
-  vuln_scanner_workflow = var.public_repo ? "vuln-scanner-pr-public.yml": "vuln-scanner-pr-private.yml"
+  vuln_scanner_workflow = var.public_repo ? "vuln-scanner-pr-public.yml" : "vuln-scanner-pr-private.yml"
 
 }
 resource "github_repository_file" "vuln_scanner_workflow" {

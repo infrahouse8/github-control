@@ -1,5 +1,5 @@
 resource "github_branch_protection" "main" {
-  count = var.public_repo ? 1 : 0
+  count          = var.public_repo ? 1 : 0
   pattern        = github_branch_default.main.branch
   repository_id  = github_repository.repo.node_id
   enforce_admins = false
@@ -15,7 +15,7 @@ resource "github_branch_protection" "main" {
 }
 
 resource "github_repository_ruleset" "main" {
-  count = var.public_repo ? 1 : 0
+  count       = var.public_repo ? 1 : 0
   name        = "Main Branch Protection"
   repository  = github_repository.repo.name
   target      = "branch"
