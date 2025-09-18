@@ -17,7 +17,6 @@ resource "github_organization_settings" "infrahouse" {
   members_can_create_public_pages                              = true
   members_can_create_private_pages                             = true
   members_can_fork_private_repositories                        = true
-  web_commit_signoff_required                                  = true
   advanced_security_enabled_for_new_repositories               = false
   dependabot_alerts_enabled_for_new_repositories               = false
   dependabot_security_updates_enabled_for_new_repositories     = false
