@@ -3,9 +3,3 @@ default_tags = {
 }
 
 role_admin = "arn:aws:iam::303467602807:role/ih-tf-github-control-admin"
-
-developers = [
-  "akuzminsky",
-  "xOtanix",
-  "naumenko",
-]
