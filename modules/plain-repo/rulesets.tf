@@ -33,6 +33,12 @@ resource "github_repository_ruleset" "main" {
     bypass_mode = "always"
   }
 
+  bypass_actors {
+    actor_id    = var.admin_team_id
+    actor_type  = "Team"
+    bypass_mode = "always"
+  }
+
   rules {
     required_status_checks {
       strict_required_status_checks_policy = true
