@@ -26,7 +26,7 @@ resource "github_team" "admins" {
 }
 
 resource "github_team_members" "admins" {
-  team_id = github_team.dev.id
+  team_id = github_team.admins.id
   dynamic "members" {
     for_each = toset(
       [
