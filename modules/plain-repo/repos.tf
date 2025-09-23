@@ -15,6 +15,12 @@ resource "github_team_repository" "dev" {
   permission = "push"
 }
 
+resource "github_team_repository" "admin" {
+  repository = github_repository.repo.name
+  team_id    = var.admin_team_id
+  permission = "admin"
+}
+
 resource "github_actions_secret" "secret" {
   for_each        = var.secrets
   repository      = github_repository.repo.name

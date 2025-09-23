@@ -15,6 +15,10 @@ variable "team_id" {
   description = "Team identifier that has a push permission"
 }
 
+variable "admin_team_id" {
+  description = "Team identifier that has the admin permission"
+}
+
 variable "secrets" {
   description = "Map with GitHub Action secrets"
   type        = map(string)
