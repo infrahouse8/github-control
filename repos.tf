@@ -213,6 +213,11 @@ locals {
       "description" = "Terraform module that deploys a private PyPI server."
       "type"        = "terraform_module"
     }
+    "terraform-aws-s3-bucket" = {
+      "description" = "Terraform module for an ISO27001 compliant S3 bucket."
+      "type"        = "terraform_module"
+      auto_merge    = true
+    }
     "terraform-aws-secret" = {
       "description" = "Terraform module for a secret with owner/writer/reader roles."
       "type"        = "terraform_module"
