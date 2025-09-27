@@ -204,6 +204,9 @@ locals {
     "terraform-aws-openvpn" = {
       "description" = "Terraform module that deploys OpenVPN server."
       "type"        = "terraform_module"
+      secrets = {
+        OPENVPN_CLIENT_SECRET : module.openvpn-oauth-client-id.secret_value
+      }
     }
     "terraform-aws-postfix" = {
       "description" = "Terraform module that deploys Postfix as a MX server."
