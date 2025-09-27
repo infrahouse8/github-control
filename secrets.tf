@@ -68,3 +68,20 @@ module "github-token" {
     tolist(data.aws_iam_roles.sso-admin.arns)[0],
   ]
 }
+
+module "openvpn-oauth-client-id" {
+  source  = "infrahouse/secret/aws"
+  version = "1.1.0"
+  providers = {
+    aws = aws.aws-303467602807-uw1
+  }
+  environment        = local.environment
+  secret_description = "Get OAuth 2.0 Client IDs from https://console.cloud.google.com/auth/clients - the secret is used for CI tests in terraform-aws-openvpn"
+  secret_name_prefix = "openvpn-client-id-"
+  readers = [
+    "arn:aws:iam::303467602807:role/openvpn-tester"
+  ]
+  writers = [
+    tolist(data.aws_iam_roles.sso-admin.arns)[0],
+  ]
+}
