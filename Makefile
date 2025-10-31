@@ -62,7 +62,7 @@ init:
 
 .PHONY: plan
 plan: init ## Run terraform plan
-	set -o pipefail ; terraform plan -no-color --out=tf.plan 2> plan.stderr | tee plan.stdout || (cat plan.stderr; exit 1)
+	set -o pipefail ; terraform plan -parallelism=$$(nproc) -no-color --out=tf.plan 2> plan.stderr | tee plan.stdout || (cat plan.stderr; exit 1)
 
 
 .PHONY: apply

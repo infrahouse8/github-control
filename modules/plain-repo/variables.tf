@@ -1,5 +1,13 @@
 variable "repo_description" {
   description = "The repository description"
+
+  validation {
+    condition     = length(regexall("[[:cntrl:]]", var.repo_description)) == 0
+    error_message = <<-EOT
+      Repository description cannot contain control characters (including newlines, tabs, carriage returns).
+      GitHub API requires descriptions to be single-line strings.
+    EOT
+  }
 }
 
 variable "repo_name" {

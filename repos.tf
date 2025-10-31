@@ -300,7 +300,7 @@ module "repos" {
   source           = "./modules/plain-repo"
   for_each         = local.repos
   repo_name        = each.key
-  repo_description = each.value["description"]
+  repo_description = replace(each.value["description"], "\n", " ")
   team_id          = github_team.dev.id
   admin_team_id    = github_team.admins.id
   public_repo      = try(each.value["public_repo"], null)
