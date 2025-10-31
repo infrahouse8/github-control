@@ -25,6 +25,7 @@ help: ## Print this help
 .PHONY: hooks
 hooks:
 	test -f .git/hooks/pre-commit || cp hooks/pre-commit .git/hooks/pre-commit
+	chmod +x .git/hooks/pre-commit
 
 
 .PHONY: bootstrap
