@@ -216,6 +216,14 @@ locals {
         OPENVPN_CLIENT_SECRET : module.openvpn-oauth-client-id.secret_value
       }
     }
+    "terraform-aws-pmm-ecs" = {
+      "description" = <<-EOT
+        Terraform module for deploying Percona Monitoring and Management (PMM) server
+        on AWS ECS with persistent EFS storage, automatic SSL,
+        and RDS PostgreSQL monitoring support.
+      EOT
+      "type"        = "terraform_module"
+    }
     "terraform-aws-postfix" = {
       "description" = "Terraform module that deploys Postfix as a MX server."
       "type"        = "terraform_module"
