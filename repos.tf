@@ -208,6 +208,9 @@ locals {
         and Vanta "Serverless function error rate monitored" requirements.
       EOT
       "type"        = "terraform_module"
+      "secrets" = {
+        "ANTHROPIC_API_KEY" = module.anthropic_api_key.secret_value
+      }
     }
     "terraform-aws-openvpn" = {
       "description" = "Terraform module that deploys OpenVPN server."
