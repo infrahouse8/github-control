@@ -86,3 +86,17 @@ module "openvpn-oauth-client-id" {
     tolist(data.aws_iam_roles.sso-admin.arns)[0],
   ]
 }
+
+module "anthropic_api_key" {
+  source  = "infrahouse/secret/aws"
+  version = "1.1.0"
+  providers = {
+    aws = aws.aws-303467602807-uw1
+  }
+  environment        = local.environment
+  secret_description = "ANTHROPIC_API_KEY token for pull request code reviews"
+  secret_name_prefix = "ANTHROPIC_API_KEY-"
+  writers = [
+    tolist(data.aws_iam_roles.sso-admin.arns)[0],
+  ]
+}
