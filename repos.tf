@@ -226,6 +226,9 @@ locals {
         and RDS PostgreSQL monitoring support.
       EOT
       "type"        = "terraform_module"
+      "secrets" = {
+        "ANTHROPIC_API_KEY" = module.anthropic_api_key.secret_value
+      }
     }
     "terraform-aws-postfix" = {
       "description" = "Terraform module that deploys Postfix as a MX server."
