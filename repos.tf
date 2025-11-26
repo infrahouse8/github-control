@@ -148,6 +148,9 @@ locals {
     "terraform-aws-elasticsearch" = {
       "description" = "Module that deploys an Elasticsearch cluster"
       "type"        = "terraform_module"
+      "secrets" = {
+        "ANTHROPIC_API_KEY" = module.anthropic_api_key.secret_value
+      }
     }
     "terraform-aws-emrserverless" = {
       "description" = "Module for deploying EMR serverless"
