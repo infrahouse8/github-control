@@ -12,3 +12,51 @@ resource "github_repository_file" "vuln_scanner_workflow" {
   commit_message      = "Update vuln-scanner-pr.yml workflow"
   overwrite_on_create = true
 }
+
+resource "github_repository_file" "terraform_module_reviewer" {
+  count = var.repo_type == "terraform_module" ? 1 : 0
+  depends_on = [
+    github_repository_ruleset.main
+  ]
+  repository          = github_repository.repo.name
+  file                = "./.claude/agents/terraform-module-reviewer.md"
+  content             = file("${path.module}/files/terraform-module-reviewer.md")
+  commit_message      = "Add terraform-module-reviewer Claude agent"
+  overwrite_on_create = true
+}
+
+resource "github_repository_file" "coding_standard" {
+  count = var.repo_type == "terraform_module" ? 1 : 0
+  depends_on = [
+    github_repository_ruleset.main
+  ]
+  repository          = github_repository.repo.name
+  file                = "./.claude/CODING_STANDARD.md"
+  content             = file("${path.module}/files/CODING_STANDARD.md")
+  commit_message      = "Add CODING_STANDARD.md"
+  overwrite_on_create = true
+}
+
+resource "github_repository_file" "makefile_example" {
+  count = var.repo_type == "terraform_module" ? 1 : 0
+  depends_on = [
+    github_repository_ruleset.main
+  ]
+  repository          = github_repository.repo.name
+  file                = "./.claude/Makefile-example"
+  content             = file("${path.module}/files/Makefile-example")
+  commit_message      = "Add Makefile-example"
+  overwrite_on_create = true
+}
+
+resource "github_repository_file" "terraform_review_workflow" {
+  count = var.repo_type == "terraform_module" ? 1 : 0
+  depends_on = [
+    github_repository_ruleset.main
+  ]
+  repository          = github_repository.repo.name
+  file                = "./.github/workflows/terraform-review.yml"
+  content             = file("${path.module}/files/terraform-review.yml")
+  commit_message      = "Add terraform-review.yml workflow"
+  overwrite_on_create = true
+}

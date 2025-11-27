@@ -148,9 +148,6 @@ locals {
     "terraform-aws-elasticsearch" = {
       "description" = "Module that deploys an Elasticsearch cluster"
       "type"        = "terraform_module"
-      "secrets" = {
-        "ANTHROPIC_API_KEY" = module.anthropic_api_key.secret_value
-      }
     }
     "terraform-aws-emrserverless" = {
       "description" = "Module for deploying EMR serverless"
@@ -211,9 +208,6 @@ locals {
         and Vanta "Serverless function error rate monitored" requirements.
       EOT
       "type"        = "terraform_module"
-      "secrets" = {
-        "ANTHROPIC_API_KEY" = module.anthropic_api_key.secret_value
-      }
     }
     "terraform-aws-openvpn" = {
       "description" = "Terraform module that deploys OpenVPN server."
@@ -229,9 +223,6 @@ locals {
         and RDS PostgreSQL monitoring support.
       EOT
       "type"        = "terraform_module"
-      "secrets" = {
-        "ANTHROPIC_API_KEY" = module.anthropic_api_key.secret_value
-      }
     }
     "terraform-aws-postfix" = {
       "description" = "Terraform module that deploys Postfix as a MX server."
@@ -305,9 +296,6 @@ locals {
     "terraform-aws-update-dns" = {
       "description" = "Module creates a lambda that manages DNS A records for instances in an autoscaling group."
       "type"        = "terraform_module"
-      "secrets" = {
-        "ANTHROPIC_API_KEY" = module.anthropic_api_key.secret_value
-      }
     }
     "terraform-aws-website-pod" = {
       "description" = "Module that creates an autoscaling group with an ALB and SSL certificate for a website."
@@ -317,15 +305,16 @@ locals {
 }
 
 module "repos" {
-  source           = "./modules/plain-repo"
-  for_each         = local.repos
-  repo_name        = each.key
-  repo_description = replace(each.value["description"], "\n", " ")
-  team_id          = github_team.dev.id
-  admin_team_id    = github_team.admins.id
-  public_repo      = try(each.value["public_repo"], null)
-  allow_auto_merge = try(each.value["auto_merge"], null)
-  repo_type        = try(each.value["type"], null)
+  source            = "./modules/plain-repo"
+  for_each          = local.repos
+  repo_name         = each.key
+  repo_description  = replace(each.value["description"], "\n", " ")
+  team_id           = github_team.dev.id
+  admin_team_id     = github_team.admins.id
+  public_repo       = try(each.value["public_repo"], null)
+  allow_auto_merge  = try(each.value["auto_merge"], null)
+  repo_type         = try(each.value["type"], null)
+  anthropic_api_key = module.anthropic_api_key.secret_value
   secrets = merge(
     contains(keys(each.value), "secrets") ? each.value["secrets"] : {},
     merge(
