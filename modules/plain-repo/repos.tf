@@ -21,21 +21,18 @@ resource "github_team_repository" "admin" {
   permission = "admin"
 }
 
-locals {
-  # Automatically add ANTHROPIC_API_KEY for terraform_module type repos
-  terraform_module_secrets = var.repo_type == "terraform_module" && var.anthropic_api_key != null ? {
-    "ANTHROPIC_API_KEY" = var.anthropic_api_key
-  } : {}
-
-  # Merge module-specific secrets with user-provided secrets
-  all_secrets = merge(local.terraform_module_secrets, var.secrets)
-}
-
 resource "github_actions_secret" "secret" {
-  for_each        = local.all_secrets
+  for_each        = var.secrets
   repository      = github_repository.repo.name
   secret_name     = each.key
   plaintext_value = each.value
+}
+
+resource "github_actions_secret" "anthropic_api_key" {
+  count           = var.repo_type == "terraform_module" && var.anthropic_api_key != null ? 1 : 0
+  repository      = github_repository.repo.name
+  secret_name     = "ANTHROPIC_API_KEY"
+  plaintext_value = var.anthropic_api_key
 }
 
 resource "github_branch_default" "main" {
