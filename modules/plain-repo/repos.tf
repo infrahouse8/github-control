@@ -28,6 +28,13 @@ resource "github_actions_secret" "secret" {
   plaintext_value = each.value
 }
 
+resource "github_actions_secret" "anthropic_api_key" {
+  count           = var.repo_type == "terraform_module" && var.anthropic_api_key != null ? 1 : 0
+  repository      = github_repository.repo.name
+  secret_name     = "ANTHROPIC_API_KEY"
+  plaintext_value = var.anthropic_api_key
+}
+
 resource "github_branch_default" "main" {
   branch     = "main"
   repository = github_repository.repo.name
