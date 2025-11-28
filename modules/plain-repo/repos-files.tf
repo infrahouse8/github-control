@@ -60,3 +60,39 @@ resource "github_repository_file" "terraform_review_workflow" {
   commit_message      = "Add terraform-review.yml workflow"
   overwrite_on_create = true
 }
+
+resource "github_repository_file" "terraform_docs_config" {
+  count = var.repo_type == "terraform_module" ? 1 : 0
+  depends_on = [
+    github_repository_ruleset.main
+  ]
+  repository          = github_repository.repo.name
+  file                = "./.terraform-docs.yml"
+  content             = file("${path.module}/files/.terraform-docs.yml")
+  commit_message      = "Add .terraform-docs.yml configuration"
+  overwrite_on_create = true
+}
+
+resource "github_repository_file" "cliff_config" {
+  count = var.repo_type == "terraform_module" ? 1 : 0
+  depends_on = [
+    github_repository_ruleset.main
+  ]
+  repository          = github_repository.repo.name
+  file                = "./cliff.toml"
+  content             = file("${path.module}/files/cliff.toml")
+  commit_message      = "Add cliff.toml configuration"
+  overwrite_on_create = true
+}
+
+resource "github_repository_file" "pre_commit_hook" {
+  count = var.repo_type == "terraform_module" ? 1 : 0
+  depends_on = [
+    github_repository_ruleset.main
+  ]
+  repository          = github_repository.repo.name
+  file                = "./hooks/pre-commit"
+  content             = file("${path.module}/files/pre-commit")
+  commit_message      = "Add pre-commit hook"
+  overwrite_on_create = true
+}
