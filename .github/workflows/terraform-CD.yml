@@ -16,7 +16,7 @@ jobs:
     if: github.event.pull_request.merged
     runs-on: ubuntu-latest
     environment: production
-    timeout-minutes: 5
+    timeout-minutes: 60
     env:
       AWS_DEFAULT_REGION: "us-west-1"
 

@@ -41,6 +41,7 @@ bootstrap-ci:  ## Build environment for CI
 lint/format:
 	yamllint \
 		.github/workflows \
+		modules/plain-repo/files \
 		.readthedocs.yaml
 	terraform fmt -check -recursive
 
