@@ -98,3 +98,15 @@ resource "github_repository_file" "pre_commit_hook" {
   commit_message      = "Add pre-commit hook"
   overwrite_on_create = true
 }
+
+resource "github_repository_file" "commit_msg_hook" {
+  count = var.repo_type == "terraform_module" ? 1 : 0
+  depends_on = [
+    github_repository_ruleset.main
+  ]
+  repository          = github_repository.repo.name
+  file                = "./hooks/commit-msg"
+  content             = file("${path.module}/files/commit-msg")
+  commit_message      = "Add commit-msg hook"
+  overwrite_on_create = true
+}
