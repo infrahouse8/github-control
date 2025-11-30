@@ -78,9 +78,11 @@ resource "github_repository_file" "cliff_config" {
   depends_on = [
     github_repository_ruleset.main
   ]
-  repository          = github_repository.repo.name
-  file                = "./cliff.toml"
-  content             = file("${path.module}/files/cliff.toml")
+  repository = github_repository.repo.name
+  file       = "./cliff.toml"
+  content = templatefile("${path.module}/files/cliff.toml.tpl", {
+    repo_name = github_repository.repo.name
+  })
   commit_message      = "Add cliff.toml configuration"
   overwrite_on_create = true
 }
