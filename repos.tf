@@ -219,8 +219,8 @@ locals {
     "terraform-aws-pmm-ecs" = {
       "description" = <<-EOT
         Terraform module for deploying Percona Monitoring and Management (PMM) server
-        on AWS ECS with persistent EFS storage, automatic SSL,
-        and RDS PostgreSQL monitoring support.
+        on AWS EC2 with Docker, featuring automatic SSL/TLS certificates, persistent EBS storage,
+        CloudWatch monitoring, automated backups, auto-recovery, and RDS PostgreSQL monitoring support.
       EOT
       "type"        = "terraform_module"
     }
