@@ -26,7 +26,6 @@ resource "github_repository_file" "terraform_module_reviewer" {
 }
 
 resource "github_repository_file" "coding_standard" {
-  count = var.repo_type == "terraform_module" ? 1 : 0
   depends_on = [
     github_repository_ruleset.main
   ]
@@ -34,6 +33,17 @@ resource "github_repository_file" "coding_standard" {
   file                = "./.claude/CODING_STANDARD.md"
   content             = file("${path.module}/files/CODING_STANDARD.md")
   commit_message      = "Add CODING_STANDARD.md"
+  overwrite_on_create = true
+}
+
+resource "github_repository_file" "claude_instructions" {
+  depends_on = [
+    github_repository_ruleset.main
+  ]
+  repository          = github_repository.repo.name
+  file                = "./.claude/instructions.md"
+  content             = file("${path.module}/files/instructions.md")
+  commit_message      = "Add Claude Code instructions"
   overwrite_on_create = true
 }
 
