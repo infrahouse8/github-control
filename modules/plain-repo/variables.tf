@@ -78,3 +78,10 @@ variable "approvals_count" {
   default     = 1
   nullable    = false
 }
+
+variable "has_projects" {
+  description = "Enable GitHub Projects for the repository"
+  type        = bool
+  default     = true
+  nullable    = false
+}
