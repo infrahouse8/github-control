@@ -143,6 +143,10 @@ resource "github_repository_file" "docs_index" {
   content             = "# ${github_repository.repo.name}\n\n${github_repository.repo.description}\n"
   commit_message      = "Add docs/index.md"
   overwrite_on_create = false
+
+  lifecycle {
+    ignore_changes = [content]
+  }
 }
 
 resource "github_repository_file" "mkdocs_config" {
@@ -157,4 +161,8 @@ resource "github_repository_file" "mkdocs_config" {
   })
   commit_message      = "Add mkdocs.yml configuration"
   overwrite_on_create = false
+
+  lifecycle {
+    ignore_changes = [content]
+  }
 }
