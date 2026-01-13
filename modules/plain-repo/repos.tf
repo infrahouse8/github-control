@@ -8,6 +8,16 @@ resource "github_repository" "repo" {
   delete_branch_on_merge = true
   allow_auto_merge       = var.allow_auto_merge
 
+  dynamic "pages" {
+    for_each = var.enable_pages ? [1] : []
+    content {
+      build_type = "workflow"
+      source {
+        branch = "main"
+        path   = "/"
+      }
+    }
+  }
 }
 
 resource "github_team_repository" "dev" {

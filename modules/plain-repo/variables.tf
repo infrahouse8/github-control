@@ -85,3 +85,10 @@ variable "has_projects" {
   default     = true
   nullable    = false
 }
+
+variable "enable_pages" {
+  description = "Enable GitHub Pages for the repository"
+  type        = bool
+  default     = false
+  nullable    = false
+}
