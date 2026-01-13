@@ -316,7 +316,10 @@ module "repos" {
   allow_auto_merge  = try(each.value["auto_merge"], null)
   repo_type         = try(each.value["type"], null)
   anthropic_api_key = module.anthropic_api_key.secret_value
-  enable_pages      = try(each.value["enable_pages"], false)
+  enable_pages = try(
+    each.value["enable_pages"],
+    each.value["type"] == "terraform_module"
+  )
   secrets = merge(
     contains(keys(each.value), "secrets") ? each.value["secrets"] : {},
     merge(

@@ -120,3 +120,41 @@ resource "github_repository_file" "commit_msg_hook" {
   commit_message      = "Add commit-msg hook"
   overwrite_on_create = true
 }
+
+resource "github_repository_file" "docs_workflow" {
+  count = var.repo_type == "terraform_module" ? 1 : 0
+  depends_on = [
+    github_repository_ruleset.main
+  ]
+  repository          = github_repository.repo.name
+  file                = "./.github/workflows/docs.yml"
+  content             = file("${path.module}/files/docs.yml")
+  commit_message      = "Add docs.yml workflow for GitHub Pages"
+  overwrite_on_create = true
+}
+
+resource "github_repository_file" "docs_index" {
+  count = var.repo_type == "terraform_module" ? 1 : 0
+  depends_on = [
+    github_repository_ruleset.main
+  ]
+  repository          = github_repository.repo.name
+  file                = "./docs/index.md"
+  content             = "# ${github_repository.repo.name}\n\n${github_repository.repo.description}\n"
+  commit_message      = "Add docs/index.md"
+  overwrite_on_create = false
+}
+
+resource "github_repository_file" "mkdocs_config" {
+  count = var.repo_type == "terraform_module" ? 1 : 0
+  depends_on = [
+    github_repository_ruleset.main
+  ]
+  repository = github_repository.repo.name
+  file       = "./mkdocs.yml"
+  content = templatefile("${path.module}/files/mkdocs.yml.tpl", {
+    repo_name = github_repository.repo.name
+  })
+  commit_message      = "Add mkdocs.yml configuration"
+  overwrite_on_create = false
+}
