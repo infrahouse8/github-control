@@ -133,6 +133,18 @@ resource "github_repository_file" "docs_workflow" {
   overwrite_on_create = true
 }
 
+resource "github_repository_file" "release_workflow" {
+  count = var.repo_type == "terraform_module" ? 1 : 0
+  depends_on = [
+    github_repository_ruleset.main
+  ]
+  repository          = github_repository.repo.name
+  file                = "./.github/workflows/release.yml"
+  content             = file("${path.module}/files/release.yml")
+  commit_message      = "Add release.yml workflow"
+  overwrite_on_create = true
+}
+
 resource "github_repository_file" "docs_index" {
   count = var.repo_type == "terraform_module" ? 1 : 0
   depends_on = [
