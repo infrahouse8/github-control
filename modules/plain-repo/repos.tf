@@ -12,10 +12,6 @@ resource "github_repository" "repo" {
     for_each = var.enable_pages ? [1] : []
     content {
       build_type = "workflow"
-      source {
-        branch = "main"
-        path   = "/"
-      }
     }
   }
 }
