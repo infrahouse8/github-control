@@ -156,6 +156,18 @@ resource "github_repository_file" "release_workflow" {
   overwrite_on_create = true
 }
 
+resource "github_repository_file" "security_md" {
+  count = var.repo_type == "terraform_module" ? 1 : 0
+  depends_on = [
+    github_repository_ruleset.main
+  ]
+  repository          = github_repository.repo.name
+  file                = "SECURITY.md"
+  content             = file("${path.module}/files/SECURITY.md")
+  commit_message      = "Add SECURITY.md"
+  overwrite_on_create = true
+}
+
 resource "github_repository_file" "docs_index" {
   count = var.repo_type == "terraform_module" ? 1 : 0
   depends_on = [
