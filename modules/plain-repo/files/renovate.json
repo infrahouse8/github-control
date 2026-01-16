@@ -4,6 +4,7 @@
     "config:recommended"
   ],
   "prConcurrentLimit": 1,
+  "rebaseWhen": "conflicted",
   "packageRules": [
     {
       "matchManagers": ["github-actions"],

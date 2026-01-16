@@ -1,7 +1,18 @@
 locals {
   vuln_scanner_workflow = var.public_repo ? "vuln-scanner-pr-public.yml" : "vuln-scanner-pr-private.yml"
-
 }
+
+resource "github_repository_file" "renovate_json" {
+  depends_on = [
+    github_repository_ruleset.main
+  ]
+  repository          = github_repository.repo.name
+  file                = "renovate.json"
+  content             = file("${path.module}/files/renovate.json")
+  commit_message      = "Configure renovate"
+  overwrite_on_create = true
+}
+
 resource "github_repository_file" "vuln_scanner_workflow" {
   depends_on = [
     github_repository_ruleset.main
