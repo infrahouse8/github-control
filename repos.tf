@@ -217,6 +217,13 @@ locals {
         OPENVPN_CLIENT_SECRET : module.openvpn-oauth-client-id.secret_value
       }
     }
+    "terraform-aws-percona-server" = {
+      "description" = <<-EOT
+        Terraform module for Percona Server replica set with GTID replication,
+        Orchestrator HA, and automated failover.
+      EOT
+      "type"        = "terraform_module"
+    }
     "terraform-aws-pmm-ecs" = {
       "description" = <<-EOT
         Terraform module for deploying Percona Monitoring and Management (PMM) server
