@@ -36,6 +36,18 @@ resource "github_repository_file" "terraform_module_reviewer" {
   overwrite_on_create = true
 }
 
+resource "github_repository_file" "review_local_command" {
+  count = var.repo_type == "terraform_module" ? 1 : 0
+  depends_on = [
+    github_repository_ruleset.main
+  ]
+  repository          = github_repository.repo.name
+  file                = "./.claude/commands/review-local.md"
+  content             = file("${path.module}/files/review-local.md")
+  commit_message      = "Add review-local Claude command"
+  overwrite_on_create = true
+}
+
 resource "github_repository_file" "coding_standard" {
   depends_on = [
     github_repository_ruleset.main
@@ -165,6 +177,30 @@ resource "github_repository_file" "security_md" {
   file                = "SECURITY.md"
   content             = file("${path.module}/files/SECURITY.md")
   commit_message      = "Add SECURITY.md"
+  overwrite_on_create = true
+}
+
+resource "github_repository_file" "contributing_md" {
+  count = var.repo_type == "terraform_module" ? 1 : 0
+  depends_on = [
+    github_repository_ruleset.main
+  ]
+  repository          = github_repository.repo.name
+  file                = "CONTRIBUTING.md"
+  content             = file("${path.module}/files/CONTRIBUTING.md")
+  commit_message      = "Add CONTRIBUTING.md"
+  overwrite_on_create = true
+}
+
+resource "github_repository_file" "license" {
+  count = var.repo_type == "terraform_module" ? 1 : 0
+  depends_on = [
+    github_repository_ruleset.main
+  ]
+  repository          = github_repository.repo.name
+  file                = "LICENSE"
+  content             = file("${path.module}/files/LICENSE")
+  commit_message      = "Add LICENSE"
   overwrite_on_create = true
 }
 
