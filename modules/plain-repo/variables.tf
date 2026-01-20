@@ -92,3 +92,9 @@ variable "enable_pages" {
   default     = false
   nullable    = false
 }
+
+variable "topics" {
+  description = "List of topics for the repository"
+  type        = list(string)
+  default     = []
+}

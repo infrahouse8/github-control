@@ -7,6 +7,8 @@ resource "github_repository" "repo" {
   vulnerability_alerts   = var.public_repo
   delete_branch_on_merge = true
   allow_auto_merge       = var.allow_auto_merge
+  homepage_url           = var.repo_type == "terraform_module" ? "https://infrahouse.github.io/${var.repo_name}" : ""
+  topics                 = var.topics
 
   dynamic "pages" {
     for_each = var.enable_pages ? [1] : []

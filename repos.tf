@@ -29,7 +29,11 @@ locals {
       public_repo = false
     }
     "infrahouse-core" = {
-      "description" = "Python library with AWS classes."
+      "description" = <<-EOF
+        Python library for AWS infrastructure automation - EC2 instance management,
+        DynamoDB distributed locks, Route53 DNS, Secrets Manager - with cross-account
+        role assumption and GitHub Actions self-hosted runner integration
+      EOF
       "secrets" = {
         "PYPI_API_TOKEN" = data.aws_secretsmanager_secret_version.pypi_api_token.secret_string
       }
@@ -99,108 +103,201 @@ locals {
 
     }
     "terraform-aws-actions-runner" = {
-      "description" = "Module that deploys self-hosted GitHub Actions runner."
+      "description" = <<-EOT
+        Terraform module for self-hosted GitHub Actions runners on AWS EC2 with
+        auto-scaling, Puppet configuration management, CloudWatch monitoring,
+        and automatic runner registration/deregistration.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["github", "github-actions", "ci-cd"]
       "secrets" = {
         "CI_TEST_TOKEN" = module.github-token.secret_value
       }
       enable_pages = true
     }
-    "terraform-aws-aerospike" = {
-      "description" = "Module that deploys Aerospike cluster."
-      "type"        = "terraform_module"
-    }
     "terraform-aws-bookstack" = {
-      "description" = "Module that deploys BookStack."
+      "description" = <<-EOT
+        Terraform module for BookStack wiki and documentation platform on AWS
+        with RDS database, S3 storage, ALB with SSL, and OIDC authentication.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["bookstack", "wiki", "documentation"]
     }
     "terraform-aws-ci-cd" = {
-      "description" = "Module that creates roles, state bucket, and dynamodb table for Terraform CI/CD."
+      "description" = <<-EOT
+        Terraform module that creates IAM roles, S3 state bucket, and DynamoDB
+        lock table for Terraform CI/CD pipelines with GitHub Actions integration.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["ci-cd", "github-actions"]
     }
     "terraform-aws-cloudcraft-role" = {
-      "description" = "Module that creates a role for CloudCraft scanner."
+      "description" = <<-EOT
+        Terraform module that creates an IAM role for CloudCraft AWS
+        infrastructure visualization and diagramming scanner.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["cloudcraft", "iam", "visualization"]
     }
     "terraform-aws-cloud-init" = {
-      "description" = "Module that creates a cloud init configuration for an InfraHouse EC2 instance."
+      "description" = <<-EOT
+        Terraform module for cloud-init configuration with Puppet integration,
+        custom package installation, file provisioning, and APT repository setup.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["cloud-init", "ec2", "puppet"]
     }
     "terraform-aws-cost-alert" = {
-      "description" = "Module that creates a alert for AWS cost per period."
+      "description" = <<-EOT
+        Terraform module for AWS Budget alerts with SNS email notifications
+        for cost monitoring and threshold-based alerting.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["cost-management", "budgets", "monitoring"]
     }
     "terraform-aws-debian-repo" = {
-      "description" = "Module that creates a Debian repository backed by S3 and fronted by CloudFront."
+      "description" = <<-EOT
+        Terraform module for private Debian/APT repository backed by S3 with
+        CloudFront CDN, GPG package signing, and Lambda-based repository indexing.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["debian", "apt", "package-repository"]
     }
     "terraform-aws-ecs" = {
-      "description" = "Module that runs service in ECS"
+      "description" = <<-EOT
+        Terraform module for ECS on EC2 service deployment with ALB integration,
+        auto-scaling, CloudWatch monitoring, secrets injection, and optional Datadog APM.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["ecs", "containers", "docker"]
     }
     "terraform-aws-ecr" = {
-      "description" = "Module that creates a container registry (AWS ECR service)."
+      "description" = <<-EOT
+        Terraform module for AWS ECR container registry with lifecycle policies,
+        image scanning, encryption, and cross-account repository access.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["ecr", "containers", "docker"]
     }
     "terraform-aws-dms" = {
-      "description" = "Module for deploying AWS Data Migration Service"
+      "description" = <<-EOT
+        Terraform module for AWS Database Migration Service with replication
+        instances, endpoints, and tasks for database migration and CDC.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["dms", "database", "migration"]
     }
     "terraform-aws-elasticsearch" = {
-      "description" = "Module that deploys an Elasticsearch cluster"
+      "description" = <<-EOT
+        Terraform module for self-managed Elasticsearch cluster on EC2 with
+        auto-scaling, S3 snapshots, NLB load balancing, and CloudWatch monitoring.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["elasticsearch", "search", "logging"]
     }
     "terraform-aws-emrserverless" = {
-      "description" = "Module for deploying EMR serverless"
+      "description" = <<-EOT
+        Terraform module for AWS EMR Serverless applications running Apache Spark
+        and Hive workloads with S3 integration and IAM role configuration.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["emr", "spark", "hive", "big-data"]
     }
     "terraform-aws-kibana" = {
-      "description" = "Module that deploys Kibana"
+      "description" = <<-EOT
+        Terraform module for Kibana deployment on ECS with ALB, SSL certificates,
+        and Elasticsearch backend integration.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["kibana", "elasticsearch", "logging", "ecs"]
     }
     "terraform-aws-gh-identity-provider" = {
-      "description" = "Module that configures GitHub OpenID connector."
+      "description" = <<-EOT
+        Terraform module that configures GitHub OIDC identity provider in AWS IAM
+        for secure, keyless authentication from GitHub Actions workflows.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["github", "oidc", "iam"]
     }
     "terraform-aws-gha-admin" = {
-      "description" = "Module for two roles to manage AWS with GitHub actions."
+      "description" = <<-EOT
+        Terraform module creating admin and read-only IAM roles for GitHub Actions
+        with OIDC trust, branch-based access control, and state management permissions.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["github", "github-actions", "iam"]
     }
     "terraform-aws-github-backup" = {
-      "description" = "Module to provision infrahouse-github-backup GitHub App."
+      "description" = <<-EOT
+        Terraform module for Lambda-based GitHub organization backup to S3 with
+        scheduled execution, repository cloning, and CloudWatch monitoring.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["github", "backup", "lambda"]
     }
     "terraform-aws-github-backup-configuration" = {
-      "description" = "Module that configures infrahouse-github-backup GitHub App client."
+      "description" = <<-EOT
+        Terraform module for configuring infrahouse-github-backup GitHub App client
+        with secrets, permissions, and backup target configuration.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["github", "backup"]
     }
     "terraform-aws-github-role" = {
-      "description" = "Module that creates a role for a GitHub Action worker."
+      "description" = <<-EOT
+        Terraform module that creates an IAM role with OIDC trust policy for
+        GitHub Actions workflows with customizable permissions and repo/branch restrictions.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["github", "github-actions", "iam"]
     }
     "terraform-aws-guardduty-configuration" = {
-      "description" = "Module that configures GuardDuty and email notifications."
+      "description" = <<-EOT
+        Terraform module for AWS GuardDuty threat detection with SNS email alerts,
+        S3 finding exports, and configurable severity filtering.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["guardduty", "security", "monitoring"]
     }
     "terraform-aws-instance-profile" = {
-      "description" = "Module bundles AWS resources to create an instance profile."
+      "description" = <<-EOT
+        Terraform module for EC2 instance profiles with IAM role, managed policies,
+        inline permissions, and optional CloudWatch/SSM integration.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["iam", "ec2", "instance-profile"]
     }
     "terraform-aws-iso27001" = {
-      "description" = "Module configures ISO 27001 compliance for AWS."
+      "description" = <<-EOT
+        Terraform module for ISO 27001 compliance including CloudTrail, AWS Config,
+        Security Hub, IAM password policies, and security baseline controls.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["iso27001", "compliance", "security"]
     }
     "terraform-aws-http-redirect" = {
-      "description" = "Module creates an HTTP redirect server."
+      "description" = <<-EOT
+        Terraform module for HTTP to HTTPS redirect using CloudFront
+        with custom domain support and SSL certificate management.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["cloudfront", "redirect", "ssl"]
     }
     "terraform-aws-jumphost" = {
-      "description" = "Module that creates a jumphost."
+      "description" = <<-EOT
+        Terraform module for bastion/jumphost EC2 instance with SSH access,
+        Route53 DNS registration, security groups, and CloudWatch monitoring.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["bastion", "ssh", "ec2"]
     }
     "terraform-aws-key" = {
-      "description" = "Module that creates an encryption key in KMS."
+      "description" = <<-EOT
+        Terraform module for AWS KMS encryption keys with configurable key policies,
+        key rotation, aliases, and cross-account access grants.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["kms", "encryption", "security"]
     }
     "terraform-aws-lambda-monitored" = {
       "description" = <<-EOT
@@ -209,10 +306,15 @@ locals {
         and Vanta "Serverless function error rate monitored" requirements.
       EOT
       "type"        = "terraform_module"
+      "topics"      = ["lambda", "serverless", "monitoring"]
     }
     "terraform-aws-openvpn" = {
-      "description" = "Terraform module that deploys OpenVPN server."
+      "description" = <<-EOT
+        Terraform module for OpenVPN Access Server on EC2 with Google OAuth/SAML
+        authentication, Let's Encrypt SSL, auto-scaling, and CloudWatch monitoring.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["openvpn", "vpn", "security"]
       secrets = {
         OPENVPN_CLIENT_SECRET : module.openvpn-oauth-client-id.secret_value
       }
@@ -223,6 +325,7 @@ locals {
         Orchestrator HA, and automated failover.
       EOT
       "type"        = "terraform_module"
+      "topics"      = ["percona", "mysql", "database", "replication"]
     }
     "terraform-aws-pmm-ecs" = {
       "description" = <<-EOT
@@ -231,83 +334,160 @@ locals {
         CloudWatch monitoring, automated backups, auto-recovery, and RDS PostgreSQL monitoring support.
       EOT
       "type"        = "terraform_module"
+      "topics"      = ["pmm", "percona", "monitoring", "mysql", "postgres"]
     }
     "terraform-aws-postfix" = {
-      "description" = "Terraform module that deploys Postfix as a MX server."
+      "description" = <<-EOT
+        Terraform module for Postfix MX mail server on EC2 with SpamAssassin,
+        DKIM signing, SPF, DMARC, TLS encryption, and CloudWatch monitoring.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["postfix", "email", "smtp", "mail-server"]
     }
     "terraform-aws-pypiserver" = {
-      "description" = "Terraform module that deploys a private PyPI server."
+      "description" = <<-EOT
+        Terraform module for private PyPI server on EC2 with S3 package storage,
+        ALB with SSL, htpasswd authentication, and CloudWatch monitoring.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["pypi", "python", "package-registry"]
     }
     "terraform-aws-registry" = {
-      "description" = "Terraform module that deploys a private Terraform registry."
+      "description" = <<-EOT
+        Terraform module for private Terraform registry on EC2 with S3 backend,
+        GitHub releases integration, ALB with SSL, and module discovery API.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["terraform-registry", "registry"]
     }
     "terraform-aws-s3-bucket" = {
-      "description" = "Terraform module for an ISO27001 compliant S3 bucket."
+      "description" = <<-EOT
+        Terraform module for ISO 27001 compliant S3 bucket with server-side
+        encryption, versioning, access logging, and public access blocking.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["s3", "storage", "iso27001"]
     }
     "terraform-aws-secret" = {
-      "description" = "Terraform module for a secret with owner/writer/reader roles."
+      "description" = <<-EOT
+        Terraform module for AWS Secrets Manager secrets with owner/writer/reader
+        IAM roles, automatic rotation support, and cross-account access policies.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["secrets-manager", "security"]
       auto_merge    = true
     }
     "terraform-aws-secret-policy" = {
-      "description" = "Terraform module that creates AWS secret permissions policy."
+      "description" = <<-EOT
+        Terraform module that creates IAM policies for AWS Secrets Manager access
+        with read, write, and admin permission levels.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["secrets-manager", "iam"]
     }
     "terraform-aws-service-network" = {
-      "description" = "Terraform service network module."
+      "description" = <<-EOT
+        Terraform module for VPC with public/private subnets across AZs, NAT
+        gateways, internet gateway, route tables, and VPC flow logs.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["vpc", "networking", "subnets"]
     }
     "terraform-aws-sqs-pod" = {
-      "description" = "Terraform module deploys an SQS queue with autoscaling group as a consumer."
+      "description" = <<-EOT
+        Terraform module for SQS queue with EC2 autoscaling group consumer,
+        CloudWatch-based scaling policies, dead-letter queue, and monitoring.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["sqs", "queue", "autoscaling"]
     }
     "terraform-aws-sqs-ecs" = {
-      "description" = "Terraform module deploys an SQS queue with ECS service as a consumer."
+      "description" = <<-EOT
+        Terraform module for SQS queue with ECS on EC2 service consumer,
+        CloudWatch-based scaling, dead-letter queue, and container configuration.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["sqs", "queue", "ecs"]
     }
     "terraform-aws-state-bucket" = {
-      "description" = "Module that creates an S3 bucket for a Terraform state."
+      "description" = <<-EOT
+        Terraform module for S3 state bucket with DynamoDB locking table,
+        server-side encryption, versioning, and access logging.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["terraform-state", "s3", "dynamodb"]
     }
     "terraform-aws-state-manager" = {
-      "description" = "Module creates an IAM role that can manage a Terraform state."
+      "description" = <<-EOT
+        Terraform module that creates an IAM role for Terraform state management
+        with S3 bucket and DynamoDB lock table permissions.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["terraform-state", "iam"]
     }
     "terraform-aws-tags-override" = {
-      "description" = "Module to override tags list for ECS"
+      "description" = <<-EOT
+        Terraform module to override values in a list of name/value maps,
+        useful for merging and overriding tag configurations.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["tags", "utility"]
     }
     "terraform-aws-tcp-pod" = {
-      "description" = "Module that creates an autoscaling group with an NLB for a TCP based services."
+      "description" = <<-EOT
+        Terraform module for NLB-fronted EC2 autoscaling group serving TCP services
+        with health checks, target tracking scaling, and DNS registration.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["nlb", "tcp", "autoscaling"]
     }
     "terraform-aws-teleport" = {
-      "description" = "Module deploys a single node Teleport cluster."
+      "description" = <<-EOT
+        Terraform module for single-node Teleport cluster providing secure SSH,
+        Kubernetes, database, and application access with audit logging.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["teleport", "security", "access-management"]
     }
     "terraform-aws-teleport-agent" = {
-      "description" = "Module deploys roles and other resources on an account joining Teleport cluster."
+      "description" = <<-EOT
+        Terraform module for Teleport agent deployment with IAM roles and resources
+        enabling AWS accounts to join an existing Teleport cluster.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["teleport", "iam"]
     }
     "terraform-aws-terraformer" = {
-      "description" = "Module that deploys an instances allowed to manage Terraform root modules."
+      "description" = <<-EOT
+        Terraform module for administrative EC2 instance with cross-account AssumeRole
+        capabilities for Terraform operations, DNS registration, and CloudWatch monitoring.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["ec2", "administration"]
     }
     "terraform-aws-truststore" = {
-      "description" = "Module that creates a trust store with a generated CA certificate."
+      "description" = <<-EOT
+        Terraform module for ALB Trust Store with auto-generated root CA certificate,
+        private key storage in Secrets Manager, and S3-backed certificate distribution.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["alb", "ssl", "certificates"]
     }
     "terraform-aws-update-dns" = {
-      "description" = "Module creates a lambda that manages DNS A records for instances in an autoscaling group."
+      "description" = <<-EOT
+        Terraform module for Lambda-based Route53 DNS record management that
+        automatically creates/removes A records for autoscaling group instances.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["route53", "dns", "lambda"]
     }
     "terraform-aws-website-pod" = {
-      "description" = "Module that creates an autoscaling group with an ALB and SSL certificate for a website."
+      "description" = <<-EOT
+        Terraform module for web application deployment with ALB, ACM SSL certificates,
+        EC2 autoscaling, CloudWatch alarms, CAA records, and spot instance support.
+      EOT
       "type"        = "terraform_module"
+      "topics"      = ["alb", "autoscaling", "website"]
     }
   }
 }
@@ -326,6 +506,13 @@ module "repos" {
   enable_pages = try(
     each.value["enable_pages"],
     each.value["type"] == "terraform_module"
+  )
+  topics = concat(
+    ["infrahouse"],
+    each.value["type"] == "terraform_module" ? ["terraform", "terraform-module", "aws"] : [],
+    each.value["type"] == "terraform_aws" ? ["terraform", "aws"] : [],
+    each.value["type"] == "python_app" ? ["python"] : [],
+    try(each.value["topics"], [])
   )
   secrets = merge(
     contains(keys(each.value), "secrets") ? each.value["secrets"] : {},
