@@ -237,3 +237,15 @@ resource "github_repository_file" "mkdocs_config" {
     ignore_changes = [content]
   }
 }
+
+resource "github_repository_file" "terraform_module_requirements" {
+  count = var.repo_type == "terraform_module" ? 1 : 0
+  depends_on = [
+    github_repository_ruleset.main
+  ]
+  repository          = github_repository.repo.name
+  file                = "./.claude/TERRAFORM_MODULE_REQUIREMENTS.md"
+  content             = file("${path.module}/files/TERRAFORM_MODULE_REQUIREMENTS.md")
+  commit_message      = "Add TERRAFORM_MODULE_REQUIREMENTS.md"
+  overwrite_on_create = true
+}
