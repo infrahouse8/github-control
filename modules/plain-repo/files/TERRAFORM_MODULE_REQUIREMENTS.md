@@ -62,7 +62,6 @@ Provide comprehensive, professional documentation and tooling for all InfraHouse
 - `CODING_STANDARD.md` (or link to central one)
 - `.terraform-docs.yml`
 - `mkdocs.yml`
-- `.pre-commit-config.yaml` (if using pre-commit framework)
 - `.github/workflows/release.yml` (auto-create GitHub Releases from tags)
 - `examples/` directory with working examples
 
