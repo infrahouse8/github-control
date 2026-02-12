@@ -238,6 +238,18 @@ resource "github_repository_file" "mkdocs_config" {
   }
 }
 
+resource "github_repository_file" "checkov_workflow" {
+  count = var.repo_type == "terraform_module" ? 1 : 0
+  depends_on = [
+    github_repository_ruleset.main
+  ]
+  repository          = github_repository.repo.name
+  file                = "./.github/workflows/checkov.yml"
+  content             = file("${path.module}/files/checkov.yml")
+  commit_message      = "Add checkov.yml workflow"
+  overwrite_on_create = true
+}
+
 resource "github_repository_file" "terraform_module_requirements" {
   count = var.repo_type == "terraform_module" ? 1 : 0
   depends_on = [

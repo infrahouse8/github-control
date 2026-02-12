@@ -1,0 +1,1 @@
+../modules/plain-repo/files/CODING_STANDARD.md
