@@ -64,7 +64,6 @@ module "infrahouse8-github-control" {
     "arn:aws:iam::493370826424:role/ih-tf-aws-control-493370826424-admin"
   ]
   trusted_arns = [
-    local.me_arn
   ]
 }
 
