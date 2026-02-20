@@ -60,7 +60,6 @@ module "infrahouse8-github-control" {
   gh_repo      = "github-control"
   state_bucket = "infrahouse-github-control-state"
   allowed_arns = [
-    "arn:aws:iam::289256138624:role/ih-tf-terraform-control",
     "arn:aws:iam::289256138624:role/ih-tf-aws-control-289256138624-admin",
     "arn:aws:iam::493370826424:role/ih-tf-aws-control-493370826424-admin"
   ]
