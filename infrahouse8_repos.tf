@@ -48,58 +48,37 @@ module "ih8_tf_template" {
   }
 }
 
-
-module "infrahouse8-github-control" {
-  source = "git::https://github.com/infrahouse/terraform-aws-ci-cd.git?ref=1.0.3"
-  providers = {
-    aws          = aws.aws-303467602807-uw1
-    aws.cicd     = aws.aws-303467602807-uw1
-    aws.tfstates = aws.aws-289256138624-uw1
-  }
-  gh_org       = "infrahouse8"
-  gh_repo      = "github-control"
-  state_bucket = "infrahouse-github-control-state"
-  allowed_arns = [
-    "arn:aws:iam::289256138624:role/ih-tf-aws-control-289256138624-admin",
-    "arn:aws:iam::493370826424:role/ih-tf-aws-control-493370826424-admin"
-  ]
-  trusted_arns = [
-    "arn:aws:iam::990466748045:role/aws-reserved/sso.amazonaws.com/us-west-1/AWSReservedSSO_AWSAdministratorAccess_16bdbe5eb442e7ef"
-  ]
-}
-
-
 resource "github_actions_variable" "role_admin" {
   provider      = github.infrahouse8
   repository    = module.ih_8_repos["github-control"].repo_name
-  value         = module.infrahouse8-github-control.admin-role
+  value         = data.aws_ssm_parameter.github_control_admin_role.value
   variable_name = "role_admin"
 }
 
 resource "github_actions_variable" "role_github" {
   provider      = github.infrahouse8
   repository    = module.ih_8_repos["github-control"].repo_name
-  value         = module.infrahouse8-github-control.github-role
+  value         = data.aws_ssm_parameter.github_control_github_role.value
   variable_name = "role_github"
 }
 
 resource "github_actions_variable" "role_state_manager" {
   provider      = github.infrahouse8
   repository    = module.ih_8_repos["github-control"].repo_name
-  value         = module.infrahouse8-github-control.state-manager-role
+  value         = data.aws_ssm_parameter.github_control_state_manager_role.value
   variable_name = "role_state_manager"
 }
 
 resource "github_actions_variable" "state_bucket" {
   provider      = github.infrahouse8
   repository    = module.ih_8_repos["github-control"].repo_name
-  value         = module.infrahouse8-github-control.bucket_name
+  value         = data.aws_ssm_parameter.github_control_state_bucket.value
   variable_name = "state_bucket"
 }
 
 resource "github_actions_variable" "dynamodb_lock_table_name" {
   provider      = github.infrahouse8
   repository    = module.ih_8_repos["github-control"].repo_name
-  value         = module.infrahouse8-github-control.lock_table_name
+  value         = data.aws_ssm_parameter.github_control_lock_table.value
   variable_name = "dynamodb_lock_table_name"
 }
