@@ -64,7 +64,7 @@ module "infrahouse8-github-control" {
     "arn:aws:iam::493370826424:role/ih-tf-aws-control-493370826424-admin"
   ]
   trusted_arns = [
-    "arn:aws:iam::990466748045:role/AWSReservedSSO_AWSAdministratorAccess_16bdbe5eb442e7ef"
+    "arn:aws:iam::990466748045:role/aws-reserved/sso.amazonaws.com/us-west-1/AWSReservedSSO_AWSAdministratorAccess_16bdbe5eb442e7ef"
   ]
 }
 
