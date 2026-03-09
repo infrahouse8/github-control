@@ -485,6 +485,15 @@ locals {
       "type"        = "terraform_module"
       "topics"      = ["route53", "dns", "lambda"]
     }
+    "terraform-aws-openclaw" = {
+      "description" = <<-EOT
+        Terraform module for OpenClaw AI agent gateway on AWS with ALB,
+        Cognito authentication, EFS persistence, and multi-provider LLM
+        support (Bedrock, Anthropic, OpenAI, Ollama).
+      EOT
+      "type"        = "terraform_module"
+      "topics"      = ["openclaw", "ai", "llm", "cognito", "bedrock"]
+    }
     "terraform-aws-website-pod" = {
       "description" = <<-EOT
         Terraform module for web application deployment with ALB, ACM SSL certificates,
