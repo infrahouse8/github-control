@@ -6,7 +6,7 @@ terraform {
     assume_role = {
       role_arn = "arn:aws:iam::289256138624:role/ih-tf-github-control-state-manager"
     }
-    dynamodb_table = "infrahouse-github-control-state-polished-lioness"
+    dynamodb_table = "infrahouse-github-control-state-central-lamprey"
     encrypt        = true
   }
 

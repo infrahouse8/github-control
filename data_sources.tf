@@ -3,6 +3,32 @@ data "aws_ssm_parameter" "gh_secrets_namespace" {
   name     = "gh_secrets_namespace"
 }
 
+data "aws_ssm_parameter" "github_control_admin_role" {
+  provider = aws.aws-303467602807-uw1
+  name     = "/terraform/github-control/ci-cd/admin_role_arn"
+}
+
+data "aws_ssm_parameter" "github_control_github_role" {
+  provider = aws.aws-303467602807-uw1
+  name     = "/terraform/github-control/ci-cd/github_role_arn"
+}
+
+data "aws_ssm_parameter" "github_control_state_manager_role" {
+  provider = aws.aws-303467602807-uw1
+  name     = "/terraform/github-control/backend/state_manager_role_arn"
+}
+
+data "aws_ssm_parameter" "github_control_state_bucket" {
+  provider = aws.aws-303467602807-uw1
+  name     = "/terraform/github-control/backend/state_bucket"
+}
+
+data "aws_ssm_parameter" "github_control_lock_table" {
+  provider = aws.aws-303467602807-uw1
+  name     = "/terraform/github-control/backend/lock_table"
+}
+
+
 data "aws_secretsmanager_secrets" "gh_secrets" {
   provider = aws.aws-303467602807-uw1
   filter {

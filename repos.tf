@@ -12,6 +12,10 @@ locals {
       "description" = "InfraHouse CI/CD AWS Account 303467602807."
       "type"        = "terraform_aws"
     }
+    "aws-control-338531211565" = {
+      "description" = "InfraHouse Log Archive AWS Account 338531211565."
+      "type"        = "terraform_aws"
+    }
     "aws-control-493370826424" = {
       "description" = "InfraHouse Management AWS Account 493370826424."
       "type"        = "terraform_aws"
