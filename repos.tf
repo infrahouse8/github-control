@@ -55,6 +55,7 @@ locals {
       "description" = "InfraHouse Toolkit."
       "secrets" = {
         "CODACY_PROJECT_TOKEN" = data.aws_secretsmanager_secret_version.codacy_api_token.secret_string
+        "HOMEBREW_TAP_TOKEN"   = module.github-token.secret_value
         "PYPI_API_TOKEN"       = data.aws_secretsmanager_secret_version.pypi_api_token.secret_string
       }
       "type" = "python_app"
