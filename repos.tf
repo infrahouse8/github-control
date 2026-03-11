@@ -71,6 +71,9 @@ locals {
     "homebrew-infrahouse-toolkit" = {
       "description" = "Homebrew Formula for infrahouse-toolkit"
       "type"        = "other"
+      "secrets" = {
+        "PAT_TOKEN" = module.github-token.secret_value
+      }
     }
     "infrahouse-website-infra" = {
       "description" = "InfraHouse Website Infrastructure."
