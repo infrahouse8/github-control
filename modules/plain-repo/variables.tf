@@ -33,12 +33,6 @@ variable "secrets" {
   default     = {}
 }
 
-variable "anthropic_api_key" {
-  description = "Anthropic API key for Claude Code. Automatically added to terraform_module type repos."
-  type        = string
-  default     = null
-  sensitive   = true
-}
 
 variable "public_repo" {
   description = "True if the repo is public."

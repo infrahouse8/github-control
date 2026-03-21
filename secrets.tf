@@ -100,3 +100,9 @@ module "anthropic_api_key" {
     tolist(data.aws_iam_roles.sso-admin.arns)[0],
   ]
 }
+
+resource "github_actions_organization_secret" "anthropic_api_key" {
+  secret_name     = "ANTHROPIC_API_KEY"
+  plaintext_value = module.anthropic_api_key.secret_value
+  visibility      = "all"
+}
