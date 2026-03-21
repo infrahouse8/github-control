@@ -532,15 +532,15 @@ module "repos" {
     try(each.value["topics"], [])
   )
   secrets = merge(
+    {
+      ANTHROPIC_API_KEY = module.anthropic_api_key.secret_value
+    },
     contains(keys(each.value), "secrets") ? each.value["secrets"] : {},
-    merge(
-      contains(["terraform_aws", "python_app"], each.value["type"]) ?
-      {
-        AWS_DEFAULT_REGION = local.aws_default_region
-
-      } :
-      {}
-    )
+    contains(["terraform_aws", "python_app"], each.value["type"]) ?
+    {
+      AWS_DEFAULT_REGION = local.aws_default_region
+    } :
+    {}
   )
 }
 
