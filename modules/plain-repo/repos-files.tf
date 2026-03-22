@@ -250,6 +250,18 @@ resource "github_repository_file" "checkov_workflow" {
   overwrite_on_create = true
 }
 
+resource "github_repository_file" "notify_on_failure_workflow" {
+  count = var.repo_type == "terraform_module" ? 1 : 0
+  depends_on = [
+    github_repository_ruleset.main
+  ]
+  repository          = github_repository.repo.name
+  file                = "./.github/workflows/notify-on-failure.yml"
+  content             = file("${path.module}/files/notify-on-failure.yml")
+  commit_message      = "Add notify-on-failure.yml workflow"
+  overwrite_on_create = true
+}
+
 resource "github_repository_file" "terraform_module_requirements" {
   count = var.repo_type == "terraform_module" ? 1 : 0
   depends_on = [
