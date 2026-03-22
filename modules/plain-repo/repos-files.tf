@@ -262,6 +262,18 @@ resource "github_repository_file" "notify_on_failure_workflow" {
   overwrite_on_create = true
 }
 
+resource "github_repository_file" "generate_excalidraw_command" {
+  count = var.repo_type == "terraform_module" ? 1 : 0
+  depends_on = [
+    github_repository_ruleset.main
+  ]
+  repository          = github_repository.repo.name
+  file                = "./.claude/commands/generate-excalidraw.md"
+  content             = file("${path.module}/files/generate-excalidraw.md")
+  commit_message      = "Add generate-excalidraw Claude command"
+  overwrite_on_create = true
+}
+
 resource "github_repository_file" "terraform_module_requirements" {
   count = var.repo_type == "terraform_module" ? 1 : 0
   depends_on = [
