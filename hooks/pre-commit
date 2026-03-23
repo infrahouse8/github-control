@@ -1,1 +1,49 @@
-make lint
+#!/usr/bin/env bash
+set -e
+
+echo "🔍 Running pre-commit checks..."
+
+# Check if we're in a git repository
+if ! git rev-parse --git-dir > /dev/null 2>&1; then
+    echo "❌ Not in a git repository"
+    exit 1
+fi
+
+# Get the root of the git repository
+REPO_ROOT=$(git rev-parse --show-toplevel)
+cd "$REPO_ROOT"
+
+# 1. Terraform formatting check
+echo "📝 Checking Terraform formatting..."
+if ! terraform fmt -check -recursive; then
+    echo "❌ Terraform files need formatting"
+    echo "   Run: terraform fmt -recursive"
+    exit 1
+fi
+echo "✅ Terraform formatting OK"
+
+# 3. Check that all staged files end with a newline
+echo "📝 Checking trailing newlines..."
+MISSING_NEWLINE=()
+for f in $(git diff --cached --name-only --diff-filter=ACM); do
+    # Skip binary files
+    if file --mime-encoding "$f" 2>/dev/null | grep -q binary; then
+        continue
+    fi
+    # Check if file ends with a newline
+    if [ -s "$f" ] && [ -n "$(tail -c 1 "$f" 2>/dev/null)" ]; then
+        MISSING_NEWLINE+=("$f")
+    fi
+done
+if [ ${#MISSING_NEWLINE[@]} -gt 0 ]; then
+    echo "❌ The following files do not end with a newline:"
+    for f in "${MISSING_NEWLINE[@]}"; do
+        echo "   $f"
+    done
+    exit 1
+fi
+echo "✅ All files end with a newline"
+
+echo ""
+echo "✨ All pre-commit checks passed!"
+echo "Happy coding!"
