@@ -509,6 +509,16 @@ locals {
   }
 }
 
+locals {
+  type_template_map = {
+    terraform_module = "terraform-module-template"
+    terraform_aws    = "terraform-root-template"
+    python_app       = "python-app-template"
+    python_lib       = "python-lib-template"
+    other            = "empty-template"
+  }
+}
+
 module "repos" {
   source           = "./modules/plain-repo"
   for_each         = local.repos
@@ -519,6 +529,7 @@ module "repos" {
   public_repo      = try(each.value["public_repo"], null)
   allow_auto_merge = try(each.value["auto_merge"], null)
   repo_type        = try(each.value["type"], null)
+  template_repo    = local.type_template_map[each.value["type"]]
 
   enable_pages = try(
     each.value["enable_pages"],
@@ -542,6 +553,71 @@ module "repos" {
     } :
     {}
   )
+}
+
+module "template_terraform_module" {
+  source           = "./modules/plain-repo"
+  repo_name        = "terraform-module-template"
+  repo_description = "Template repository for Terraform module projects."
+  team_id          = github_team.dev.id
+  admin_team_id    = github_team.admins.id
+  repo_type        = "terraform_module"
+  is_template      = true
+  template_repo    = null
+  enable_pages     = false
+  secrets          = {}
+}
+
+module "template_terraform_root" {
+  source           = "./modules/plain-repo"
+  repo_name        = "terraform-root-template"
+  repo_description = "Template repository for root Terraform configurations."
+  team_id          = github_team.dev.id
+  admin_team_id    = github_team.admins.id
+  repo_type        = "terraform_aws"
+  is_template      = true
+  template_repo    = null
+  enable_pages     = false
+  secrets          = {}
+}
+
+module "template_python_app" {
+  source           = "./modules/plain-repo"
+  repo_name        = "python-app-template"
+  repo_description = "Template repository for Python application projects."
+  team_id          = github_team.dev.id
+  admin_team_id    = github_team.admins.id
+  repo_type        = "python_app"
+  is_template      = true
+  template_repo    = null
+  enable_pages     = false
+  secrets          = {}
+}
+
+module "template_python_lib" {
+  source           = "./modules/plain-repo"
+  repo_name        = "python-lib-template"
+  repo_description = "Template repository for Python library projects."
+  team_id          = github_team.dev.id
+  admin_team_id    = github_team.admins.id
+  repo_type        = "python_lib"
+  is_template      = true
+  template_repo    = null
+  enable_pages     = false
+  secrets          = {}
+}
+
+module "template_empty" {
+  source           = "./modules/plain-repo"
+  repo_name        = "empty-template"
+  repo_description = "Minimal template repository for new projects."
+  team_id          = github_team.dev.id
+  admin_team_id    = github_team.admins.id
+  repo_type        = "other"
+  is_template      = true
+  template_repo    = null
+  enable_pages     = false
+  secrets          = {}
 }
 
 module "ih_tf_template" {

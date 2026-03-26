@@ -3,12 +3,23 @@ resource "github_repository" "repo" {
   description            = var.repo_description
   has_issues             = true
   has_projects           = var.has_projects
+  is_template            = var.is_template
   visibility             = var.public_repo ? "public" : "private"
   vulnerability_alerts   = var.public_repo
   delete_branch_on_merge = true
   allow_auto_merge       = var.allow_auto_merge
   homepage_url           = var.repo_type == "terraform_module" ? "https://infrahouse.github.io/${var.repo_name}" : ""
   topics                 = var.topics
+
+  dynamic "template" {
+    for_each = toset(
+      var.template_repo != null ? ["one"] : []
+    )
+    content {
+      owner      = var.template_owner
+      repository = var.template_repo
+    }
+  }
 
   dynamic "pages" {
     for_each = var.enable_pages ? [1] : []
@@ -31,14 +42,14 @@ resource "github_team_repository" "admin" {
 }
 
 resource "github_actions_secret" "secret" {
-  for_each        = var.secrets
+  for_each        = var.is_template ? {} : var.secrets
   repository      = github_repository.repo.name
   secret_name     = each.key
   plaintext_value = each.value
 }
 
-
 resource "github_branch_default" "main" {
+  count      = var.is_template ? 0 : 1
   branch     = "main"
   repository = github_repository.repo.name
 }

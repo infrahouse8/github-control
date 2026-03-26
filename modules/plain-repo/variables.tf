@@ -92,3 +92,20 @@ variable "topics" {
   type        = list(string)
   default     = []
 }
+
+variable "template_repo" {
+  description = "Repository name to use as a template"
+  default     = null
+}
+
+variable "template_owner" {
+  description = "Owner of the template repository"
+  default     = "infrahouse"
+}
+
+variable "is_template" {
+  description = "Whether this repository is a template repository"
+  type        = bool
+  default     = false
+  nullable    = false
+}
