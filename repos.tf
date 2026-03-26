@@ -153,7 +153,7 @@ locals {
         custom package installation, file provisioning, and APT repository setup.
       EOT
       "type"        = "terraform_module"
-      "topics"      = ["cloud-init", "ec2", "puppet"]
+      "topics"      = ["cloud-init", "ec2", "puppet", "userdata"]
     }
     "terraform-aws-cost-alert" = {
       "description" = <<-EOT
@@ -315,6 +315,15 @@ locals {
       EOT
       "type"        = "terraform_module"
       "topics"      = ["lambda", "serverless", "monitoring"]
+    }
+    "terraform-aws-org-governance" = {
+      "description" = <<-EOT
+        Terraform module for centralized AWS Organizations governance deployed
+        in the management account, including log retention enforcement, SCPs,
+        tag policies, and delegated admin registration.
+      EOT
+      "type"        = "terraform_module"
+      "topics"      = ["aws-organizations", "governance", "compliance"]
     }
     "terraform-aws-openvpn" = {
       "description" = <<-EOT
