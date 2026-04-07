@@ -68,7 +68,7 @@ plan: init ## Run terraform plan
 
 .PHONY: apply
 apply: ## Run terraform apply
-	terraform apply -auto-approve -input=false tf.plan
+	terraform apply -auto-approve -parallelism=5 -input=false tf.plan
 
 .PHONY: docs
 docs: ## generate Sphinx HTML documentation
