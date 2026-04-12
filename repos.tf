@@ -359,14 +359,13 @@ locals {
       "topics"        = ["lambda", "serverless", "monitoring"]
     }
     "terraform-aws-org-governance" = {
-      "description"   = <<-EOT
+      "description" = <<-EOT
         Terraform module for centralized AWS Organizations governance deployed
         in the management account, including log retention enforcement, SCPs,
         tag policies, and delegated admin registration.
       EOT
-      "type"          = "terraform_module"
-      "template_repo" = null
-      "topics"        = ["aws-organizations", "governance", "compliance"]
+      "type"        = "terraform_module"
+      "topics"      = ["aws-organizations", "governance", "compliance"]
     }
     "terraform-aws-openvpn" = {
       "description"   = <<-EOT
