@@ -176,7 +176,7 @@ resource "github_repository_file" "security_md" {
   repository          = github_repository.repo.name
   file                = "SECURITY.md"
   content             = file("${path.module}/files/SECURITY.md")
-  commit_message      = "Add SECURITY.md"
+  commit_message      = "Update SECURITY.md"
   overwrite_on_create = true
 }
 
