@@ -9,9 +9,6 @@ locals {
       github_team.dev.name,
       github_team.admins.name
     ],
-    "xOtanix" : [
-      github_team.dev.name,
-    ],
     "naumenko" : [
       github_team.dev.name,
     ],
