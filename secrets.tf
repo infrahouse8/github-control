@@ -25,8 +25,9 @@ module "actions-runner-pem" {
   providers = {
     aws = aws.aws-303467602807-uw1
   }
-  source             = "registry.infrahouse.com/infrahouse/secret/aws"
-  version            = "1.0.1"
+  source  = "registry.infrahouse.com/infrahouse/secret/aws"
+  version = "1.1.1"
+
   environment        = local.environment
   secret_description = "A copy of infrahouse-github-terraform App private key (pem) for actions-runner tests"
   secret_name_prefix = "action-runner-pem-"
@@ -45,7 +46,7 @@ module "actions-runner-pem-493370826424-uw1" {
     aws = aws.aws-493370826424-uw1
   }
   source             = "registry.infrahouse.com/infrahouse/secret/aws"
-  version            = "1.0.1"
+  version            = "1.1.1"
   environment        = local.environment
   secret_description = "A copy of infrahouse-github-terraform App private key (pem) for actions-runner tests"
   secret_name_prefix = "action-runner-pem-"
@@ -54,11 +55,12 @@ module "actions-runner-pem-493370826424-uw1" {
 
 
 module "github-token" {
-  source  = "infrahouse/secret/aws"
-  version = "1.0.3"
   providers = {
     aws = aws.aws-303467602807-uw1
   }
+  source  = "registry.infrahouse.com/infrahouse/secret/aws"
+  version = "1.1.1"
+
   environment        = local.environment
   secret_description = "Classic GitHub token. Needed for action-runner tests"
   secret_name_prefix = "github-token-"
@@ -71,11 +73,12 @@ module "github-token" {
 }
 
 module "openvpn-oauth-client-id" {
-  source  = "infrahouse/secret/aws"
-  version = "1.1.0"
   providers = {
     aws = aws.aws-303467602807-uw1
   }
+  source  = "registry.infrahouse.com/infrahouse/secret/aws"
+  version = "1.1.1"
+
   environment        = local.environment
   secret_description = "Get OAuth 2.0 Client IDs from https://console.cloud.google.com/auth/clients - the secret is used for CI tests in terraform-aws-openvpn"
   secret_name_prefix = "openvpn-client-id-"
@@ -88,11 +91,12 @@ module "openvpn-oauth-client-id" {
 }
 
 module "anthropic_api_key" {
-  source  = "infrahouse/secret/aws"
-  version = "1.1.0"
   providers = {
     aws = aws.aws-303467602807-uw1
   }
+  source  = "registry.infrahouse.com/infrahouse/secret/aws"
+  version = "1.1.1"
+
   environment        = local.environment
   secret_description = "ANTHROPIC_API_KEY token for pull request code reviews"
   secret_name_prefix = "ANTHROPIC_API_KEY-"
@@ -100,4 +104,3 @@ module "anthropic_api_key" {
     tolist(data.aws_iam_roles.sso-admin.arns)[0],
   ]
 }
-
