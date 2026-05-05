@@ -1,6 +1,6 @@
 locals {
   aws_default_region = "us-west-1"
-  environment = "production"
+  environment        = "production"
 
   gh_org_name = "infrahouse"
 
