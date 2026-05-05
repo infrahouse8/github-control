@@ -1,0 +1,120 @@
+---
+name: "Terraform Drift Detection"
+
+on:  # yamllint disable-line rule:truthy
+  workflow_call:
+    inputs:
+      env:
+        type: "string"
+        required: true
+
+permissions:
+  id-token: "write"  # This is required for requesting the JWT
+  contents: "write"
+  pull-requests: "write"
+  issues: "write"  # Required to create and apply labels
+
+concurrency:
+  group: "terraform-drift-${{ inputs.env }}"
+  cancel-in-progress: false
+
+jobs:
+  terraform-drift:
+    name: "Terraform Drift Detection"
+    runs-on: ubuntu-24.04
+    environment: "continuous-integration-${{ inputs.env }}"
+    timeout-minutes: 15
+    env:
+      GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      REGION_JSON: "${{ vars.AWS_DEFAULT_REGION }}"
+
+    defaults:
+      run:
+        shell: "bash"
+        working-directory: "environments/${{ inputs.env }}"
+
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v6"
+
+      - name: "Extract Variables"
+        id: "extract_vars"
+        env:
+          REGION_JSON_CONTENT: ${{ env.REGION_JSON }}
+          TARGET_ENV: ${{ inputs.env }}
+        run: |
+          REGION=$(echo "$REGION_JSON_CONTENT" | jq -r ".${TARGET_ENV}")
+          echo "REGION=$REGION" >> "$GITHUB_OUTPUT"
+
+      - name: "Configure AWS Credentials"
+        uses: "aws-actions/configure-aws-credentials@v6"
+        with:
+          role-to-assume: "${{ vars.ROLE_GITHUB }}"
+          role-session-name: "github-actions-${{ inputs.env }}"
+          aws-region: "${{ steps.extract_vars.outputs.REGION }}"
+
+      - name: "Set Terraform version"
+        id: "terraform_version"
+        run: |
+          echo "IH_TF_VERSION=$(cat .terraform-version)" >> "$GITHUB_OUTPUT"
+
+      - name: "Setup Terraform"
+        uses: "hashicorp/setup-terraform@v4"
+        with:
+          terraform_version: "${{ steps.terraform_version.outputs.IH_TF_VERSION }}"
+
+      - name: "Set up Python"
+        uses: "actions/setup-python@v6"
+        with:
+          python-version: "3.14"
+
+      - name: "Setup Python Environment"
+        run: |
+          make bootstrap-ci
+
+      - name: "Terraform Init"
+        run: |
+          terraform init -input=false
+
+      - name: "Check if any changes are planned"
+        id: "check_drift"
+        run: |
+          terraform plan -no-color -input=false -detailed-exitcode
+
+      - name: Cleanup working dir
+        run: git clean -df
+
+      - name: "Record Config Drift Log Entry"
+        if: "steps.check_drift.outputs.exitcode == 2"
+        run: |
+          git \
+          -c user.name="${{ github.actor }}" \
+          -c user.email="${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com" \
+          commit -m "Reconcile configuration drift" --allow-empty
+
+      - name: "Check for open PR with label"
+        id: "check_label"
+        if: "steps.check_drift.outputs.exitcode == 2"
+        run: |
+          LABEL="config-drift"
+          REPO="${{ github.repository }}"
+          COUNT=$(gh pr list --repo "$REPO" --label "$LABEL" --state open --json number --jq 'length')
+          echo "Found $COUNT open PR(s) with label '$LABEL'"
+          if [[ $COUNT -gt 0 ]]; then
+            echo "label_exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "label_exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: "Create Pull Request"
+        if: "steps.check_label.outputs.label_exists == 'false'"
+        uses: "peter-evans/create-pull-request@v8"
+        with:
+          token: "${{ steps.app-token.outputs.token }}"
+          base: "main"
+          branch: "create-pull-request/config-drift"
+          title: "[config-drift] Reconcile Terraform configuration drift in ${{ inputs.env }}"
+          commit-message: "[config-drift] Configuration drift record for ${{ inputs.env }}"
+          team-reviewers: "devops-members"
+          labels: |
+            config-drift

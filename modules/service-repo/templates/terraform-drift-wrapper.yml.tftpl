@@ -1,0 +1,33 @@
+---
+name: "[Meta] Terraform Drift Detection"
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Runs daily at 10:XX AM UTC
+    - cron: "${random_minute} 10 * * *"
+
+jobs:
+  config-drift-check:
+    strategy:
+      matrix:
+        env: ${jsonencode(environments)}
+    uses: "./.github/workflows/terraform-drift.yml"
+    with:
+      env: "$${{ matrix.env }}"
+    secrets: "inherit"
+
+  notify_on_failure:
+    name: "Notify #infra slack on failure"
+    needs: ["config-drift-check"]
+    if: $${{ failure() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post to Slack
+        uses: "slackapi/slack-github-action@v2.1.1"
+        with:
+          method: "chat.postMessage"
+          token: $${{ secrets.SLACK_BOT_TOKEN }}
+          payload: |
+            channel: "$${{ vars.INFRA_NOTIFICATION_CHANNEL }}"
+            text: "❌ Terraform Drift Detection failed for $${{ github.repository }}. Check the workflow run for more details: $${{ github.server_url }}/$${{ github.repository }}/actions/runs/$${{ github.run_id }}."

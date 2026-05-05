@@ -1,0 +1,26 @@
+terraform {
+  required_version = ">= 1.10"
+  backend "s3" {
+    bucket       = "${state_bucket}"
+    key          = "${environment}/terraform.tfstate"
+    region       = "${region}"
+    encrypt      = true
+    use_lockfile = true
+    assume_role = {
+      role_arn = "${state_manager_role_arn}"
+    }
+  }
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "${aws_provider_constraint}"
+    }
+%{ for name, provider in extra_required_providers ~}
+    ${name} = {
+      source  = "${provider.source}"
+      version = "${provider.version}"
+    }
+%{ endfor ~}
+  }
+}
