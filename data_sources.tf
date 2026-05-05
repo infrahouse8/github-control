@@ -28,16 +28,6 @@ data "aws_ssm_parameter" "github_control_lock_table" {
   name     = "/terraform/github-control/backend/lock_table"
 }
 
-
-data "aws_secretsmanager_secrets" "gh_secrets" {
-  provider = aws.aws-303467602807-uw1
-  filter {
-    name   = "name"
-    values = []
-  }
-}
-
-
 data "aws_secretsmanager_secret_version" "pypi_api_token" {
   provider  = aws.aws-303467602807-uw1
   secret_id = aws_secretsmanager_secret.pypi_api_token.id
