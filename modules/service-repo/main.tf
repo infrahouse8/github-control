@@ -28,8 +28,8 @@ resource "github_repository" "this" {
   web_commit_signoff_required = false
 
   template {
-    owner      = var.gh_org_name
-    repository = var.template_repo
+    owner      = "infrahouse"
+    repository = "terraform-root-template"
   }
 }
 
