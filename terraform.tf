@@ -12,7 +12,7 @@ terraform {
 
   required_providers {
     github = {
-      source  = "integrations/github"
+      source = "integrations/github"
       # 6.7.3 causes "Root object was present, but now absent"
       # on github_actions_secret due to destroy_on_drift bug.
       # https://github.com/integrations/terraform-provider-github/issues/2387
