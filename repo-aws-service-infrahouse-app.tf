@@ -37,7 +37,6 @@ module "aws_service_infrahouse_app" {
   repo_description = "AWS infrastructure for the InfraHouse product app"
   gh_org_name      = local.gh_org_name
   github_app_slug  = "infrahouse-github-terraform"
-  template_repo    = "terraform-root-template"
   state_bucket     = module.aws_service_infrahouse_app_state.bucket_name
 
   environments = {

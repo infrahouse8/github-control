@@ -101,18 +101,12 @@ variable "state_bucket" {
   type        = string
 }
 
-variable "template_repo" {
-  description = <<-EOT
-    Name of the template repository to use when creating the service repo.
-    The template provides CI/CD workflows, Makefile, .gitignore, and other
-    boilerplate. Files are copied once at creation time — the service repo
-    owns them after that.
-  EOT
-  type        = string
-}
-
 variable "repo_private" {
-  description = "If true, the repository is private."
+  description = <<-EOT
+    If true, the repository is private.
+    Rulesets and environments on private repos require a GitHub Team
+    plan ($4/user/month).
+  EOT
   type        = bool
   default     = true
 }
