@@ -30,6 +30,11 @@ locals {
       "type"          = "other"
       "template_repo" = null
     }
+    "github-control" = {
+      "description"   = "InfraHouse GitHub configuration."
+      "type"          = "other"
+      "template_repo" = null
+    }
     "infrahouse-com" = {
       "description"   = "InfraHouse.com content."
       "type"          = "other"
